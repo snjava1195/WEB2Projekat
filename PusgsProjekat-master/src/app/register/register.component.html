@@ -1,0 +1,87 @@
+<p>register works!</p>
+<mat-card-content>  
+    <form [formGroup]="userForm"(ngSubmit)="onFormSubmit()">  
+            <table>  
+              <tr>  
+              <!--  <td class="tbl1">  
+                  <mat-form-field class="demo-full-width">  
+                    <input formControlName="UserId" matTooltip="Enter User Name" matInput placeholder="User Name">  
+                  </mat-form-field>  
+                  <mat-error>  
+                    <span *ngIf="!userForm.get('UserId').value && userForm.get('UserId').touched"></span>  
+                  </mat-error>  
+                </td>  -->
+                <td class="tbl1">  
+                  <mat-form-field class="demo-full-width">  
+                    <input formControlName="Name" matInput placeholder="First Name">  
+                    
+                  </mat-form-field>  
+                  <mat-error>  
+                    <span *ngIf="!userForm.get('Name').value && userForm.get('Name').touched"></span>  
+                  </mat-error>  
+                </td>  
+                <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="LastName" matInput placeholder="Last Name">  
+                      
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!userForm.get('LastName').value && userForm.get('LastName').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                <td class="tbl1">  
+                  <mat-form-field class="demo-full-width">  
+                    <input formControlName="Email" matInput placeholder="Email address">  
+                  </mat-form-field>  
+                  <mat-error>  
+                    <span *ngIf="!userForm.get('Email').value && userForm.get('Email').touched"></span>  
+                  </mat-error>  
+                </td>  
+                <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="Phone" matInput placeholder="Phone">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!userForm.get('Phone').value && userForm.get('Phone').touched"></span>  
+                    </mat-error>  
+                  </td>  
+              </tr>  
+              <tr>  
+                <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                        <input formControlName="Password" matInput placeholder="PassId">  
+                      </mat-form-field>  
+                  <mat-error>  
+                    <span *ngIf="!userForm.get('Password').value && userForm.get('Password').touched"></span>  
+                  </mat-error>  
+                </td>  
+                <td class="tbl1">  
+                  <mat-form-field class="demo-full-width">  
+                    <input formControlName="City" matInput placeholder="City">  
+                  </mat-form-field>  
+                  <mat-error>  
+                    <span *ngIf="!userForm.get('City').value && userForm.get('City').touched"></span>  
+                  </mat-error>  
+                </td>  
+                <td class="tbl1">  
+                  <mat-form-field class="demo-full-width">  
+                    <input formControlName="ConfirmPassword" matInput placeholder="ConfirmPassword">  
+                  </mat-form-field>  
+                  <mat-error>  
+                    <span *ngIf="!userForm.get('ConfirmPassword').value && userForm.get('ConfirmPassword').touched"></span>  
+                  </mat-error>  
+                </td>  
+              </tr>  
+              <tr>  
+                <td></td>  
+                <td  class="content-center">  
+                  <button type="submit" mat-raised-button color="accent"[disabled]="!userForm.valid">Submit</button>      
+                  <button type="reset" mat-raised-button color="accent" (click)="resetForm()">Reset</button>  
+                </td>  
+                <td>  
+                  <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                    {{message}}  
+                  </p>  
+                </td>  
+              </tr>  
+            </table>  

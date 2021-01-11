@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+input.ng-touched.ng-invalid{
+    border-color: red;
+}
+
+input.ng-valid{
+    border-color: green;
+}
+
+#toast-container > div {
+    opacity: 1;
+}
+
+@import '@angular/material/prebuilt-themes/indigo-pink.css'
+
