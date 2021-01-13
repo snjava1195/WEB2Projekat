@@ -18,34 +18,40 @@ namespace UserAPI.Controllers
         [HttpPost]
         public IHttpActionResult SetUserAdmin(string email)
         {
-            var user = from u in objEntity.UserDetails where (u.Email == email) select u;
-            if (user!=null)
+            using (var ctx = new UserContext())
             {
-                var us = user.First();
-                us.UserType = Convert.ToInt32(UserType.CarAdmin);
-                this.objEntity.SaveChanges();
-                return Ok(email);
-            }
+                var user = from u in ctx.Users where (u.Email == email) select u;
+                if (user != null)
+                {
+                    var us = user.First();
+                    us.UserType = Convert.ToInt32(UserType.CarAdmin);
+                    ctx.SaveChanges();
+                    return Ok(email);
+                }
 
-            else
-                return NotFound();
+                else
+                    return NotFound();
+            }
         }
 
         [Route("SetAsAirlineAdmin")]
         [HttpPost]
         public IHttpActionResult SetUserAsAirlineAdmin(string email)
         {
-            var user = from u in objEntity.UserDetails where (u.Email == email) select u;
-            if (user != null)
+            using (var ctx = new UserContext())
             {
-                var us = user.First();
-                us.UserType = Convert.ToInt32(UserType.AirlineAdmin);
-                this.objEntity.SaveChanges();
-                return Ok(email);
-            }
+                var user = from u in ctx.Users where (u.Email == email) select u;
+                if (user != null)
+                {
+                    var us = user.First();
+                    us.UserType = Convert.ToInt32(UserType.AirlineAdmin);
+                    ctx.SaveChanges();
+                    return Ok(email);
+                }
 
-            else
-                return NotFound();
+                else
+                    return NotFound();
+            }
         }
     }
 }
