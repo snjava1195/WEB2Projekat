@@ -17,7 +17,7 @@ namespace UserAPI.Controllers
     public class UserAPIController : ApiController
     {
         AngularEntities2 objEntity = new AngularEntities2();
-        UserContext ctx = new UserContext();
+       
         [Route("UserLogin")]
         [HttpPost]
         public IHttpActionResult Login(Login lg)
