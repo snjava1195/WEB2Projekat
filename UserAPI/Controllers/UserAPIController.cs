@@ -25,18 +25,9 @@ namespace UserAPI.Controllers
             AngularEntities2 DB = new AngularEntities2();
             var Obj = DB.Usp_Login(lg.Email, lg.Password).ToList<Usp_Login_Result>().FirstOrDefault();
             if (Obj == null) return NotFound();
-            /* if (Obj.Status == -1) return new Response
-             {
-                 Status = "Inactive",
-                 Message = "User Inactive"
-             };*/
+      
             else return Ok(Obj.UserType);
-            /*return new Response
-        {
-            Status = "Success",
-            Message = lg.Email
-        };*/
-
+       
         }
 
 
@@ -44,11 +35,11 @@ namespace UserAPI.Controllers
 
         [HttpGet]
         [Route("AllUserDetails")]
-        public IQueryable<UserCRUD> GetUser()
+        public IQueryable<UserDetail> GetUser()
         {
             try
             {
-                return ctx.Users;
+                return objEntity.UserDetails;
             }
             catch (Exception)
             {
@@ -60,11 +51,11 @@ namespace UserAPI.Controllers
         [Route("GetUserDetailsById/{userId}")]
         public IHttpActionResult GetUserById(string userId)
         {
-            UserCRUD objUsr = new UserCRUD();
+            UserDetail objUsr = new UserDetail();
             int ID = Convert.ToInt32(userId);
             try
             {
-                objUsr = ctx.Users.Find(ID);
+                objUsr = objEntity.UserDetails.Find(ID);
                 if (objUsr == null)
                     return NotFound();
             }
@@ -78,7 +69,7 @@ namespace UserAPI.Controllers
 
         [HttpPost]
         [Route("InsertUserDetails")]
-        public IHttpActionResult PostUser(UserCRUD data)
+        public IHttpActionResult PostUser(UserDetail data)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -89,14 +80,14 @@ namespace UserAPI.Controllers
                     if (data.Email == "snjava@gmail.com" && data.Password == "1234")
                     {
                         data.UserType = Convert.ToInt32(UserType.SystemAdmin);
-                        ctx.Users.Add(data);
-                        ctx.SaveChanges();
+                        objEntity.UserDetails.Add(data);
+                        objEntity.SaveChanges();
                     }
                     else
                     {
                         data.UserType = Convert.ToInt32(UserType.User);
-                        ctx.Users.Add(data);
-                        ctx.SaveChanges();
+                        objEntity.UserDetails.Add(data);
+                        objEntity.SaveChanges();
                     }
                 }
             }
@@ -110,7 +101,7 @@ namespace UserAPI.Controllers
 
         [HttpPut]
         [Route("UpdateUserDetails")]
-        public IHttpActionResult PutUserMaster(UserCRUD user)
+        public IHttpActionResult PutUserMaster(UserDetail user)
         {
             if (!ModelState.IsValid)
             {
@@ -119,8 +110,8 @@ namespace UserAPI.Controllers
 
             try
             {
-                UserCRUD objUsr = new UserCRUD();
-                objUsr = ctx.Users.Find(user.UserId);
+                UserDetail objUsr = new UserDetail();
+                objUsr = objEntity.UserDetails.Find(user.UserId);
                 if (objUsr != null)
                 {
                     objUsr.UserId = user.UserId;
@@ -134,7 +125,7 @@ namespace UserAPI.Controllers
 
 
                 }
-                int i = ctx.SaveChanges();
+                int i = objEntity.SaveChanges();
 
             }
             catch (Exception)
@@ -148,14 +139,14 @@ namespace UserAPI.Controllers
         public IHttpActionResult DeleteUserDelete(int id)
         {
             //int empId = Convert.ToInt32(id);  
-            UserCRUD user = ctx.Users.Find(id);
+            UserDetail user = objEntity.UserDetails.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            ctx.Users.Remove(user);
-            ctx.SaveChanges();
+            objEntity.UserDetails.Remove(user);
+            objEntity.SaveChanges();
 
             return Ok(user);
         }
@@ -166,7 +157,7 @@ namespace UserAPI.Controllers
         {
             if (checkbox == true)
             {
-                UserCRUD user = ctx.Users.Find(email);
+                UserDetail user = objEntity.UserDetails.Find(email);
                 user.UserType = Convert.ToInt32(UserType.CarAdmin);
                 return Ok(checkbox);
             }

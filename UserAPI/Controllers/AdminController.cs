@@ -18,14 +18,14 @@ namespace UserAPI.Controllers
         [HttpPost]
         public IHttpActionResult SetUserAdmin(string email)
         {
-            using (var ctx = new UserContext())
+            using (var objEntity = new AngularEntities2())
             {
-                var user = from u in ctx.Users where (u.Email == email) select u;
+                var user = from u in objEntity.UserDetails where (u.Email == email) select u;
                 if (user != null)
                 {
                     var us = user.First();
                     us.UserType = Convert.ToInt32(UserType.CarAdmin);
-                    ctx.SaveChanges();
+                    objEntity.SaveChanges();
                     return Ok(email);
                 }
 
@@ -38,14 +38,14 @@ namespace UserAPI.Controllers
         [HttpPost]
         public IHttpActionResult SetUserAsAirlineAdmin(string email)
         {
-            using (var ctx = new UserContext())
+            using (var objEntity = new AngularEntities2())
             {
-                var user = from u in ctx.Users where (u.Email == email) select u;
+                var user = from u in objEntity.UserDetails where (u.Email == email) select u;
                 if (user != null)
                 {
                     var us = user.First();
                     us.UserType = Convert.ToInt32(UserType.AirlineAdmin);
-                    ctx.SaveChanges();
+                    objEntity.SaveChanges();
                     return Ok(email);
                 }
 
