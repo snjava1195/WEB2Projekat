@@ -123,7 +123,6 @@ namespace UserAPI.Controllers
                     objUsr.City = user.City;
                     objUsr.Email = user.Email;
 
-
                 }
                 int i = objEntity.SaveChanges();
 
