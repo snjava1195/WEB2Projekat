@@ -1,6 +1,7 @@
 import { Flight } from './flight';
 
 export class Airline {
+    id: Int16Array;
     name: string;
     address: string; 
     rate: number;

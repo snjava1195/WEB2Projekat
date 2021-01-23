@@ -29,6 +29,7 @@ namespace UserAPI.Models
     
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<Usermaster> Usermasters { get; set; }
+        public virtual DbSet<Airline> Airlines { get; set; }
     
         public virtual ObjectResult<Usp_Login_Result> Usp_Login(string userName, string password)
         {

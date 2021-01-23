@@ -36,6 +36,9 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { BaseComponent } from './base/base.component';
 import { LoginService } from './login.service';
 import { RegisterComponent } from './register/register.component';
+import { AdminComponent } from './admin/admin.component';
+import { AddAirlineComponent } from './add-airline/add-airline.component';
+import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { RegisterComponent } from './register/register.component';
     AdminDashboardComponent,
     UserDashboardComponent,
     BaseComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    AddAirlineComponent,
+    AddRentacarComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,9 @@ import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.compone
 import {UserDashboardComponent} from './user-dashboard/user-dashboard.component';
 import {BaseComponent} from './base/base.component';
 import { RegisterComponent } from './register/register.component';
+import { AdminComponent } from './admin/admin.component';
+import { AddAirlineComponent } from './add-airline/add-airline.component';
+import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
 const routes: Routes = [
 {
   path: '',
@@ -35,7 +38,22 @@ const routes: Routes = [
         {
           path: 'user',
           component: UserComponent
+        },
+        {
+          path: 'companies',
+          component: AdminComponent,
+          children: [
+            {
+              path: 'addAirline',
+              component: AddAirlineComponent
+            },
+            {
+              path: 'addRentacar',
+              component: AddRentacarComponent
+            }
+          ]
         }
+
       ]
     },
     
@@ -54,7 +72,20 @@ const routes: Routes = [
       ]*/
     },
 //  ]
-
+{
+    path: 'companies',
+    component: AdminComponent,
+    children: [
+      {
+        path: 'addAirline',
+        component: AddAirlineComponent
+      },
+      {
+        path: 'addRentacar',
+        component: AddRentacarComponent
+      }
+    ]
+  },
 /*{
   path: 'rentacar',
   component: RentACarComponent
@@ -90,6 +121,15 @@ const routes: Routes = [
   component: RegisterComponent
 },
 
+{
+  path:'addAirline',
+  component: AddAirlineComponent
+},
+
+{
+  path: 'addRentacar',
+  component: AddRentacarComponent
+},
 /*{
   path: 'admindashboard',
   component: AdminDashboardComponent

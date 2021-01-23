@@ -182,6 +182,7 @@ C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\obj\Debug\UserAPI.csproj.CoreCompil
 C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\obj\Debug\UserAPI.csproj.CopyComplete
 C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\obj\Debug\UserAPI.dll
 C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\obj\Debug\UserAPI.pdb
+<<<<<<< Updated upstream
 K:\WEB2Projekat\UserAPI\bin\UserAPI.dll.config
 K:\WEB2Projekat\UserAPI\bin\UserAPI.dll
 K:\WEB2Projekat\UserAPI\bin\UserAPI.pdb
@@ -274,3 +275,13 @@ K:\WEB2Projekat\UserAPI\obj\Debug\UserAPI.csproj.CoreCompileInputs.cache
 K:\WEB2Projekat\UserAPI\obj\Debug\UserAPI.csproj.CopyComplete
 K:\WEB2Projekat\UserAPI\obj\Debug\UserAPI.dll
 K:\WEB2Projekat\UserAPI\obj\Debug\UserAPI.pdb
+=======
+C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\bin\SendGrid.dll
+C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\bin\StarkbankEcdsa.dll
+C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\bin\SendGrid.pdb
+C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\bin\SendGrid.xml
+>>>>>>> Stashed changes
