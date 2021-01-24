@@ -4,7 +4,7 @@ export class Airline {
     id: Int16Array;
     name: string;
     address: string; 
-    rate: number;
+ //   rate: number;
     description: string;
 
     flights: Array<Flight>;
@@ -13,7 +13,7 @@ export class Airline {
     {
         this.name = n;
         this.address = a;
-        this.rate = r;
+      //  this.rate = r;
         this.description = d;   
         
         this.flights = new Array<Flight>();

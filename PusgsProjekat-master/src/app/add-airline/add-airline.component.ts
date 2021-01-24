@@ -33,7 +33,7 @@ export class AddAirlineComponent implements OnInit{
          
 
         });
-        this.loadAllUsers();
+        this.loadAllAirlines();
     }
   /*  checkCheckBoxValue(email:string)
     {
@@ -59,16 +59,16 @@ export class AddAirlineComponent implements OnInit{
 
       });
     }*/
-    loadAllUsers(){
+    loadAllAirlines(){
         this.allAirlines = this.addAirlineService.getAllAirlines();
     }
     onFormSubmit() {  
         this.dataSaved = false;  
         const airline = this.airlineForm.value;  
-        this.CreateUser(airline);  
+        this.CreateAirline(airline);  
         this.airlineForm.reset();  
       }  
-      loadUserToEdit(userId: Int16Array) {  
+      loadAirlineToEdit(userId: Int16Array) {  
         this.addAirlineService.getAirlineById(userId).subscribe(airline=> {  
           this.message = null;  
           this.dataSaved = false;  
@@ -82,13 +82,13 @@ export class AddAirlineComponent implements OnInit{
         });  
       
       }  
-      CreateUser(airline: Airline) {  
+      CreateAirline(airline: Airline) {  
         if (this.airlineIdUpdate == null) {  
           this.addAirlineService.createAirline(airline).subscribe(  
             () => {  
               this.dataSaved = true;  
               this.message = 'Record saved Successfully';  
-              this.loadAllUsers();  
+              this.loadAllAirlines();  
               this.airlineIdUpdate = null;  
               this.airlineForm.reset();  
             }  
@@ -98,7 +98,7 @@ export class AddAirlineComponent implements OnInit{
           this.addAirlineService.updateAirline(airline).subscribe(() => {  
             this.dataSaved = true;  
             this.message = 'Record Updated Successfully';  
-            this.loadAllUsers();  
+            this.loadAllAirlines();  
             this.airlineIdUpdate = null;  
             this.airlineForm.reset();  
           });  
@@ -109,7 +109,7 @@ export class AddAirlineComponent implements OnInit{
         this.addAirlineService.deleteAirlineById(airlineId).subscribe(() => {  
           this.dataSaved = true;  
           this.message = 'Record Deleted Succefully';  
-          this.loadAllUsers();  
+          this.loadAllAirlines();  
           this.airlineIdUpdate = null;  
           this.airlineForm.reset();  
       

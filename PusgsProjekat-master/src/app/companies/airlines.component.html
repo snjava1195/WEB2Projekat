@@ -1,4 +1,4 @@
-<table>
+<!-- <table>
     <tr>
         <td>
             <input type="text" [(ngModel)]="toSearch" > <button class="btn btn-success" (click)="doSearch()" > search </button>
@@ -10,25 +10,26 @@
                 {{ afterSearch }}
             </p>
        </td> 
-    </tr>
+    </tr>-->
+    <table>
     <tr>
         <td> 
             <button class="btn btn-success" (click)="loadAirlines()" > SHOW </button>    
         </td>
     </tr>
-</table>
+</table> 
 
 <br/>
 
 
 
 
-<div class="split left" [hidden]="airlines.length === 0">
+<div class="split left"> <!--[hidden]="airlines.length === 0"-->
     <div class="centered">
     <table class="table table-hover">           
         <tbody>
-            <tr *ngFor="let ac of airlines" (click)="onSelect(ac)" (click)="loadFlights()" >
-                    <td>{{ ac.name }}</td>
+            <tr *ngFor="let ac of airlines | async" (click)="onSelect(ac)" (click)="loadFlights()" >
+                    <td>{{ ac.Name }}</td>
             </tr> 
         </tbody>
     </table>       
@@ -40,24 +41,24 @@
     <div class="centered">
     <table class="table table-hover">   
         <thead>
-            {{selectedAirline.name | uppercase}} details:
+            {{selectedAirline.Name | uppercase}} details:
         </thead>        
         <tbody>
-            <tr>
+            <!-- <tr>
                 <td> rate: </td>
                 <td>{{selectedAirline.rate}}</td>
-            </tr> 
+            </tr>  -->
             <tr> 
                 <td> name: </td>
-                <td> <input [(ngModel)]="selectedAirline.name" placeholder="name"/> </td>
+                <td> <input [(ngModel)]="selectedAirline.Name" placeholder="name"/> </td>
             </tr>
             <tr>
                 <td> address: </td>
-                <td> <input [(ngModel)]="selectedAirline.address"  placeholder="address"/> </td>
+                <td> <input [(ngModel)]="selectedAirline.Address"  placeholder="address"/> </td>
             </tr>
             <tr>
                 <td> description: </td>
-                <td>  <input [(ngModel)]="selectedAirline.description" placeholder="description"/> </td>
+                <td>  <input [(ngModel)]="selectedAirline.Description" placeholder="description"/> </td>
             </tr>
             <tr>
                 <td> flights: </td>

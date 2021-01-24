@@ -13,7 +13,7 @@ namespace UserAPI.Controllers
     {
         AngularEntities2 objEntity = new AngularEntities2();
         [HttpGet]
-        [Route("AllAirlinesDetails")]
+        [Route("AllAirlineDetails")]
         public IQueryable<Airline> GetAirline()
         {
             try

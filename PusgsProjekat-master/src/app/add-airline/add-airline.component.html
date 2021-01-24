@@ -11,14 +11,7 @@
         <form [formGroup]="airlineForm"(ngSubmit)="onFormSubmit()">  
                 <table>  
                   <tr>  
-                  <!--  <td class="tbl1">  
-                      <mat-form-field class="demo-full-width">  
-                        <input formControlName="UserId" matTooltip="Enter User Name" matInput placeholder="User Name">  
-                      </mat-form-field>  
-                      <mat-error>  
-                        <span *ngIf="!userForm.get('UserId').value && userForm.get('UserId').touched"></span>  
-                      </mat-error>  
-                    </td>  -->
+                 
                     <td class="tbl1">  
                       <mat-form-field class="demo-full-width">  
                         <input formControlName="Name" matInput placeholder="Airline name">  
@@ -68,10 +61,10 @@
                 
               </tr>  
               <tr *ngFor="let airline of allAirlines | async">  
-               <td class="tbl2">{{airline.id}}</td>  
-                <td class="tbl2">{{airline.name}}</td>  
-                <td class="tbl2">{{airline.address}}</td>  
-                <td class="tbl2">{{airline.description}}</td>  
+               <td class="tbl2">{{airline.Id}}</td>  
+                <td class="tbl2">{{airline.Name}}</td>  
+                <td class="tbl2">{{airline.Address}}</td>  
+                <td class="tbl2">{{airline.Description}}</td>  
                <!-- <td class="tbl2">{{user.Phone}}</td>  
                 <td class="tbl2">{{user.Password}}</td>
                 <td class="tbl2">{{user.City}}</td> 
