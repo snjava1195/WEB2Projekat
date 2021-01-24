@@ -28,20 +28,20 @@ namespace UserAPI.Models
         }
     
         public virtual DbSet<UserDetail> UserDetails { get; set; }
-        public virtual DbSet<Usermaster> Usermasters { get; set; }
         public virtual DbSet<Airline> Airlines { get; set; }
+        public virtual DbSet<RentaCar> RentaCars { get; set; }
     
-        public virtual ObjectResult<Usp_Login_Result> Usp_Login(string userName, string password)
+        public virtual ObjectResult<Usp_Login_Result> Usp_Login(string username, string password)
         {
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
     
             var passwordParameter = password != null ?
                 new ObjectParameter("Password", password) :
                 new ObjectParameter("Password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Usp_Login_Result>("Usp_Login", userNameParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Usp_Login_Result>("Usp_Login", usernameParameter, passwordParameter);
         }
     }
 }

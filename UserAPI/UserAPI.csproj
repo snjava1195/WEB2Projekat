@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AirlineController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RentaCarController.cs" />
     <Compile Include="Controllers\UserAPIController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -193,6 +194,9 @@
     </Compile>
     <Compile Include="Models\Enums\UserType.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\RentaCar.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\User.Context.cs">
       <AutoGen>True</AutoGen>
@@ -210,9 +214,6 @@
       <DependentUpon>User.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\UserDetail.cs">
-      <DependentUpon>User.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usermaster.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usp_Login_Result.cs">

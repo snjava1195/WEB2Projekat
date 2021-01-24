@@ -19,6 +19,6 @@ namespace UserAPI.Models
             set;
         }
 
-        public class Registration : Usermaster { }
+       // public class Registration : Usermaster { }
     }
 }

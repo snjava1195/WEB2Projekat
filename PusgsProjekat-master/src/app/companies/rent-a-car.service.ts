@@ -1,6 +1,8 @@
 import { RentACar } from './rent-a-car';
 import { Car } from './car';
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs'; 
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +10,10 @@ import { Injectable } from '@angular/core';
 
 export class RentACarService{
 
-    constructor(){}
+    url = 'https://localhost:44325/api/RentaCar';
+    url2 = 'https://localhost:44325/api/RentaCar';
+
+    constructor(private http: HttpClient){}
 
     mockedRentACars(){
         let rentacars = new Array<RentACar>();
@@ -21,8 +26,10 @@ export class RentACarService{
         return  rentacars;
     }
 
-    loadRentACars(){
-        return this.mockedRentACars();
+
+      
+    getRentACars(): Observable<RentACar[]> {
+        return this.http.get<RentACar[]>(this.url + '/AllRentaCarDetails');
     }
 
     loadCars(){

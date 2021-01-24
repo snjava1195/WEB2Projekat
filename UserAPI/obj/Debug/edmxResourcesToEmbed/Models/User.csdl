@@ -14,30 +14,14 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="UserType" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="Usermaster">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="PasswordConfirm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="IsApporved" Type="Int32" />
-    <Property Name="Status" Type="Int32" />
-    <Property Name="TotalCnt" Type="Int32" />
-  </EntityType>
   <EntityContainer Name="AngularEntities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
-    <EntitySet Name="Usermasters" EntityType="Self.Usermaster" />
     <FunctionImport Name="Usp_Login" ReturnType="Collection(AngularModel.Usp_Login_Result)">
-      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Username" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="Airlines" EntityType="AngularModel.Airline" />
+    <EntitySet Name="RentaCars" EntityType="AngularModel.RentaCar" />
   </EntityContainer>
   <ComplexType Name="Usp_Login_Result">
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
@@ -52,5 +36,15 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="RentaCar">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rate" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

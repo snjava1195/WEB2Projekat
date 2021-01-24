@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Visnja\Desktop\WEB2Projekat\UserAPI\Models\User.edmx'. 
+﻿// T4 code generation is enabled for model 'K:\WEB2Projekat\UserAPI\Models\User.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
