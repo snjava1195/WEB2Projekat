@@ -16,11 +16,10 @@ namespace UserAPI.Controllers
         AngularEntities2 objEntity = new AngularEntities2();
         [HttpGet]
         [Route("AllRentaCarDetails")]
-        public IQueryable<RentaCar> GetRentaCar()
+        public IQueryable<RentaCar> GetRentaCars()
         {
             try
             {
-                System.Diagnostics.Trace.WriteLine("prosao sam!");
                 return objEntity.RentaCars;
             }
             catch (Exception)
@@ -32,7 +31,7 @@ namespace UserAPI.Controllers
 
         [HttpGet]
         [Route("GetRentaCarDetailsById/{rentaCarId}")]
-        public IHttpActionResult GetAirlineById(string rentaCarId)
+        public IHttpActionResult GetRentaCarById(string rentaCarId)
         {
             RentaCar objUsr = new RentaCar();
             int ID = Convert.ToInt32(rentaCarId);
@@ -54,15 +53,15 @@ namespace UserAPI.Controllers
 
         [HttpPost]
         [Route("InsertRentaCarDetails")]
-        public IHttpActionResult PostUser(RentaCar data)
+        public IHttpActionResult PostRentaCar(RentaCar data)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             try
             {
+                data.Rate = 0;
                 objEntity.RentaCars.Add(data);
                 objEntity.SaveChanges();
-
             }
             catch (Exception)
             {
@@ -75,7 +74,7 @@ namespace UserAPI.Controllers
 
         [HttpPut]
         [Route("UpdateRentaCarDetails")]
-        public IHttpActionResult PutUserMaster(RentaCar rentaCar)
+        public IHttpActionResult PutRentaCar(RentaCar rentaCar)
         {
             if (!ModelState.IsValid)
             {
@@ -92,7 +91,7 @@ namespace UserAPI.Controllers
                     objUsr.Id = rentaCar.Id;
                     objUsr.Name = rentaCar.Name;
                     objUsr.Address = rentaCar.Address;
-                    objUsr.Description = rentaCar.Address;
+                    objUsr.Description = rentaCar.Description;
 
                 }
                 int i = objEntity.SaveChanges();
@@ -108,7 +107,7 @@ namespace UserAPI.Controllers
 
         [HttpDelete]
         [Route("DeleteRentaCarDetails")]
-        public IHttpActionResult DeleteUserDelete(int id)
+        public IHttpActionResult DeleteRentaCar(int id)
         {
             RentaCar rentaCar = objEntity.RentaCars.Find(id);
             if (rentaCar == null)

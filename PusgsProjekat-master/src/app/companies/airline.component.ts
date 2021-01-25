@@ -32,9 +32,8 @@ export class AirlineComponent {
     }
 
     loadAirlines(){
-                this.airlines = this.airlineService.loadAirlines();
-                
-            }
+        this.airlines = this.airlineService.loadAirlines();            
+    }
     
 
     onSelect(ac: Airline) : void{

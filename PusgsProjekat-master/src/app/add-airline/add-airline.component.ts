@@ -72,11 +72,11 @@ export class AddAirlineComponent implements OnInit{
         this.addAirlineService.getAirlineById(userId).subscribe(airline=> {  
           this.message = null;  
           this.dataSaved = false;  
-          this.airlineIdUpdate = airline.id;  
-          this.airlineForm.get('UserId').setValue(airline.id);  
-         this.airlineForm.get('Name').setValue(airline.name);  
-          this.airlineForm.get('Address').setValue(airline.address);  
-          this.airlineForm.get('Description').setValue(airline.description);  
+          this.airlineIdUpdate = airline.Id;  
+          this.airlineForm.get('UserId').setValue(airline.Id);  
+         this.airlineForm.get('Name').setValue(airline.Name);  
+          this.airlineForm.get('Address').setValue(airline.Address);  
+          this.airlineForm.get('Description').setValue(airline.Description);  
           //this.employeeForm.controls['Address'].setValue(employee.Address);  
           //this.employeeForm.controls['PinCode'].setValue(employee.PinCode);  
         });  
@@ -94,7 +94,7 @@ export class AddAirlineComponent implements OnInit{
             }  
           );  
         } else {  
-          airline.id = this.airlineIdUpdate;  
+          airline.Id = this.airlineIdUpdate;  
           this.addAirlineService.updateAirline(airline).subscribe(() => {  
             this.dataSaved = true;  
             this.message = 'Record Updated Successfully';  

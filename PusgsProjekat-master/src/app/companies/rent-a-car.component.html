@@ -21,16 +21,15 @@
 <br/>
 
 
-<div class="split left"   >
-    <!--[hidden]= "rentACars.length === 0"-->
+<div class="split left">
     <div class="centered">
     <table class="table table-hover">           
         <tbody>
             <tr
             [class.selected]="rc === selectedRentACar" 
-            *ngFor="let rc of rentACars" (click)="onSelect(rc)" (click)="loadCars()" >
+            *ngFor="let rc of rentACars | async" (click)="onSelect(rc)" (click)="loadCars()" >
                     <td>
-                        <span class="badge">{{ rc.rate}}</span> {{rc.name}}
+                        <span class="badge">{{ rc.Name}}</span> {{rc.Address}}
                     </td>
             </tr> 
         </tbody>
@@ -41,34 +40,34 @@
 <br/>
 
 
-<div class="split right" [hidden]="selectedRentACar.name ==='' " *ngIf="selectedRentACar">
+<div class="split right" [hidden]="selectedRentACar.Name ==='' " *ngIf="selectedRentACar">
     <div class="centered">
    <table class="table table-hover">   
         <thead>
-            {{ selectedRentACar.name | uppercase}} details:
+            {{ selectedRentACar.Name | uppercase}} details:
         </thead>        
         <tbody>
             <tr>
                 <td> rate: </td>
-                <td>{{selectedRentACar.rate}}</td>
+                <td>{{selectedRentACar.Rate}}</td>
             </tr> 
             <tr> 
                 <td> name: </td>
-                <td> <input [(ngModel)]="selectedRentACar.name" placeholder="name"/> </td>
+                <td> <input [(ngModel)]="selectedRentACar.Name" placeholder="name"/> </td>
             </tr>
             <tr>
                 <td> address: </td>
-                <td> <input [(ngModel)]="selectedRentACar.address"  placeholder="address"/> </td>
+                <td> <input [(ngModel)]="selectedRentACar.Address"  placeholder="address"/> </td>
             </tr>
             <tr>
                 <td> description: </td>
-                <td>  <input [(ngModel)]="selectedRentACar.description" placeholder="description"/> </td>
+                <td>  <input [(ngModel)]="selectedRentACar.Description" placeholder="description"/> </td>
             </tr>
             <tr>
                 <td> cars: </td>
                     <td> 
                         <tr *ngFor="let c of selectedRentACar.cars" > 
-                           <td>  {{ c.name }}  </td>
+                           <td>  {{ c.Name }}  </td>
                         </tr>
                     </td>
             </tr>

@@ -1,20 +1,20 @@
 import { Flight } from './flight';
 
 export class Airline {
-    id: Int16Array;
-    name: string;
-    address: string; 
+    Id: Int16Array;
+    Name: string;
+    Address: string; 
  //   rate: number;
-    description: string;
+    Description: string;
 
     flights: Array<Flight>;
    
     constructor(n: string,  r: number, a: string, d: string)
     {
-        this.name = n;
-        this.address = a;
+        this.Name = n;
+        this.Address = a;
       //  this.rate = r;
-        this.description = d;   
+        this.Description = d;   
         
         this.flights = new Array<Flight>();
     }

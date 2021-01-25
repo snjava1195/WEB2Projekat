@@ -11,26 +11,33 @@ import { Observable } from 'rxjs';
 export class RentACarService{
 
     url = 'https://localhost:44325/api/RentaCar';
-    url2 = 'https://localhost:44325/api/RentaCar';
 
     constructor(private http: HttpClient){}
-
-    mockedRentACars(){
-        let rentacars = new Array<RentACar>();
-
-        rentacars.push(new RentACar('Nista GSP', 'nistagsp@yahoo.com', 'neki rent-a-car', 1 ));
-        rentacars.push(new RentACar('Samo kamilom', 'samo.kamilom@gmail.com', 'neki drugi rent-a-car', 5));
-        rentacars.push(new RentACar('Just Rent', 'just.rent@gmail.com', 'neki treci', 9));
-        rentacars.push(new RentACar('Brm brm', 'brm.brm@yahoo.com', 'cetvrti rent-a-car', 4));
-     
-        return  rentacars;
-    }
-
-
       
     getRentACars(): Observable<RentACar[]> {
         return this.http.get<RentACar[]>(this.url + '/AllRentaCarDetails');
     }
+ 
+    getRentaCarById(rentaCarId: Int16Array): Observable<RentACar>{
+        return this.http.get<RentACar>(this.url + '/GetRentaCarDetailsById/'+ rentaCarId);
+    }
+
+    createRentaCar(rentaCar: RentACar) : Observable<RentACar>{
+        const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'} ) };
+        return this.http.post<RentACar>(this.url + '/InsertRentaCarDetails/', rentaCar, httpOptions);
+    }
+
+    updateRentaCar(rentaCar: RentACar) : Observable<RentACar>{
+        const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'}) };
+        return this.http.put<RentACar>(this.url + '/UpdateRentaCarDetails/', rentaCar, httpOptions);
+    }
+
+    deleteRentaCarById(rentaCarId : Int16Array): Observable<number> {
+        const httpOptions = {headers: new HttpHeaders( {'Content-Type': 'application/json' }) };
+        return this.http.delete<number>(this.url + '/DeleteRentaCarDetails?id=' + rentaCarId, httpOptions);
+    }
+
+
 
     loadCars(){
         let allCars = new Array<Car>();

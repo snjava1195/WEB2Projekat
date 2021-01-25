@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
     styleUrls: ['./rent-a-car.component.css']
 })
 
-export class RentACarComponent implements OnInit{
+export class RentACarComponent {
 
     rentACars: Observable<RentACar[]>;
     selectedRentACar: RentACar;
@@ -21,18 +21,13 @@ export class RentACarComponent implements OnInit{
     c : Car;
 
     constructor(private rentACarService: RentACarService){
-        this.selectedRentACar = new RentACar('','','',0);
+        this.selectedRentACar = new RentACar('','','', 0);
         this.toSearch = '';
     }
 
-    ngOnInit()
-    {
-        this.rentACars = this.rentACarService.getRentACars();
-
-    }
 
     loadRentACars(){
-        //this.rentACars = this.rentACarService.getRentACars();
+        this.rentACars = this.rentACarService.getRentACars();
     }
 
     onSelect(rc: RentACar): void{
