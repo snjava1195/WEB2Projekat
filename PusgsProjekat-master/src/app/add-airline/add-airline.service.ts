@@ -3,7 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Airline } from '../companies/airline';
 import { Observable } from 'rxjs'; 
 import { HttpClient } from "@angular/common/http";
-
+import {User} from '../users/user';
 @Injectable({
     providedIn : 'root'    
 })
@@ -36,7 +36,14 @@ export class AddAirlineService{
         return this.http.delete<number>(this.url + '/DeleteAirlineDetails?id=' +airlineId,  
      httpOptions);  
       }  
-  
+      getAllAirlineAdmins(): Observable<User[]>
+      {
+        return this.http.get<User[]>(this.url + '/AdminList');
+      }
+      StateDDL(airlineId: Int16Array, adminName:string)
+      {
+        return this.http.post(this.url+ '/AddAsAirlineAdmin',  {airlineId, adminName});
+      }
       
 
 }

@@ -5,24 +5,56 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AngularModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Airline">
+        <EntityType Name="AirlineDetails">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="RentaCar">
+        <EntityType Name="Flight">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="DatumPoletanja" Type="datetime" />
+          <Property Name="DatumSletanja" Type="datetime" />
+          <Property Name="VremeTrajanjaLeta" Type="varchar" MaxLength="50" />
+          <Property Name="DuzinaPutovanja" Type="bigint" />
+          <Property Name="BrojPresedanja" Type="int" />
+          <Property Name="Cena" Type="bigint" />
+          <Property Name="MestoPoletanja" Type="nvarchar" MaxLength="50" />
+          <Property Name="MestoSletanja" Type="nvarchar" MaxLength="50" />
+          <Property Name="OcenaLeta" Type="int" />
+          <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FlightReservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FlightId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Karta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrojLeta" Type="int" Nullable="false" />
+          <Property Name="Popust" Type="bigint" />
+          <Property Name="Cena" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Presedanje">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lokacija" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdLeta" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserDetails">
           <Key>
@@ -38,14 +70,34 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserType" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Usermaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordConfirm" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsApporved" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="TotalCnt" Type="int" />
+        </EntityType>
         <Function Name="Usp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="AngularModelStoreContainer">
-          <EntitySet Name="Airline" EntityType="Self.Airline" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RentaCar" EntityType="Self.RentaCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AirlineDetails" EntityType="Self.AirlineDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FlightReservation" EntityType="Self.FlightReservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Karta" EntityType="Self.Karta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presedanje" EntityType="Self.Presedanje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usermaster" EntityType="Self.Usermaster" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -68,35 +120,87 @@
         <EntityContainer Name="AngularEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
           <FunctionImport Name="Usp_Login" ReturnType="Collection(AngularModel.Usp_Login_Result)">
-            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Airlines" EntityType="AngularModel.Airline" />
-          <EntitySet Name="RentaCars" EntityType="AngularModel.RentaCar" />
+          <EntitySet Name="AirlineDetails" EntityType="AngularModel.AirlineDetail" />
+          <EntitySet Name="Flights" EntityType="AngularModel.Flight" />
+          <EntitySet Name="Kartas" EntityType="AngularModel.Karta" />
+          <EntitySet Name="Presedanjes" EntityType="AngularModel.Presedanje" />
+          <EntitySet Name="Usermasters" EntityType="AngularModel.Usermaster" />
+          <EntitySet Name="FlightReservations" EntityType="AngularModel.FlightReservation" />
         </EntityContainer>
         <ComplexType Name="Usp_Login_Result">
           <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="UserType" Nullable="false" />
         </ComplexType>
-        <EntityType Name="Airline">
+        <EntityType Name="AirlineDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="RentaCar">
+        <EntityType Name="Flight">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="DatumPoletanja" Type="DateTime" Precision="3" />
+          <Property Name="DatumSletanja" Type="DateTime" Precision="3" />
+          <Property Name="VremeTrajanjaLeta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DuzinaPutovanja" Type="Int64" />
+          <Property Name="BrojPresedanja" Type="Int32" />
+          <Property Name="Cena" Type="Int64" />
+          <Property Name="MestoPoletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MestoSletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OcenaLeta" Type="Int32" />
+          <Property Name="IdAvioKompanije" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Karta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrojLeta" Type="Int32" Nullable="false" />
+          <Property Name="Popust" Type="Int64" />
+          <Property Name="Cena" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Presedanje">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lokacija" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdLeta" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usermaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordConfirm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsApporved" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="TotalCnt" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FlightReservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FlightId" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -128,28 +232,80 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Airlines">
-            <EntityTypeMapping TypeName="AngularModel.Airline">
-              <MappingFragment StoreEntitySet="Airline">
-                <ScalarProperty Name="Description" ColumnName="Description" />
+          <EntitySetMapping Name="AirlineDetails">
+            <EntityTypeMapping TypeName="AngularModel.AirlineDetail">
+              <MappingFragment StoreEntitySet="AirlineDetails">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RentaCars">
-            <EntityTypeMapping TypeName="AngularModel.RentaCar">
-              <MappingFragment StoreEntitySet="RentaCar">
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="Flights">
+            <EntityTypeMapping TypeName="AngularModel.Flight">
+              <MappingFragment StoreEntitySet="Flight">
+                <ScalarProperty Name="IdAvioKompanije" ColumnName="IdAvioKompanije" />
+                <ScalarProperty Name="OcenaLeta" ColumnName="OcenaLeta" />
+                <ScalarProperty Name="MestoSletanja" ColumnName="MestoSletanja" />
+                <ScalarProperty Name="MestoPoletanja" ColumnName="MestoPoletanja" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="BrojPresedanja" ColumnName="BrojPresedanja" />
+                <ScalarProperty Name="DuzinaPutovanja" ColumnName="DuzinaPutovanja" />
+                <ScalarProperty Name="VremeTrajanjaLeta" ColumnName="VremeTrajanjaLeta" />
+                <ScalarProperty Name="DatumSletanja" ColumnName="DatumSletanja" />
+                <ScalarProperty Name="DatumPoletanja" ColumnName="DatumPoletanja" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Kartas">
+            <EntityTypeMapping TypeName="AngularModel.Karta">
+              <MappingFragment StoreEntitySet="Karta">
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Popust" ColumnName="Popust" />
+                <ScalarProperty Name="BrojLeta" ColumnName="BrojLeta" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presedanjes">
+            <EntityTypeMapping TypeName="AngularModel.Presedanje">
+              <MappingFragment StoreEntitySet="Presedanje">
+                <ScalarProperty Name="IdLeta" ColumnName="IdLeta" />
+                <ScalarProperty Name="Lokacija" ColumnName="Lokacija" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usermasters">
+            <EntityTypeMapping TypeName="AngularModel.Usermaster">
+              <MappingFragment StoreEntitySet="Usermaster">
+                <ScalarProperty Name="TotalCnt" ColumnName="TotalCnt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsApporved" ColumnName="IsApporved" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PasswordConfirm" ColumnName="PasswordConfirm" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FlightReservations">
+            <EntityTypeMapping TypeName="AngularModel.FlightReservation">
+              <MappingFragment StoreEntitySet="FlightReservation">
+                <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

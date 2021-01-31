@@ -11,6 +11,13 @@
             </p>
        </td> 
     </tr>-->
+    <ul>
+        <li><a class="navbar-item"  routerLink="/airline" routerLinkActive="active">Airlines</a></li>
+        <li><a class="navbar-item"  routerLink="/rentacar" routerLinkActive="active">Rent-a-car</a></li>
+        <!--<li><a class="navbar-item" routerLink="/user" routerLinkActive="active">User</a></li>-->
+        <!--<li><a class="navbar-item" routerLink="/login" routerLinkActive="active">Login</a></li>-->
+        
+    </ul>
     <table>
     <tr>
         <td> 
@@ -63,8 +70,8 @@
             <tr>
                 <td> flights: </td>
                     <td> 
-                        <tr *ngFor="let f of selectedAirline.flights" > 
-                           <td>  {{ f.from  }} - {{ f.to }}  - {{ f.price }} e - {{ f.time }} </td>
+                        <tr *ngFor="let f of selectedAirline.flights | async" > 
+                           <td>  {{ f.DatumPoletanja }} - {{ f.DatumSletanja }} - {{ f.VremeTrajanjaLeta }} - {{ f.DuzinaPutovanja }} - {{ f.BrojPresedanja}} - {{ f.Cena }} - {{ f.MestoPoletanja }} - {{ f.MestoSletanja }} </td>
                         </tr>
                     </td>
             </tr>

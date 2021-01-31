@@ -14,11 +14,11 @@ namespace UserAPI.Controllers
         AngularEntities2 objEntity = new AngularEntities2();
         [HttpGet]
         [Route("AllAirlineDetails")]
-        public IQueryable<Airline> GetAirline()
+        public IQueryable<AirlineDetail> GetAirline()
         {
             try
             {
-                return objEntity.Airlines;
+                return objEntity.AirlineDetails;
             }
             catch (Exception)
             {
@@ -29,11 +29,11 @@ namespace UserAPI.Controllers
         [Route("GetAirlineDetailsById/{airlineId}")]
         public IHttpActionResult GetAirlineById(string airlineId)
         {
-            Airline objUsr = new Airline();
+            AirlineDetail objUsr = new AirlineDetail();
             int ID = Convert.ToInt32(airlineId);
             try
             {
-                objUsr = objEntity.Airlines.Find(ID);
+                objUsr = objEntity.AirlineDetails.Find(ID);
                 if (objUsr == null)
                     return NotFound();
             }
@@ -47,17 +47,17 @@ namespace UserAPI.Controllers
 
         [HttpPost]
         [Route("InsertAirlineDetails")]
-        public IHttpActionResult PostUser(Airline data)
+        public IHttpActionResult PostUser(AirlineDetail data)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             try
             {
                 
-                        
-                        objEntity.Airlines.Add(data);
-                        objEntity.SaveChanges();
-                    
+                
+                objEntity.AirlineDetails.Add(data);
+                objEntity.SaveChanges();
+
             }
             catch (Exception)
             {
@@ -67,9 +67,16 @@ namespace UserAPI.Controllers
             return Ok(data);
         }
 
+        [HttpGet]
+        [Route("AdminList")]
+        public List<UserDetail> ListOfAdmins()
+        {
+            return objEntity.UserDetails.Where(s => s.UserType == 3).ToList<UserDetail>();
+        }
+
         [HttpPut]
         [Route("UpdateAirlineDetails")]
-        public IHttpActionResult PutUserMaster(Airline airline)
+        public IHttpActionResult PutUserMaster(AirlineDetail airline)
         {
             if (!ModelState.IsValid)
             {
@@ -78,8 +85,8 @@ namespace UserAPI.Controllers
 
             try
             {
-                Airline objUsr = new Airline();
-                objUsr = objEntity.Airlines.Find(airline.Id);
+                AirlineDetail objUsr = new AirlineDetail();
+                objUsr = objEntity.AirlineDetails.Find(airline.Id);
                 if (objUsr != null)
                 {
                     objUsr.Id = airline.Id;
@@ -104,16 +111,33 @@ namespace UserAPI.Controllers
         public IHttpActionResult DeleteUserDelete(int id)
         {
             //int empId = Convert.ToInt32(id);  
-            Airline airline = objEntity.Airlines.Find(id);
+            AirlineDetail airline = objEntity.AirlineDetails.Find(id);
             if (airline == null)
             {
                 return NotFound();
             }
 
-            objEntity.Airlines.Remove(airline);
+            objEntity.AirlineDetails.Remove(airline);
             objEntity.SaveChanges();
 
             return Ok(airline);
         }
+
+        [HttpPost]
+        [Route("AddAsAirlineAdmin")]
+        public IHttpActionResult AddAirlineAdmin( int airlineId, string adminName)
+        {
+            AirlineDetail airline = objEntity.AirlineDetails.Find(airlineId);
+            UserDetail user = objEntity.UserDetails.Find(adminName);
+            airline.AdminId = user.UserId;
+            objEntity.SaveChanges();
+            return Ok(airline);
+        }
+    }
+
+    public class DTO
+    {
+        public AirlineDetail ad { get; set; }
+        public string adminId { get; set; }
     }
 }

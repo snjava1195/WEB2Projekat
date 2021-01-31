@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { UserService} from '../app/users/user.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { DatePipe } from '@angular/common';
 import { ViewComponent } from './view/view.component';
 import { AirlineComponent } from './companies/airline.component';
-
+import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RentACarComponent } from './companies/rent-a-car.component';
 
@@ -19,6 +19,7 @@ import {
 } from '@angular/material/button';  
 import{ MatMenuModule} from '@angular/material/menu';
 import{ MatDatepickerModule} from '@angular/material/datepicker';
+
 import{ MatIconModule} from '@angular/material/icon';
 import{ MatCardModule} from '@angular/material/card';
 import{ MatSidenavModule} from '@angular/material/sidenav';
@@ -39,6 +40,10 @@ import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddAirlineComponent } from './add-airline/add-airline.component';
 import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
+import { FlightComponent } from './companies/flight.component';
+import {CommonModule} from '@angular/common';
+import { AirlineadmindashboardComponent } from './airlineadmindashboard.component';
+import { ReserveFlightComponent } from './reserve-flight/reserve-flight.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +59,10 @@ import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
     RegisterComponent,
     AdminComponent,
     AddAirlineComponent,
-    AddRentacarComponent
+    AddRentacarComponent,
+    FlightComponent,
+    AirlineadmindashboardComponent,
+    ReserveFlightComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +73,11 @@ import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
     BrowserAnimationsModule,
     MatButtonModule,  
     MatMenuModule,  
-    MatDatepickerModule,  
+    MatDatepickerModule,
+    MatDatepickerModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatNativeDateModule,  
     //MatNativeDateModule,  
     MatIconModule,  
     MatRadioModule,  
@@ -75,9 +87,11 @@ import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
     MatInputModule,  
     MatTooltipModule,  
     MatToolbarModule,  
+    CommonModule,
+   
     ToastrModule.forRoot()
   ],
-  providers: [UserService, HttpClientModule, AppRoutingModule, LoginService],
+  providers: [UserService, HttpClientModule, AppRoutingModule, LoginService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

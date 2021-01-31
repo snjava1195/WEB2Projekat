@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Flight } from './flight';
 
 export class Airline {
@@ -6,8 +7,8 @@ export class Airline {
     Address: string; 
  //   rate: number;
     Description: string;
-
-    flights: Array<Flight>;
+    AdminId: Int16Array;
+    flights: Observable<Flight[]>;
    
     constructor(n: string,  r: number, a: string, d: string)
     {
@@ -16,7 +17,7 @@ export class Airline {
       //  this.rate = r;
         this.Description = d;   
         
-        this.flights = new Array<Flight>();
+        this.flights = new Observable<Flight[]>();
     }
 
 }

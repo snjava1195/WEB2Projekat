@@ -40,8 +40,12 @@ export class LoginComponent {
       user => {
           if(user==0)
             this.router.navigate(['/admindashboard']);
-          else
+          else if(user==1)
             this.router.navigate(['/userdashboard']);
+          else if(user==2)
+            this.router.navigate(['/caradmindashboard']);
+          else if(user==3)
+            this.router.navigate(['/airlineadmindashboard'])
         
       });
   };

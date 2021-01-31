@@ -12,6 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddAirlineComponent } from './add-airline/add-airline.component';
 import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
+import {AirlineadmindashboardComponent} from './airlineadmindashboard.component';
+import {FlightComponent} from './companies/flight.component';
 const routes: Routes = [
 {
   path: '',
@@ -58,6 +60,17 @@ const routes: Routes = [
     },
     
     {
+      path: 'airlineadmindashboard',
+      component: AirlineadmindashboardComponent,
+      /*children: [
+        {
+          path: 'flight',
+          component: FlightComponent
+        },
+
+      ]*/
+    },
+    {
       path: 'userdashboard',
       component: UserDashboardComponent,
  /*     children: [
@@ -96,6 +109,10 @@ const routes: Routes = [
   component: AirlineComponent
 },
 */
+{
+  path: 'flight',
+  component: FlightComponent
+},
 {
   path: 'user',
   component: UserComponent

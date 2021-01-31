@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Button } from 'protractor';
-
+import {User} from '../users/user';
 
 @Component({
     selector: 'add-airline',
@@ -21,19 +21,65 @@ export class AddAirlineComponent implements OnInit{
     allAirlines: Observable<Airline[]>;
     airlineIdUpdate=null;
     message=null;
-    
+    myNamePlaceHolder: string = 'Name'
+    AddressPlaceholder: string = 'Address'
+    DescriptionPlaceholder: string = 'Description'
+    _allAirlineAdmins: Observable<User[]>;
+    SelAdminId:Int16Array;
     constructor(private formbulider: FormBuilder, private addAirlineService:AddAirlineService) { }
 
-    ngOnInit(){
+    ngOnInit():void{
         this.airlineForm = this.formbulider.group({
        //   UserId: ['', [Validators.required]],
           Name: ['', [Validators.required]],
           Address: ['', [Validators.required]],
           Description: ['', [Validators.required]],
+          AirlineAdmin: ['', [Validators.required]]
          
 
         });
         this.loadAllAirlines();
+        this.FillAirlineAdmins();
+    }
+
+    checkPlaceHolder()
+    {
+      if (this.myNamePlaceHolder) {
+        this.myNamePlaceHolder = null
+        return;
+      } else {
+        this.myNamePlaceHolder = 'Name'
+        return;
+      }
+      
+      
+    }
+
+    checkAddressPlaceHolder()
+    {
+      if(this.AddressPlaceholder)
+      {
+        this.AddressPlaceholder = null
+        return;
+      }
+      else{
+        this.AddressPlaceholder='Address'
+        return;
+      }
+    }
+
+    checkDescPlaceHolder()
+    {
+      if(this.DescriptionPlaceholder)
+      {
+        this.DescriptionPlaceholder=null
+        return;
+      }
+      else
+      {
+        this.DescriptionPlaceholder='Description'
+        return;
+      }
     }
   /*  checkCheckBoxValue(email:string)
     {
@@ -65,6 +111,7 @@ export class AddAirlineComponent implements OnInit{
     onFormSubmit() {  
         this.dataSaved = false;  
         const airline = this.airlineForm.value;  
+        //airline.AdminId = this.SelAdminId;
         this.CreateAirline(airline);  
         this.airlineForm.reset();  
       }  
@@ -83,12 +130,15 @@ export class AddAirlineComponent implements OnInit{
       
       }  
       CreateAirline(airline: Airline) {  
-        if (this.airlineIdUpdate == null) {  
+        if (this.airlineIdUpdate == null) {
+          debugger;
+          airline.AdminId = this.SelAdminId ; 
           this.addAirlineService.createAirline(airline).subscribe(  
             () => {  
               this.dataSaved = true;  
               this.message = 'Record saved Successfully';  
               this.loadAllAirlines();  
+         //     this.FillStateDDL(airline);
               this.airlineIdUpdate = null;  
               this.airlineForm.reset();  
             }  
@@ -120,6 +170,18 @@ export class AddAirlineComponent implements OnInit{
         this.airlineForm.reset();  
         this.message = null;  
         this.dataSaved = false;  
-      }  
+      }
+      
+      FillAirlineAdmins()
+      {
+        debugger;
+        this._allAirlineAdmins = this.addAirlineService.getAllAirlineAdmins();
+      }
+      
+      // FillStateDDL(airline: Airline)
+      // {
+      //   this.addAirlineService.StateDDL(airline.Id, this.SelAdminId);
+      // }
+
     }  
 

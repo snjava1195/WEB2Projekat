@@ -6,8 +6,17 @@
     <edmx:Diagrams>
       <Diagram DiagramId="921079e51d564a9f94c4fc101e73180d" Name="Diagram1">
         <EntityTypeShape EntityType="AngularModel.UserDetail" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+<<<<<<< Updated upstream
         <EntityTypeShape EntityType="AngularModel.Airline" Width="1.5" PointX="5.875" PointY="0.75" />
         <EntityTypeShape EntityType="AngularModel.RentaCar" Width="1.5" PointX="3.375" PointY="0.75" />
+=======
+        <EntityTypeShape EntityType="AngularModel.AirlineDetail" Width="1.5" PointX="3.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AngularModel.Flight" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AngularModel.Karta" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AngularModel.Presedanje" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AngularModel.Usermaster" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AngularModel.FlightReservation" Width="1.5" PointX="0.0029581189169353428" PointY="28.493271423733454" />
+>>>>>>> Stashed changes
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -11,19 +11,21 @@
         <form [formGroup]="airlineForm"(ngSubmit)="onFormSubmit()">  
                 <table>  
                   <tr>  
-                 
+                    
                     <td class="tbl1">  
                       <mat-form-field class="demo-full-width">  
-                        <input formControlName="Name" matInput placeholder="Airline name">  
                         
+                        <input formControlName="Name" (click)="checkPlaceHolder()" (blur)="checkPlaceHolder()"   matInput placeholder=" {{myNamePlaceHolder}} ">  
+                        <!-- <span class="text-danger" *ngIf="(airlineForm.get('Email').touched || airlineForm.get('Email').dirty) && 
+                        airlineForm.get('Email').errors"></span> -->
                       </mat-form-field>  
                       <mat-error>  
                         <span *ngIf="!airlineForm.get('Name').value && airlineForm.get('Name').touched"></span>  
-                      </mat-error>  
+                      </mat-error> 
                     </td>  
                     <td class="tbl1">  
                         <mat-form-field class="demo-full-width">  
-                          <input formControlName="Address" matInput placeholder="Address">  
+                          <input formControlName="Address" (click)="checkAddressPlaceHolder()" (blur)="checkAddressPlaceHolder()" matInput placeholder="{{AddressPlaceholder}}">  
                           
                         </mat-form-field>  
                         <mat-error>  
@@ -32,13 +34,31 @@
                       </td>  
                     <td class="tbl1">  
                       <mat-form-field class="demo-full-width">  
-                        <input formControlName="Description" matInput placeholder="Description">  
+                        <input formControlName="Description" (click)="checkDescPlaceHolder()" (blur)="checkDescPlaceHolder()" matInput placeholder="{{DescriptionPlaceholder}}">  
                       </mat-form-field>  
                       <mat-error>  
                         <span *ngIf="!airlineForm.get('Description').value && airlineForm.get('Description').touched"></span>  
                       </mat-error>  
                     </td>  
-                   
+                    <td class="tbl1">
+                      <div class="form-group col-sm-3">   
+                        <label for="company">Country</label>  
+                        <select  class="form-control"  formControlName="AirlineAdmin"  [(ngModel)]="SelAdminId">
+                          <option value="">--Select--</option>  
+                          <option *ngFor="let User of _allAirlineAdmins | async" value={{User.UserId}}>  
+                              {{User.UserId}}  
+                          </option>  
+                    </select>  
+                    </div>  
+                    </td>
+                    <!-- <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="AdminId" (click)="checkDescPlaceHolder()" (blur)="checkDescPlaceHolder()" matInput placeholder="{{DescriptionPlaceholder}}">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!airlineForm.get('Description').value && airlineForm.get('Description').touched"></span>  
+                      </mat-error>  
+                    </td>   -->
                     <td></td>  
                     <td  class="content-center">  
                       <button type="submit" mat-raised-button color="accent"[disabled]="!airlineForm.valid">Submit</button>      

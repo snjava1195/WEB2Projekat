@@ -1,0 +1,197 @@
+<div class="container">  
+  
+    <mat-card>  
+      <mat-toolbar color="accent">  
+        <div align="center" style="color:white;text-align: right;">  
+          CRUD operation in Angular 7 using Web api and Sql Database  
+        </div>    
+      </mat-toolbar>  
+    <br><br>  
+      <mat-card-content>  
+        <form [formGroup]="flightForm"(ngSubmit)="onFormSubmit()">  
+                <table>  
+                  <tr>  
+                    
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        
+                        <input matInput [(ngModel)] = "datumPoletanja" type='datetime-local' formControlName="DatumPoletanja" [matDatepicker]="DatumPoletanja" placeholder="Datum Poletanja" >  
+                        <mat-datepicker-toggle matSuffix [for]="DatumPoletanja"></mat-datepicker-toggle>
+  <mat-datepicker #DatumPoletanja></mat-datepicker>
+</mat-form-field>
+                    </td>
+<td class="tbl1">  
+    <mat-form-field class="demo-full-width">  
+      
+        <input matInput [(ngModel)] = "datumSletanja" type='datetime-local' formControlName="DatumSletanja" [matDatepicker]="DatumSletanja" placeholder="Datum Sletanja" >  
+        <mat-datepicker-toggle matSuffix [for]="DatumSletanja"></mat-datepicker-toggle>
+<mat-datepicker #DatumSletanja></mat-datepicker>
+</mat-form-field>
+
+                      <!-- <mat-error>  
+                        <span *ngIf="!flightForm.get('Name').value && flightForm.get('Name').touched"></span>  
+                      </mat-error>  -->
+                    <!-- </td>   -->
+                    <!-- <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="DatumPoletanja"  matInput placeholder="Datum Poletanja">  
+                          <span class="text-danger" *ngIf="(flightForm.get('DatumPoletanja').touched || flightForm.get('DatumPoletanja').dirty) && 
+                          flightForm.get('DatumPoletanja').errors">Vreme trajanja leta:</span> 
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!flightForm.get('DatumPoletanja').value && flightForm.get('DatumPoletanja').touched"></span>  
+                        </mat-error>  
+                      </td>  
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="DatumSletanja"  matInput placeholder="Datum Sletanja">  
+                          <span class="text-danger" *ngIf="(flightForm.get('DatumSletanja').touched || flightForm.get('DatumSletanja').dirty) && 
+                          flightForm.get('DatumSletanja').errors">Vreme trajanja leta:</span> 
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!flightForm.get('DatumSletanja').value && flightForm.get('DatumSletanja').touched"></span>  
+                        </mat-error>  
+                      </td>   -->
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="VremeTrajanjaLeta"  matInput placeholder="Vreme trajanja leta">  
+                          <span class="text-danger" *ngIf="(flightForm.get('VremeTrajanjaLeta').touched || flightForm.get('VremeTrajanjaLeta').dirty) && 
+                          flightForm.get('VremeTrajanjaLeta').errors">Vreme trajanja leta:</span> 
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!flightForm.get('VremeTrajanjaLeta').value && flightForm.get('VremeTrajanjaLeta').touched"></span>  
+                        </mat-error>  
+                      </td>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="DuzinaPutovanja"  matInput placeholder="Duzina Putovanja"> 
+                        <span class="text-danger" *ngIf="(flightForm.get('DuzinaPutovanja').touched || flightForm.get('DuzinaPutovanja').dirty) && 
+                        flightForm.get('DuzinaPutovanja').errors">Duzina Putovanja:</span>  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!flightForm.get('DuzinaPutovanja').value && flightForm.get('DuzinaPutovanja').touched"></span>  
+                      </mat-error>  
+                    </td>
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="BrojPresedanja"  matInput placeholder="Broj Presedanja"> 
+                          <span class="text-danger" *ngIf="(flightForm.get('BrojPresedanja').touched || flightForm.get('BrojPresedanja').dirty) && 
+                          flightForm.get('BrojPresedanja').errors">Broj Presedanja:</span>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!flightForm.get('BrojPresedanja').value && flightForm.get('BrojPresedanja').touched"></span>  
+                        </mat-error>  
+                      </td>   
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="Cena"  matInput placeholder="Cena"> 
+                          <span class="text-danger" *ngIf="(flightForm.get('Cena').touched || flightForm.get('Cena').dirty) && 
+                          flightForm.get('Cena').errors">Cena:</span>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!flightForm.get('Cena').value && flightForm.get('Cena').touched"></span>  
+                        </mat-error>  
+                      </td>    
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="MestoPoletanja"  matInput placeholder="Mesto Poletanja"> 
+                          <span class="text-danger" *ngIf="(flightForm.get('MestoPoletanja').touched || flightForm.get('MestoPoletanja').dirty) && 
+                          flightForm.get('MestoPoletanja').errors">Mesto Poletanja:</span>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!flightForm.get('MestoPoletanja').value && flightForm.get('MestoPoletanja').touched"></span>  
+                        </mat-error>  
+                      </td>   
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="MestoSletanja"  matInput placeholder="Mesto Sletanja"> 
+                          <span class="text-danger" *ngIf="(flightForm.get('MestoSletanja').touched || flightForm.get('MestoSletanja').dirty) && 
+                          flightForm.get('MestoSletanja').errors">Mesto Sletanja:</span>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!flightForm.get('MestoSletanja').value && flightForm.get('MestoSletanja').touched"></span>  
+                        </mat-error>  
+                      </td>   
+                      <td class="tbl1">
+                        <div class="form-group col-sm-3">   
+                          <label for="company">Country</label>  
+                          <select  class="form-control"  formControlName="AirlineAdmin"  [(ngModel)]="SelAirlineId">
+                            <option value="">--Select--</option>  
+                            <option *ngFor="let User of _allAirlineIds | async" value={{User.Id}}>  
+                                {{User.Id}}  
+                            </option>  
+                      </select>  
+                      </div>  
+                      </td>
+
+                    <!-- <td class="tbl1">
+                      <div class="form-group col-sm-3">   
+                        <label for="company">Country</label>  
+                        <select  class="form-control"  formControlName="AirlineAdmin"  [(ngModel)]="SelAdminId">
+                          <option value="">--Select--</option>  
+                          <option *ngFor="let User of _allAirlineAdmins | async" value={{User.UserId}}>  
+                              {{User.UserId}}  
+                          </option>  
+                    </select>  
+                    </div>  
+                    </td> -->
+                    <!-- <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="AdminId" (click)="checkDescPlaceHolder()" (blur)="checkDescPlaceHolder()" matInput placeholder="{{DescriptionPlaceholder}}">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!airlineForm.get('Description').value && airlineForm.get('Description').touched"></span>  
+                      </mat-error>  
+                    </td>   -->
+                    <td></td>  
+                    <td  class="content-center">  
+                      <button type="submit" mat-raised-button color="accent"[disabled]="!flightForm.valid">Submit</button>      
+                      <button type="reset" mat-raised-button color="accent" (click)="resetForm()">Reset</button>  
+                    </td>  
+                    <td>  
+                      <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                        {{message}}  
+                      </p>  
+                    </td>  
+                  </tr>  
+                </table>  
+    <!-- <br><br>  
+          <table class="table" >  
+              <tr ngclass="btn-primary">  
+                <th class="tbl2">Airline ID</th>  
+                <th class="tbl2">Name</th>  
+                <th class="tbl2">Address</th>  
+                <th class="tbl2">Desription</th>  
+                
+              </tr>  
+              <tr *ngFor="let airline of allAirlines | async">  
+               <td class="tbl2">{{airline.Id}}</td>  
+                <td class="tbl2">{{airline.Name}}</td>  
+                <td class="tbl2">{{airline.Address}}</td>  
+                <td class="tbl2">{{airline.Description}}</td>  -->
+               <!-- <td class="tbl2">{{user.Phone}}</td>  
+                <td class="tbl2">{{user.Password}}</td>
+                <td class="tbl2">{{user.City}}</td> 
+                <td class="tbl2">{{user.ConfirmPassword}}</td> 
+  
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadUserToEdit(user.UserId)">Edit</button>  
+                </td>  
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteUser(user.UserId)">Delete</button>  
+                </td>  
+                <td class="tbl2">
+                
+  <button type="button" class="btn btn-danger" (click)="checkCheckBoxValue(user.Email)">Add as car admin</button>
+  </td>
+  <td class="tbl2">
+                
+    <button type="button" class="btn btn-danger" (click)="checkAirlineValue(user.Email)">Add as airline admin</button>
+    </td>-->
+  <!--</tr>  
+      
+            </table>   -->
+        </form>  
+      </mat-card-content>  
+    </mat-card>  
+    </div>  

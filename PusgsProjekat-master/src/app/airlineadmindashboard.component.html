@@ -1,0 +1,132 @@
+<!-- <ul>
+    <li><a class="navbar-item"  routerLink="/flight" routerLinkActive="active">Add Flight</a></li>-->
+    <!-- <li><a class="navbar-item"  routerLink="/viewflights" routerLinkActive="active">View Flights</a></li> -->
+    <!-- <li><a class="navbar-item" routerLink="/user" routerLinkActive="active">User</a></li>
+    <li><a class="navbar-item" routerLink="/companies" routerLinkActive="active">Add companies</a></li> -->
+    <!--<li><a class="navbar-item" routerLink="/login" routerLinkActive="active">Login</a></li>-->
+    
+<!--</ul> -->
+<!-- <div class="container"> 
+<table class="table" >  
+    <tr ngclass="btn-primary">  
+      <th class="tbl2">Flight ID</th>  
+      <th class="tbl2">DatumPoletanja</th>  
+      <th class="tbl2">DatumSletanja</th>  
+      <th class="tbl2">VremeTrajanjaLeta</th>  
+      <th class="tbl2">DuzinaPutovanja</th>
+      <th class="tbl2">BrojPresedanja</th>
+      <th class="tbl2">Cena</th>
+      <th class="tbl2">MestoPoletanja</th>
+      <th class="tbl2">MestoSletanja</th>
+      
+      
+    </tr>  
+    <tr *ngFor="let flight of allFlights | async">  
+     <td class="tbl2">{{flight.Id}}</td>  
+      <td class="tbl2">{{flight.DatumPoletanja}}</td>  
+      <td class="tbl2">{{flight.DatumSletanja}}</td>  
+      <td class="tbl2">{{flight.VremeTrajanjaLeta}}</td>  
+      <td class="tbl2">{{flight.DuzinaPutovanja}}</td>  
+      <td class="tbl2">{{flight.BrojPresedanja}}</td>  
+      <td class="tbl2">{{flight.Cena}}</td>  
+      <td class="tbl2">{{flight.MestoPoletanja}}</td>  
+      <td class="tbl2">{{flight.MestoSletanja}}</td> -->
+     <!-- <td class="tbl2">{{user.Phone}}</td>  
+      <td class="tbl2">{{user.Password}}</td>
+      <td class="tbl2">{{user.City}}</td> 
+      <td class="tbl2">{{user.ConfirmPassword}}</td> 
+
+      <td class="tbl2">  
+        <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadUserToEdit(user.UserId)">Edit</button>  
+      </td>  
+      <td class="tbl2">  
+        <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteUser(user.UserId)">Delete</button>  
+      </td>  
+      <td class="tbl2">
+      
+<button type="button" class="btn btn-danger" (click)="checkCheckBoxValue(user.Email)">Add as car admin</button>
+</td>
+<td class="tbl2">
+      
+<button type="button" class="btn btn-danger" (click)="checkAirlineValue(user.Email)">Add as airline admin</button>
+</td>-->
+<table>
+  <tr>
+      <td> 
+          <button class="btn btn-success" (click)="loadAirlines()" > SHOW </button>    
+      </td>
+  </tr>
+</table> 
+
+<div class="split left"> 
+  <div class="centered">
+  <table class="table table-hover">           
+      <tbody>
+          <tr *ngFor="let flight of flights | async"  >
+              
+              <td class="tbl2">{{flight.Id}}</td>  
+               <td class="tbl2">{{flight.DatumPoletanja}}</td>  
+               <td class="tbl2">{{flight.DatumSletanja}}</td>  
+               <td class="tbl2">{{flight.VremeTrajanjaLeta}}</td>  
+               <td class="tbl2">{{flight.DuzinaPutovanja}}</td>  
+               <td class="tbl2">{{flight.BrojPresedanja}}</td>  
+               <td class="tbl2">{{flight.Cena}}</td>  
+               <td class="tbl2">{{flight.MestoPoletanja}}</td>
+                  <td>{{ flight.MestoSletanja }}</td>
+          </tr> 
+      </tbody>
+  </table>       
+</div>
+</div>
+<br/>
+
+<!-- <div class="split right" [hidden]="selectedFlight.MestoSletanja ==='' " *ngIf="selectedFlight"  >
+  <div class="centered">
+  <table class="table table-hover">   
+      <thead>
+          {{selectedFlight.MestoSletanja | uppercase}} details:
+      </thead>        
+      <tbody>
+          
+          <tr> 
+              <td> Datum Poletanja: </td>
+              <td> <input [(ngModel)]="selectedFlight.DatumPoletanja" placeholder="DatumPoletanja"/> </td>
+          </tr>
+          <tr>
+              <td> Datum Sletanja: </td>
+              <td> <input [(ngModel)]="selectedFlight.DatumSletanja"  placeholder="DatumSletanja"/> </td>
+          </tr>
+          <tr>
+              <td> Vreme Trajanja Leta: </td>
+              <td>  <input [(ngModel)]="selectedFlight.VremeTrajanjaLeta" placeholder="VremeTrajanjaLeta"/> </td>
+          </tr>
+          <tr>
+            <td> Duzina Putovanja: </td>
+            <td>  <input [(ngModel)]="selectedFlight.DuzinaPutovanja" placeholder="DuzinaPutovanja"/> </td>
+        </tr>
+        <tr>
+          <td> Broj Presedanja: </td>
+          <td>  <input [(ngModel)]="selectedFlight.BrojPresedanja" placeholder="BrojPresedanja"/> </td>
+      </tr>
+      <tr>
+        <td> Cena: </td>
+        <td>  <input [(ngModel)]="selectedFlight.Cena" placeholder="Cena"/> </td>
+    </tr>
+    <tr>
+      <td> Mesto Poletanja: </td>
+      <td>  <input [(ngModel)]="selectedFlight.MestoPoletanja" placeholder="MestoPoletanja"/> </td>
+  </tr>
+  <tr>
+    <td> Mesto Sletanja: </td>
+    <td>  <input [(ngModel)]="selectedFlight.MestoSletanja" placeholder="MestoSletanja"/> </td>
+
+                 
+          </tr>
+      </tbody>
+  </table>     
+</div>
+</div> -->
+<a class="btn" routerLink="/flight">Add flight</a>
+  
+
+   

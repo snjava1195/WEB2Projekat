@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Airline } from "src/app/companies/airline"
 import { AirlineService } from "src/app/companies/airline.service";
 import { Flight } from './flight';
+import {FlightService} from './flight.service';
 
 @Component({
     selector: 'airlines',
@@ -14,7 +15,7 @@ export class AirlineComponent {
 
     airlines: Observable<Airline[]>;
     selectedAirline: Airline;
-    flights : Array<Flight>;
+    flights : Observable<Flight[]>;
     
     num: number;
 
@@ -22,11 +23,11 @@ export class AirlineComponent {
     afterSearch: string;
     airline: Airline;
 
-    constructor(private airlineService: AirlineService){
+    constructor(private airlineService: AirlineService, private flightService: FlightService){
         //this.airlines = new Observable<Airline[]>();
         //this.selectedAirline = new Airline('',0,'','');
       
-        this.flights = new Array<Flight>();
+        //this.flights = new Array<Flight>();
        
         this.toSearch = '';
     }
@@ -38,12 +39,14 @@ export class AirlineComponent {
 
     onSelect(ac: Airline) : void{
         this.selectedAirline = ac;
-        this.num = Math.random() * 5;
+        //this.num = Math.random() * 5;
     }
 
     loadFlights() : void{
-        this.selectedAirline.flights = this.airlineService.loadFlights().slice(this.num, this.num+5);
+        this.selectedAirline.flights = this.flightService.loadFlightsByAirlineId(this.selectedAirline.Id);
     }
+
+
 
   /*  doSearch() : void{  
      this.afterSearch = "Ne postoji takva aviokompanija.";  
