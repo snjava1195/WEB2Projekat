@@ -1,9 +1,17 @@
 
 export class Car{
-    name: string;
+    Id: Int16Array;
+    RentaCarId: Int16Array;
+    Name: string;
+    Rate: number;
+    Price: number;
+    RatedBy: number;
 
-    constructor(n: string)
+    constructor(id: Int16Array, rci: Int16Array, n :string, p: number )
     {
-        this.name = n;
+        this.Name = n;
+        this.Id =id;
+        this.RentaCarId = rci;
+        this.Price = p;
     }
 }

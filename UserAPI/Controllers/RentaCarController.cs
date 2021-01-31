@@ -9,227 +9,159 @@ using UserAPI.Models;
 
 namespace UserAPI.Controllers
 {
-  //  [RoutePrefix("Api/RentaCar")]
-    public class RentaCarController// : ApiController
+    [RoutePrefix("Api/RentaCar")]
+    public class RentaCarController : ApiController
     {
 
-
-        //AngularEntities2 objEntity = new AngularEntities2();
-        //[HttpGet]
-        //[Route("AllRentaCarDetails")]
-        //public IQueryable<RentaCar> GetRentaCars()
-        //{
-        //    try
-        //    {
-        //        return objEntity.RentaCars;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-
-        //[HttpGet]
-        //[Route("GetRentaCarDetailsById/{rentaCarId}")]
-        //public IHttpActionResult GetRentaCarById(string rentaCarId)
-        //{
-        //    RentaCar objUsr = new RentaCar();
-        //    int ID = Convert.ToInt32(rentaCarId);
-
-        //    try
-        //    {
-        //        objUsr = objEntity.RentaCars.Find(ID);
-        //        if (objUsr == null)
-        //            return NotFound();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-
-        //    return Ok(objUsr);
-        //}
+        AngularEntities2 objEntity = new AngularEntities2();
+        [HttpGet]
+        [Route("AllRentaCars")]
+        public IQueryable<RentaCar> GetRentaCars()
+        {
+            try
+            {
+                return objEntity.RentaCars;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
-        //[HttpPost]
-        //[Route("InsertRentaCarDetails")]
-        //public IHttpActionResult PostRentaCar(RentaCar data)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState);
-        //    try
-        //    {
-        //        data.Rate = 0;
-        //        objEntity.RentaCars.Add(data);
-        //        objEntity.SaveChanges();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+        [HttpGet]
+        [Route("GetRentaCarById")]
+        public IHttpActionResult GetRentaCarById(int rentaCarId)
+        {
+            RentaCar rentaCar= new RentaCar();
+           // int ID = Convert.ToInt32(rentaCarId);
 
-        //    return Ok(data);
-        //}
+            try
+            {
+                rentaCar = objEntity.RentaCars.Find(rentaCarId);
+                if (rentaCar == null)
+                    return NotFound();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-
-        //[HttpPut]
-        //[Route("UpdateRentaCarDetails")]
-        //public IHttpActionResult PutRentaCar(RentaCar rentaCar)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    try
-        //    {
-        //        RentaCar objUsr = new RentaCar();
-
-        //        objUsr = objEntity.RentaCars.Find(rentaCar.Id);
-        //        if (objUsr != null)
-        //        {
-        //            objUsr.Id = rentaCar.Id;
-        //            objUsr.Name = rentaCar.Name;
-        //            objUsr.Address = rentaCar.Address;
-        //            objUsr.Description = rentaCar.Description;
-
-        //        }
-        //        int i = objEntity.SaveChanges();
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    return Ok(rentaCar);
-        //}
+            return Ok(rentaCar);
+        }
 
 
-        //[HttpDelete]
-        //[Route("DeleteRentaCarDetails")]
-        //public IHttpActionResult DeleteRentaCar(int id)
-        //{
-        //    RentaCar rentaCar = objEntity.RentaCars.Find(id);
-        //    if (rentaCar == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpGet]
+        [Route("GetRentaCarByName/{rentaCarName}")]
+        public IQueryable<RentaCar> GetRentaCarByName(string rentaCarName)
+        {
+            RentaCar rentaCar = new RentaCar();
+            string ifSmall = rentaCarName.First().ToString().ToUpper() +
+                String.Join("", rentaCarName.Skip(1));
 
-        //    objEntity.RentaCars.Remove(rentaCar);
-        //    objEntity.SaveChanges();
+            try
+            {
+                return objEntity.RentaCars.Where(c => c.Name.Contains(rentaCarName) && c.Name.Contains(ifSmall));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    return Ok(rentaCar);
-        //}
-
-        //AngularEntities2 objEntity = new AngularEntities2();
-        //[HttpGet]
-        //[Route("AllRentaCarDetails")]
-        //public IQueryable<RentaCar> GetRentaCar()
-        //{
-        //    try
-        //    {
-        //        System.Diagnostics.Trace.WriteLine("prosao sam!");
-        //        return objEntity.RentaCars;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        }
 
 
-        //[HttpGet]
-        //[Route("GetRentaCarDetailsById/{rentaCarId}")]
-        //public IHttpActionResult GetAirlineById(string rentaCarId)
-        //{
-        //    RentaCar objUsr = new RentaCar();
-        //    int ID = Convert.ToInt32(rentaCarId);
+        [HttpGet]
+        [Route("GetRentaCarByLocation/{rentaCarLocation}")]
+        public IQueryable<RentaCar> GetRentaCarByLocation(string rentaCarLocation)
+        {
+            RentaCar rentaCar = new RentaCar();
+            string ifSmall = rentaCarLocation.First().ToString().ToUpper() +
+                String.Join("", rentaCarLocation.Skip(1));
 
-        //    try
-        //    {
-        //        objUsr = objEntity.RentaCars.Find(ID);
-        //        if (objUsr == null)
-        //            return NotFound();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+            try
+            {
+                return objEntity.RentaCars.Where(c => c.City.Contains(rentaCarLocation) && c.City.Contains(ifSmall));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    return Ok(objUsr);
-        //}
+        }
 
 
-        //[HttpPost]
-        //[Route("InsertRentaCarDetails")]
-        //public IHttpActionResult PostUser(RentaCar data)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState);
-        //    try
-        //    {
-        //        objEntity.RentaCars.Add(data);
-        //        objEntity.SaveChanges();
+        [HttpPost]
+        [Route("InsertRentaCar")]
+        public IHttpActionResult PostRentaCar(RentaCar data)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            try
+            {
+                data.Rate = 0;
+                data.RatedBy = 0;
+                objEntity.RentaCars.Add(data);
+                objEntity.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-
-        //    return Ok(data);
-        //}
-
-
-        //[HttpPut]
-        //[Route("UpdateRentaCarDetails")]
-        //public IHttpActionResult PutUserMaster(RentaCar rentaCar)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    try
-        //    {
-        //        RentaCar objUsr = new RentaCar();
-
-        //        objUsr = objEntity.RentaCars.Find(rentaCar.Id);
-        //        if (objUsr != null)
-        //        {
-        //            objUsr.Id = rentaCar.Id;
-        //            objUsr.Name = rentaCar.Name;
-        //            objUsr.Address = rentaCar.Address;
-        //            objUsr.Description = rentaCar.Address;
-
-        //        }
-        //        int i = objEntity.SaveChanges();
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    return Ok(rentaCar);
-        //}
+            return Ok(data);
+        }
 
 
-        //[HttpDelete]
-        //[Route("DeleteRentaCarDetails")]
-        //public IHttpActionResult DeleteUserDelete(int id)
-        //{
-        //    RentaCar rentaCar = objEntity.RentaCars.Find(id);
-        //    if (rentaCar == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPut]
+        [Route("UpdateRentaCar")]
+        public IHttpActionResult PutRentaCar(RentaCar data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    objEntity.RentaCars.Remove(rentaCar);
-        //    objEntity.SaveChanges();
+            try
+            {
+                RentaCar rentaCar = new RentaCar();
+                rentaCar = objEntity.RentaCars.Find(data.Id);
 
-        //    return Ok(rentaCar);
-        //}
-//>>>>>>> Stashed changes
+                if (rentaCar != null)
+                {
+                    rentaCar.Id = data.Id;
+                    rentaCar.Name = data.Name;
+                    rentaCar.Address = data.Address;
+                    rentaCar.City = data.City;
+                    rentaCar.Description = data.Description;
+                    rentaCar.Rate = data.Rate;
+                    rentaCar.RatedBy = data.RatedBy;
+                }
+                int i = objEntity.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Ok(data);
+        }
+
+
+        [HttpDelete]
+        [Route("DeleteRentaCar")]
+        public IHttpActionResult DeleteRentaCar(int id)
+        {
+            RentaCar rentaCar = objEntity.RentaCars.Find(id);
+            if (rentaCar == null)
+            {
+                return NotFound();
+            }
+
+            objEntity.RentaCars.Remove(rentaCar);
+            objEntity.SaveChanges();
+
+            return Ok(rentaCar);
+        }
     }
 }

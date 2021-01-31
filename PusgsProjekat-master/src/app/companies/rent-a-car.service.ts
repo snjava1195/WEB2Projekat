@@ -14,43 +14,37 @@ export class RentACarService{
 
     constructor(private http: HttpClient){}
       
-    getRentACars(): Observable<RentACar[]> {
-        return this.http.get<RentACar[]>(this.url + '/AllRentaCarDetails');
+    getRentaCars(): Observable<RentACar[]> {
+        return this.http.get<RentACar[]>(this.url + '/AllRentaCars');
     }
  
     getRentaCarById(rentaCarId: Int16Array): Observable<RentACar>{
-        return this.http.get<RentACar>(this.url + '/GetRentaCarDetailsById/'+ rentaCarId);
+        return this.http.get<RentACar>(this.url + '/GetRentaCarById?rentaCarId='+ rentaCarId);
     }
+
+    getRentaCarByName(rentaCarName: string): Observable<RentACar[]>{
+        return this.http.get<RentACar[]>(this.url + '/GetRentaCarByName/' + rentaCarName);
+    }
+
+    getRentaCarByLocation(rentaCarLocation: string): Observable<RentACar[]>{
+        return this.http.get<RentACar[]>(this.url + '/GetRentaCarByLocation/' + rentaCarLocation);
+    }
+   
 
     createRentaCar(rentaCar: RentACar) : Observable<RentACar>{
         const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'} ) };
-        return this.http.post<RentACar>(this.url + '/InsertRentaCarDetails/', rentaCar, httpOptions);
+        return this.http.post<RentACar>(this.url + '/InsertRentaCar/', rentaCar, httpOptions);
     }
 
     updateRentaCar(rentaCar: RentACar) : Observable<RentACar>{
         const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'}) };
-        return this.http.put<RentACar>(this.url + '/UpdateRentaCarDetails/', rentaCar, httpOptions);
+        return this.http.put<RentACar>(this.url + '/UpdateRentaCar/', rentaCar, httpOptions);
     }
 
     deleteRentaCarById(rentaCarId : Int16Array): Observable<number> {
         const httpOptions = {headers: new HttpHeaders( {'Content-Type': 'application/json' }) };
-        return this.http.delete<number>(this.url + '/DeleteRentaCarDetails?id=' + rentaCarId, httpOptions);
+        return this.http.delete<number>(this.url + '/DeleteRentaCar?id=' + rentaCarId, httpOptions);
     }
 
 
-
-    loadCars(){
-        let allCars = new Array<Car>();
-        
-        allCars.push(new Car('Golf'));
-        allCars.push(new Car('Lada'));
-        allCars.push(new Car('Yugo'));
-        allCars.push(new Car('Zastava'));
-        allCars.push(new Car('Mercedes'));
-        allCars.push(new Car('BMW'));
-        allCars.push(new Car('Fiat'));
-        allCars.push(new Car('Ferrari'));
-
-        return allCars;
-    }
 }
