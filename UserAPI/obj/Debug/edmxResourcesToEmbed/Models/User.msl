@@ -25,24 +25,67 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="Airlines">
-      <EntityTypeMapping TypeName="AngularModel.Airline">
-        <MappingFragment StoreEntitySet="Airline">
-          <ScalarProperty Name="Description" ColumnName="Description" />
+    <EntitySetMapping Name="AirlineDetails">
+      <EntityTypeMapping TypeName="AngularModel.AirlineDetail">
+        <MappingFragment StoreEntitySet="AirlineDetails">
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
           <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RentaCars">
-      <EntityTypeMapping TypeName="AngularModel.RentaCar">
-        <MappingFragment StoreEntitySet="RentaCar">
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
+    <EntitySetMapping Name="Flights">
+      <EntityTypeMapping TypeName="AngularModel.Flight">
+        <MappingFragment StoreEntitySet="Flight">
+          <ScalarProperty Name="IdAvioKompanije" ColumnName="IdAvioKompanije" />
+          <ScalarProperty Name="OcenaLeta" ColumnName="OcenaLeta" />
+          <ScalarProperty Name="MestoSletanja" ColumnName="MestoSletanja" />
+          <ScalarProperty Name="MestoPoletanja" ColumnName="MestoPoletanja" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="BrojPresedanja" ColumnName="BrojPresedanja" />
+          <ScalarProperty Name="DuzinaPutovanja" ColumnName="DuzinaPutovanja" />
+          <ScalarProperty Name="VremeTrajanjaLeta" ColumnName="VremeTrajanjaLeta" />
+          <ScalarProperty Name="DatumSletanja" ColumnName="DatumSletanja" />
+          <ScalarProperty Name="DatumPoletanja" ColumnName="DatumPoletanja" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kartas">
+      <EntityTypeMapping TypeName="AngularModel.Karta">
+        <MappingFragment StoreEntitySet="Karta">
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="Popust" ColumnName="Popust" />
+          <ScalarProperty Name="BrojLeta" ColumnName="BrojLeta" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Presedanjes">
+      <EntityTypeMapping TypeName="AngularModel.Presedanje">
+        <MappingFragment StoreEntitySet="Presedanje">
+          <ScalarProperty Name="IdLeta" ColumnName="IdLeta" />
+          <ScalarProperty Name="Lokacija" ColumnName="Lokacija" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usermasters">
+      <EntityTypeMapping TypeName="AngularModel.Usermaster">
+        <MappingFragment StoreEntitySet="Usermaster">
+          <ScalarProperty Name="TotalCnt" ColumnName="TotalCnt" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsApporved" ColumnName="IsApporved" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="PasswordConfirm" ColumnName="PasswordConfirm" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

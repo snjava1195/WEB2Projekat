@@ -1,23 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="AngularModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Airline">
+  <EntityType Name="AirlineDetails">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AdminId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="RentaCar">
+  <EntityType Name="Flight">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Rate" Type="float" Nullable="false" />
+    <Property Name="DatumPoletanja" Type="datetime" />
+    <Property Name="DatumSletanja" Type="datetime" />
+    <Property Name="VremeTrajanjaLeta" Type="varchar" MaxLength="50" />
+    <Property Name="DuzinaPutovanja" Type="bigint" />
+    <Property Name="BrojPresedanja" Type="int" />
+    <Property Name="Cena" Type="bigint" />
+    <Property Name="MestoPoletanja" Type="nvarchar" MaxLength="50" />
+    <Property Name="MestoSletanja" Type="nvarchar" MaxLength="50" />
+    <Property Name="OcenaLeta" Type="int" />
+    <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Karta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BrojLeta" Type="int" Nullable="false" />
+    <Property Name="Popust" Type="bigint" />
+    <Property Name="Cena" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Presedanje">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Lokacija" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdLeta" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UserDetails">
     <Key>
@@ -33,13 +57,32 @@
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="UserType" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Usermaster">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PasswordConfirm" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsApporved" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="TotalCnt" Type="int" />
+  </EntityType>
   <Function Name="Usp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="AngularModelStoreContainer">
-    <EntitySet Name="Airline" EntityType="Self.Airline" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="RentaCar" EntityType="Self.RentaCar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AirlineDetails" EntityType="Self.AirlineDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Karta" EntityType="Self.Karta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Presedanje" EntityType="Self.Presedanje" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usermaster" EntityType="Self.Usermaster" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

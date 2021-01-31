@@ -182,6 +182,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AirlineController.cs" />
+    <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RentaCarController.cs" />
     <Compile Include="Controllers\UserAPIController.cs" />
@@ -189,12 +190,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Airline.cs">
+    <Compile Include="Models\AirlineDetail.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Enums\UserType.cs" />
+    <Compile Include="Models\Flight.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FlightConverter.cs" />
+    <Compile Include="Models\FlightReservation.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Karta.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\RentaCar.cs">
+    <Compile Include="Models\Presedanje.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Response.cs" />
@@ -214,6 +225,9 @@
       <DependentUpon>User.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\UserDetail.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usermaster.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usp_Login_Result.cs">
