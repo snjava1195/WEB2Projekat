@@ -15,7 +15,7 @@ namespace UserAPI.Controllers
 
         AngularEntities2 objEntity = new AngularEntities2();
         [HttpGet]
-        [Route("AllRentaCarDetails")]
+        [Route("AllRentaCars")]
         public IQueryable<RentaCar> GetRentaCars()
         {
             try
@@ -30,16 +30,16 @@ namespace UserAPI.Controllers
 
 
         [HttpGet]
-        [Route("GetRentaCarDetailsById/{rentaCarId}")]
-        public IHttpActionResult GetRentaCarById(string rentaCarId)
+        [Route("GetRentaCarById")]
+        public IHttpActionResult GetRentaCarById(int rentaCarId)
         {
-            RentaCar objUsr = new RentaCar();
-            int ID = Convert.ToInt32(rentaCarId);
+            RentaCar rentaCar= new RentaCar();
+           // int ID = Convert.ToInt32(rentaCarId);
 
             try
             {
-                objUsr = objEntity.RentaCars.Find(ID);
-                if (objUsr == null)
+                rentaCar = objEntity.RentaCars.Find(rentaCarId);
+                if (rentaCar == null)
                     return NotFound();
             }
             catch (Exception)
@@ -47,12 +47,52 @@ namespace UserAPI.Controllers
                 throw;
             }
 
-            return Ok(objUsr);
+            return Ok(rentaCar);
+        }
+
+
+        [HttpGet]
+        [Route("GetRentaCarByName/{rentaCarName}")]
+        public IQueryable<RentaCar> GetRentaCarByName(string rentaCarName)
+        {
+            RentaCar rentaCar = new RentaCar();
+            string ifSmall = rentaCarName.First().ToString().ToUpper() +
+                String.Join("", rentaCarName.Skip(1));
+
+            try
+            {
+                return objEntity.RentaCars.Where(c => c.Name.Contains(rentaCarName) && c.Name.Contains(ifSmall));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+
+        [HttpGet]
+        [Route("GetRentaCarByLocation/{rentaCarLocation}")]
+        public IQueryable<RentaCar> GetRentaCarByLocation(string rentaCarLocation)
+        {
+            RentaCar rentaCar = new RentaCar();
+            string ifSmall = rentaCarLocation.First().ToString().ToUpper() +
+                String.Join("", rentaCarLocation.Skip(1));
+
+            try
+            {
+                return objEntity.RentaCars.Where(c => c.City.Contains(rentaCarLocation) && c.City.Contains(ifSmall));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
 
         [HttpPost]
-        [Route("InsertRentaCarDetails")]
+        [Route("InsertRentaCar")]
         public IHttpActionResult PostRentaCar(RentaCar data)
         {
             if (!ModelState.IsValid)
@@ -60,6 +100,7 @@ namespace UserAPI.Controllers
             try
             {
                 data.Rate = 0;
+                data.RatedBy = 0;
                 objEntity.RentaCars.Add(data);
                 objEntity.SaveChanges();
             }
@@ -73,8 +114,8 @@ namespace UserAPI.Controllers
 
 
         [HttpPut]
-        [Route("UpdateRentaCarDetails")]
-        public IHttpActionResult PutRentaCar(RentaCar rentaCar)
+        [Route("UpdateRentaCar")]
+        public IHttpActionResult PutRentaCar(RentaCar data)
         {
             if (!ModelState.IsValid)
             {
@@ -83,16 +124,18 @@ namespace UserAPI.Controllers
 
             try
             {
-                RentaCar objUsr = new RentaCar();
+                RentaCar rentaCar = new RentaCar();
+                rentaCar = objEntity.RentaCars.Find(data.Id);
 
-                objUsr = objEntity.RentaCars.Find(rentaCar.Id);
-                if (objUsr != null)
+                if (rentaCar != null)
                 {
-                    objUsr.Id = rentaCar.Id;
-                    objUsr.Name = rentaCar.Name;
-                    objUsr.Address = rentaCar.Address;
-                    objUsr.Description = rentaCar.Description;
-
+                    rentaCar.Id = data.Id;
+                    rentaCar.Name = data.Name;
+                    rentaCar.Address = data.Address;
+                    rentaCar.City = data.City;
+                    rentaCar.Description = data.Description;
+                    rentaCar.Rate = data.Rate;
+                    rentaCar.RatedBy = data.RatedBy;
                 }
                 int i = objEntity.SaveChanges();
 
@@ -101,12 +144,12 @@ namespace UserAPI.Controllers
             {
                 throw;
             }
-            return Ok(rentaCar);
+            return Ok(data);
         }
 
 
         [HttpDelete]
-        [Route("DeleteRentaCarDetails")]
+        [Route("DeleteRentaCar")]
         public IHttpActionResult DeleteRentaCar(int id)
         {
             RentaCar rentaCar = objEntity.RentaCars.Find(id);

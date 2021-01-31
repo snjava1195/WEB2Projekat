@@ -6,8 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="921079e51d564a9f94c4fc101e73180d" Name="Diagram1">
         <EntityTypeShape EntityType="AngularModel.UserDetail" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularModel.Airline" Width="1.5" PointX="5.875" PointY="0.75" />
-        <EntityTypeShape EntityType="AngularModel.RentaCar" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AngularModel.Airline" Width="1.5" PointX="3.875" PointY="0.5" />
+        <EntityTypeShape EntityType="AngularModel.RentaCar" Width="1.5" PointX="3.75" PointY="3.5" />
+        <EntityTypeShape EntityType="AngularModel.BranchOffice" Width="1.5" PointX="8.5" PointY="3.5" />
+        <EntityTypeShape EntityType="AngularModel.Car" Width="1.5" PointX="6.25" PointY="3.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

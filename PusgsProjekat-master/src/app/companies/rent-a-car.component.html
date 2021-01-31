@@ -1,21 +1,60 @@
 <table> 
     <tr> 
         <td>
-            <input type="text" [(ngModel)]="toSearch" > <button class="btn btn-success" (click)="doSearch()" > search </button>
+            <button class="btn btn-success" (click)="doSearchCar()"    
+            [disabled]="!(carToSearch != null && by)" > search car by </button>
+            <select name="by" id="by" [(ngModel)]="by" >
+                <option value="name" id="name" selected > name </option>
+                <option value="rate" id="rate" > rate </option>
+                <option value="price" id="price"> price </option>
+            </select>           
+        </td>
+        <td>   
+            <input type="text" [(ngModel)]="carToSearch" [disabled]="!(by == 'name' || by == 'rate')"> 
+        </td>
+        <td>
+            <div> min:
+                <input type="text" [(ngModel)]="minPrice" [disabled]="by!='price' " >
+            </div>
+            <div> max:
+                <input type="text" [(ngModel)]="maxPrice" [disabled]="by!='price' " >
+            </div>
        </td>
     </tr>
-    <tr> 
-        <td>
-            <p [hidden]="toSearch===''" > 
-                {{ afterSearch }}
-            </p>
-       </td> 
-    </tr>
+       <!--td>
+             <button class="btn btn-success" (click)="doSearchRentaCar()" [disabled]="!(parameter && rentaCarToSearch != null)" > search rent-a-car by</button>
+             <select name="parameter" id="parameter" [(ngModel)]="parameter" >
+                 <option value="name" id="name" selected > name </option>
+                 <option value="city" id="city" > city </option>
+             </select>
+             <input type="text"  [(ngModel)]="rentaCarToSearch" > 
+        </td-->
+    
+
+    <br>
+
+  
+
     <tr>
-        <td> 
-            <button class="btn btn-success" (click)="loadRentACars()" > SHOW </button>    
-        </td>
+        <td colspan="2"> Name </td>
+        <td> Rent-a-car service </td>
+        <td> Rate </td>
+        <td> Price </td>
     </tr>
+    <tr *ngFor="let fc of foundCars | async"  > 
+                    <td > {{ fc.Name }} </td>                  
+                    <td> <button (click)="getRentaCar(fc)"> show details </button> </td> 
+                    <td [hidden]="!donesearch" > {{ foundAtRentaCar }}  </td>
+                    <td [hidden]="!donesearch" >    {{ fc.Rate }} </td>
+                    <td [hidden]="!donesearch" > {{ fc.Price }} </td> 
+   </tr> 
+ 
+   <!--tr *ngFor="let frc of foundRentaCars | async" [hidden]="!donerentacarsearch"> 
+        <td>    
+            {{ frc.Name }}
+         </td> 
+    </tr--> 
+
 </table>
 
 <br/>
@@ -27,7 +66,7 @@
         <tbody>
             <tr
             [class.selected]="rc === selectedRentACar" 
-            *ngFor="let rc of rentACars | async" (click)="onSelect(rc)" (click)="loadCars()" >
+            *ngFor="let rc of rentACars | async" (click)="onSelect(rc)" >
                     <td>
                         <span class="badge">{{ rc.Name}}</span> {{rc.Address}}
                     </td>
@@ -47,10 +86,6 @@
             {{ selectedRentACar.Name | uppercase}} details:
         </thead>        
         <tbody>
-            <tr>
-                <td> rate: </td>
-                <td>{{selectedRentACar.Rate}}</td>
-            </tr> 
             <tr> 
                 <td> name: </td>
                 <td> <input [(ngModel)]="selectedRentACar.Name" placeholder="name"/> </td>
@@ -64,10 +99,44 @@
                 <td>  <input [(ngModel)]="selectedRentACar.Description" placeholder="description"/> </td>
             </tr>
             <tr>
+                <td> rate: </td>
+                <td>{{selectedRentACar.Rate}}</td>
+            </tr> 
+            <tr>
                 <td> cars: </td>
-                    <td> 
-                        <tr *ngFor="let c of selectedRentACar.cars" > 
-                           <td>  {{ c.Name }}  </td>
+                    <td>             
+                        <tr>
+                            <td> name </td>
+                            <td> rate </td>
+                            <td> price </td>
+                        </tr>   
+                        <tr *ngFor="let i of selectedRentACar.Cars   | async"> 
+                           <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                               {{  i.Name }}  
+                            </td>
+                            <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                                {{  i.Rate }}  
+                             </td>
+                             <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                                {{  i.Price }}  
+                             </td>
+                        </tr>
+                    </td>
+            </tr>
+            <tr>
+                <td> branch offices: </td>
+                    <td>             
+                        <tr>
+                            <td> name </td>
+                            <td> address </td>
+                        </tr>   
+                        <tr *ngFor="let i of selectedRentACar.BranchOffices   | async"> 
+                           <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                               {{  i.Name }}  
+                            </td>
+                            <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                                {{  i.Address }}  
+                             </td>
                         </tr>
                     </td>
             </tr>
@@ -76,6 +145,6 @@
     </table>    
 </div> 
 </div>
-<button type="button" class="btn btn-success btn-lg btn-block px-12"
-                    [routerLink]="['/register']">Register</button>
+
+              
 
