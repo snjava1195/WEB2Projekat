@@ -1,8 +1,13 @@
 
-PusgsProjekat-master/angular.json
-PusgsProjekat-master/angular.json
-PusgsProjekat-master/package-lock.json
-UserAPI/obj/Debug/UserAPI.csprojAssemblyReference.cache
-PusgsProjekat-master/angular.json
+*.json
 *.cache
 *.dll
+*.config
+*.ide
+*.ide-wal
+UserAPI/.vs/config/applicationhost.config
+UserAPI/.vs/UserAPI/v15/Server/sqlite3/storage.ide
+UserAPI/.vs/UserAPI/v15/Server/sqlite3/storage.ide-shm
+UserAPI/.vs/UserAPI/v15/Server/sqlite3/storage.ide-wal
+UserAPI/obj/Debug/UserAPI.csproj.CoreCompileInputs.cache
+UserAPI/obj/Debug/UserAPI.csprojAssemblyReference.cache
