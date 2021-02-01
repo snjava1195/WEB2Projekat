@@ -4,3 +4,5 @@ PusgsProjekat-master/angular.json
 PusgsProjekat-master/package-lock.json
 UserAPI/obj/Debug/UserAPI.csprojAssemblyReference.cache
 PusgsProjekat-master/angular.json
+*.cache
+*.dll

@@ -32,6 +32,12 @@ namespace UserAPI.Models
         public virtual DbSet<RentaCar> RentaCars { get; set; }
         public virtual DbSet<BranchOffice> BranchOffices { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<AirlineDetail> AirlineDetails { get; set; }
+        public virtual DbSet<Flight> Flights { get; set; }
+        public virtual DbSet<FlightReservation> FlightReservations { get; set; }
+        public virtual DbSet<Karta> Kartas { get; set; }
+        public virtual DbSet<Presedanje> Presedanjes { get; set; }
+        public virtual DbSet<Usermaster> Usermasters { get; set; }
     
         public virtual ObjectResult<Usp_Login_Result> Usp_Login(string username, string password)
         {

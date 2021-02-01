@@ -12,10 +12,14 @@ namespace UserAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FlightReservation
+    public partial class RentaCar
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public int FlightId { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Description { get; set; }
+        public double Rate { get; set; }
+        public string City { get; set; }
+        public int RatedBy { get; set; }
     }
 }
