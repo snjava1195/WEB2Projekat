@@ -37,7 +37,6 @@ namespace UserAPI.Models
         public virtual DbSet<FlightReservation> FlightReservations { get; set; }
         public virtual DbSet<Karta> Kartas { get; set; }
         public virtual DbSet<Presedanje> Presedanjes { get; set; }
-        public virtual DbSet<Usermaster> Usermasters { get; set; }
     
         public virtual ObjectResult<Usp_Login_Result> Usp_Login(string username, string password)
         {

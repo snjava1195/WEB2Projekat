@@ -182,6 +182,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AirlineController.cs" />
+    <Compile Include="Controllers\BranchOfficeController.cs" />
+    <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RentaCarController.cs" />
@@ -190,7 +192,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Airline.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AirlineDetail.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BranchOffice.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Car.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Enums\UserType.cs" />
@@ -206,6 +217,9 @@
     </Compile>
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Presedanje.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RentaCar.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Response.cs" />
@@ -225,9 +239,6 @@
       <DependentUpon>User.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\UserDetail.cs">
-      <DependentUpon>User.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usermaster.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usp_Login_Result.cs">
@@ -250,6 +261,7 @@
       <DependentUpon>User.edmx</DependentUpon>
       <LastGenOutput>User.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\User.edmx.sql" />
     <Content Include="Models\User.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>User.edmx</DependentUpon>

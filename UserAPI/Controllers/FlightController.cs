@@ -68,16 +68,16 @@ namespace UserAPI.Controllers
                
                 var flights = new Flight()
                 {
-                    BrojPresedanja = data.BrojPresedanja,
-                    Cena = data.Cena,
+                    BrojPresedanja = (int)data.BrojPresedanja,
+                    Cena = (long)data.Cena,
                     DatumPoletanja = dt,
                     DatumSletanja = dt2,
-                    DuzinaPutovanja = data.DuzinaPutovanja,
+                    DuzinaPutovanja = (long)data.DuzinaPutovanja,
                     Id = data.Id,
                     IdAvioKompanije = data.IdAvioKompanije,
                     MestoPoletanja = data.MestoPoletanja,
                     MestoSletanja = data.MestoSletanja,
-                    OcenaLeta = data.OcenaLeta,
+                    OcenaLeta = (int)data.OcenaLeta,
                     VremeTrajanjaLeta = data.VremeTrajanjaLeta
 
                 };

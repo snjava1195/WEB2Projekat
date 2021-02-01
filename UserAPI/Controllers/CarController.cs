@@ -12,7 +12,6 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/Car")]
     public class CarController : ApiController
     {
-
         AngularEntities2 objEntity = new AngularEntities2();
 
 
@@ -176,6 +175,11 @@ namespace UserAPI.Controllers
 
             return Ok(car);
         }
+
+
+
+
+
 
     }
 }

@@ -15,15 +15,15 @@ namespace UserAPI.Models
     public partial class Flight
     {
         public int Id { get; set; }
-        public Nullable<System.DateTime> DatumPoletanja { get; set; }
-        public Nullable<System.DateTime> DatumSletanja { get; set; }
+        public System.DateTime DatumPoletanja { get; set; }
+        public System.DateTime DatumSletanja { get; set; }
         public string VremeTrajanjaLeta { get; set; }
-        public Nullable<long> DuzinaPutovanja { get; set; }
-        public Nullable<int> BrojPresedanja { get; set; }
-        public Nullable<long> Cena { get; set; }
+        public long DuzinaPutovanja { get; set; }
+        public int BrojPresedanja { get; set; }
+        public long Cena { get; set; }
         public string MestoPoletanja { get; set; }
         public string MestoSletanja { get; set; }
-        public Nullable<int> OcenaLeta { get; set; }
+        public int OcenaLeta { get; set; }
         public int IdAvioKompanije { get; set; }
     }
 }

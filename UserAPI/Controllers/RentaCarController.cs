@@ -34,7 +34,6 @@ namespace UserAPI.Controllers
         public IHttpActionResult GetRentaCarById(int rentaCarId)
         {
             RentaCar rentaCar= new RentaCar();
-           // int ID = Convert.ToInt32(rentaCarId);
 
             try
             {

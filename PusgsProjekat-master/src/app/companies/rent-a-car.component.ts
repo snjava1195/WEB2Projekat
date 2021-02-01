@@ -35,6 +35,7 @@ export class RentACarComponent implements OnInit {
         private branchOfficeService: BranchOfficeService){
         this.selectedRentACar = new RentACar('','','', 0);
         
+        this.selectedCar = null;
         this.carToSearch = '';
         this.donesearch = false;
     }
@@ -76,13 +77,12 @@ export class RentACarComponent implements OnInit {
             }
         }
 
-
        }     
         this.by = null;   
         this.maxPrice = null;
         this.minPrice = null;
 
-       
+        this.donesearch = true; 
     }
 
 
@@ -93,7 +93,8 @@ export class RentACarComponent implements OnInit {
            (val) => {
                this.foundAtRentaCar = val.Name;
        });
-       this.donesearch = true;  
+
+       this.selectedCar = car; 
     }
 
 
