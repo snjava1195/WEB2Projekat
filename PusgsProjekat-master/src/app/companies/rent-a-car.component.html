@@ -20,20 +20,23 @@
                 <input type="text" [(ngModel)]="maxPrice" [disabled]="by!='price' " >
             </div>
        </td>
+       <td>
+           <button type="reset" (click)="onReset()" > reset </button>
+       </td>
     </tr>
     
     <br>
 
   
 
-    <tr >
+    <tr [hidden]="!donesearch" >
         <td> Search results: </td>
         <td  [hidden]="selectedCar == null" > Rent-a-car service </td>
         <td   [hidden]="selectedCar == null" > Rate </td>
-        <td  [hidden]="selectedCar == null" > Price </td>
+        <td  [hidden]="selectedCar == null" > Price (€/day) </td>
     </tr>
 
-    <tr [class.selected]="fc === selectedCar"
+    <tr [hidden]="!donesearch" [class.selected]="fc === selectedCar"
     *ngFor="let fc of foundCars | async" > 
             <td (click)="getRentaCar(fc)" > {{ fc.Name }} </td>     
             <td *ngIf="fc == selectedCar" > {{ foundAtRentaCar }}  </td>
@@ -98,13 +101,13 @@
                             <td> price </td>
                         </tr>   
                         <tr *ngFor="let i of selectedRentACar.Cars   | async"> 
-                           <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                           <td> 
                                {{  i.Name }}  
                             </td>
-                            <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                            <td> 
                                 {{  i.Rate }}  
                              </td>
-                             <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                             <td>  
                                 {{  i.Price }}  
                              </td>
                         </tr>
@@ -118,10 +121,10 @@
                             <td> address </td>
                         </tr>   
                         <tr *ngFor="let i of selectedRentACar.BranchOffices   | async"> 
-                           <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                           <td> 
                                {{  i.Name }}  
                             </td>
-                            <td *ngIf="i.RentaCarId == selectedRentACar.Id">   
+                            <td>  
                                 {{  i.Address }}  
                              </td>
                         </tr>

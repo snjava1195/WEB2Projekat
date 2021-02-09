@@ -21,5 +21,9 @@ namespace UserAPI.Models
         public int RatedBy { get; set; }
         public double Price { get; set; }
         public bool Reserved { get; set; }
+        public string Brand { get; set; }
+        public int Type { get; set; }
+        public int Seats { get; set; }
+        public int Year { get; set; }
     }
 }

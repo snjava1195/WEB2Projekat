@@ -31,6 +31,21 @@ namespace UserAPI.Controllers
 
 
         [HttpGet]
+        [Route("BranchOfficesFromRentaCar")]
+        public IQueryable<BranchOffice> GetBranchOfficesFromRentaCar(int rentaCarID)
+        {
+            try
+            {
+                return objEntity.BranchOffices.Where(office => office.RentaCarId == rentaCarID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
         [Route("GetBranchOfficeById/{branchOfficeId}")]
         public IHttpActionResult GeBranchOfficeById(string branchOfficeId)
         {

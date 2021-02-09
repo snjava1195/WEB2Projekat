@@ -1,0 +1,319 @@
+<div class="container">
+
+
+    <mat-card>
+        <!--mat-toolbar color="accent">
+            <div align="center" style="color:white;text-align: right;">
+                CRUD operation in Angular 7 using Web api and Sql Database
+            </div>
+        </mat-toolbar-->
+        <br><br>
+
+
+        <mat-card-content>
+
+            <table class="table table-hover">
+                <tr>
+                    <td>
+                        <input type="text" [(ngModel)]="rentaCarToSearch">
+                        <button type="button" class="btn btn-success" (click)="doSearchRentaCar()"
+                            [disabled]="!(parameter && rentaCarToSearch != null)"> search rent-a-car by</button>
+                    </td>
+                    <td>
+                        <select name="parameter" id="parameter" [(ngModel)]="parameter">
+                            <option value="name" id="name" selected> name </option>
+                            <option value="city" id="city"> city </option>
+                        </select>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" (click)="sortRentaCars()"
+                            [disabled]="!parameter"> sort by </button>
+                    </td>
+                </tr>
+
+                <br>
+
+                <tr [class.selected]="frc === selectedRentaCar" *ngFor="let frc of foundRentaCars | async"
+                    [hidden]="!donerentacarsearch" (click)="onSelect(frc)">
+                    <td>
+                        {{ frc.Name }}
+                    </td>
+                </tr>
+
+            </table>
+
+            <br>
+
+            <button type="reset" [disabled]="!(parameter || selectedRentaCar)" (click)="onReset()"> reset </button>
+
+            <br>
+
+            <table class="table table-hover" style="border-spacing: 2px">
+                <th> Rent-a-car services: </th>
+                <tr [class.selected]="rc === selectedRentaCar" *ngFor="let rc of rentaCars | async" (click)="onSelect(rc)">
+                    <td>
+                        {{ rc.Name }}
+                    </td>
+                </tr>
+            </table>
+
+
+            <br>
+
+
+            <div class="split right"  *ngIf="selectedRentaCar">
+
+
+                <div class="centered">
+                    <table class="table table-hover" style="border-spacing: 2px">
+                        <thead>
+                            {{ selectedRentaCar.Name }} details:
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> name: </td>
+                                <td> <input [(ngModel)]="selectedRentaCar.Name" placeholder="name" /> </td>
+                            </tr>
+                            <tr>
+                                <td> address: </td>
+                                <td> <input [(ngModel)]="selectedRentaCar.Address" placeholder="address" /> </td>
+                            </tr>
+                            <tr>
+                                <td> description: </td>
+                                <td> <input [(ngModel)]="selectedRentaCar.Description" placeholder="description" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> rate: </td>
+                                <td>{{ selectedRentaCar.Rate }}</td>
+                            </tr>
+
+                            <tr>
+                                <td> cars: </td>
+                                <td>
+                                    <table>
+                                        <tr [class.selected]="c === selectedCar"
+                                            *ngFor="let c of selectedRentaCar.Cars | async" (click)="showCar(c)">
+                                            <td>
+                                                {{ c.Brand }}
+                                            </td>
+                                            <td>
+                                                {{ c.Name }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td> branch offices: </td>
+                                <td>
+                                    <table>
+                                        <tr *ngFor="let i of selectedRentaCar.BranchOffices | async">
+                                            <td>
+                                                {{ i.Name }}
+                                            </td>
+                                            <td>
+                                                {{ i.Address }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <button class="btn btn-success" [disabled]="!selectedRentaCar" (click)="showResForm = true"> rent-a-car here! </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+
+
+
+            <form [formGroup]="reservationForm" [hidden]="!showResForm">
+                <table>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td> Car type: </td>
+
+                                    <td class="tbl1">
+                                        <mat-form-field class="demo-full-width">
+                                            <select matNativeControl formControlName="Type" matInput>
+                                                <option value="1"> hatchback </option>
+                                                <option value="2"> limuzina </option>
+                                                <option value="3"> džip </option>
+                                                <option value="4"> karavan </option>
+                                                <option value="5"> kabriolet </option>
+                                                <option value="6"> kupe </option>
+                                            </select>
+                                        </mat-form-field>
+
+                                        <mat-error>
+                                            <span
+                                                *ngIf="!reservationForm.get('Type').value && reservationForm.get('Type').touched"></span>
+                                        </mat-error>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td> From: </td>
+
+                                    <td class="tbl1">
+                                        <mat-form-field class="demo-full-width">
+                                            <input formControlName="DateFrom" matInput [matDatepicker]="DateFrom">
+                                            <mat-datepicker-toggle matSuffix [for]="DateFrom"> </mat-datepicker-toggle>
+                                            <mat-datepicker #DateFrom></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+
+                                    <td class="tbl1">
+                                        <mat-form-field class="demo-full-width">
+                                            <select matNativeControl formControlName="BranchOfficeFrom">
+                                                <option *ngFor="let office of selectedRentaCar.BranchOffices | async"
+                                                    [value]="office.Name"> {{office.Name }} </option>
+                                            </select>
+                                        </mat-form-field>
+
+                                        <mat-error>
+                                            <span
+                                                *ngIf="!reservationForm.get('BranchOfficeFrom').value && reservationForm.get('BranchOfficeFrom').touched"></span>
+                                        </mat-error>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td> To: </td>
+                                    <td class="tbl1">
+                                        <mat-form-field class="demo-full-width">
+                                            <input formControlName="DateTo" matInput [matDatepicker]="DateTo">
+                                            <mat-datepicker-toggle matSuffix [for]="DateTo"> </mat-datepicker-toggle>
+                                            <mat-datepicker #DateTo></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+
+                                    <td class="tbl1">
+                                        <mat-form-field class="demo-full-width">
+                                            <select matNativeControl formControlName="BranchOfficeTo">
+                                                <option *ngFor="let office of selectedRentaCar.BranchOffices | async"
+                                                    [value]="office.Name"> {{ office.Name }} </option>
+                                            </select>
+                                        </mat-form-field>
+
+                                        <mat-error>
+                                            <span
+                                                *ngIf="!reservationForm.get('BranchOfficeTo').value && reservationForm.get('BranchOfficeTo').touched"></span>
+                                        </mat-error>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                </table>
+
+                <button type="button" mat-raised-button color="accent" (click)="searchCars()"> show cars </button>
+
+
+            </form>
+
+        </mat-card-content>
+
+    </mat-card>
+
+
+
+    <br>
+
+    <!--p *ngIf="donecarsearch && "> Nema dostupnih vozila koja odgovaraju pretrazi. </p-->
+
+<div *ngIf="selectedCar || donecarsearch " >
+
+    <table >
+        <th colspan="7"> CARS </th>
+
+        <tr>
+            <td> brand </td>
+            <td> name </td>
+            <td> type </td>
+            <td> rate </td>
+            <td> price <br> (€/day) </td>
+            <td> year </td>
+            <td> seats </td>
+        </tr>
+
+        <tr *ngIf="selectedCar; else ifSearched ">
+            <td>
+                {{ selectedCar.Brand }}
+            </td>
+            <td>
+                {{ selectedCar.Name  }}
+            </td>
+            <td>
+                {{ selectedCar.Type }}
+            </td>
+            <td>
+                {{ selectedCar.Rate }}
+            </td>
+            <td>
+                {{ selectedCar.Price }}
+            </td>
+            <td>
+                {{ selectedCar.Year }}
+            </td>
+            <td>
+                {{ selectedCar.Seats }}
+            </td>
+            <td *ngIf="selectedCar.Reserved ">
+                reserved
+            </td>
+
+        </tr>
+
+        <ng-template #ifSearched>
+            <tr [class.selected]="c === selectedCar" *ngFor="let c of cars  | async" (click)="onSelectCar(c)">
+                <td>
+                    {{ c.Brand }}
+                </td>
+                <td>
+                    {{ c.Name }}
+                </td>
+                <td>
+                    {{ c.Type }}
+                </td>
+                <td>
+                    {{ c.Rate }}
+                </td>
+                <td>
+                    {{ c.Price }}
+                </td>
+                <td>
+                    {{ c.Year }}
+                </td>
+                <td>
+                    {{ c.Seats }}
+                </td>
+                <td *ngIf="c.Reserved">
+                    reserved
+                </td>
+            </tr>
+        </ng-template>
+
+
+        <tr>
+            <button type="button" (click)="reserveCar()"> reserve </button>
+        </tr>
+
+    </table>
+</div>
+   
+
+
+</div>

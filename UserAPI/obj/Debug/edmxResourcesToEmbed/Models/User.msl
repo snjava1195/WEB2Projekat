@@ -52,6 +52,10 @@
     <EntitySetMapping Name="Cars">
       <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Car)">
         <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Seats" ColumnName="Seats" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RentaCarId" ColumnName="RentaCarId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -118,5 +122,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Usp_Login" FunctionName="AngularModel.Store.Usp_Login">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AngularModel.Usp_Login_Result">
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

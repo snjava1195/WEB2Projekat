@@ -31,6 +31,21 @@ namespace UserAPI.Controllers
 
 
         [HttpGet]
+        [Route("CarsFromRentaCar")]
+        public IQueryable<Car> GetCarsFromRentaCar(int rentaCarID)
+        {
+            try
+            {
+                return objEntity.Cars.Where(c => c.RentaCarId == rentaCarID);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
         [Route("GetCarById/{carId}")]
         public IHttpActionResult GeCarById(string carId)
         {
@@ -101,6 +116,25 @@ namespace UserAPI.Controllers
         }
 
 
+        [HttpGet]
+        [Route("GetCarsByType")]
+        public IQueryable<Car> GetCarsType(int type, int rentaCarId)
+        {
+            try
+            {
+                if (rentaCarId == 0)
+                      return objEntity.Cars.Where(t => t.Type == type);
+                else
+                    return GetCarsFromRentaCar(rentaCarId).Where(t => t.Type == type);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         [HttpPost]
         [Route("InsertCar")]
         public IHttpActionResult PostCar(Car data)
@@ -111,6 +145,8 @@ namespace UserAPI.Controllers
             {
                 data.Rate = 0;
                 data.RatedBy = 0;
+                data.Reserved = false;
+
                 objEntity.Cars.Add(data);
                 objEntity.SaveChanges();
             }
@@ -146,6 +182,9 @@ namespace UserAPI.Controllers
                     car.Price = data.Price;
                     car.RentaCarId = data.RentaCarId;
                     car.Reserved = data.Reserved;
+                    car.Seats = data.Seats;
+                    car.Type = data.Type;
+                    car.Brand = data.Brand;
                 }
                 objEntity.SaveChanges();
             }

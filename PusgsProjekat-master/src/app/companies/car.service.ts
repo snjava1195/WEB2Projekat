@@ -51,7 +51,13 @@ export class CarService{
         return this.http.delete<number>(this.url + '/DeleteCar?id='+ carId, httpOptions);
     }
 
+    getCarsFromRentaCar(rentaCarID: Int16Array): Observable<Car[]> {
+        return this.http.get<Car[]>(this.url + '/CarsFromRentaCar?rentaCarID=' + rentaCarID);
+    }
 
+    getSearchedCars( type: Int16Array, rentaCarID : Int16Array) : Observable<Car[]>{
+        return this.http.get<Car[]>(this.url + '/GetCarsByType?type=' + type + '&rentaCarId=' + rentaCarID);
+    }
 
 
 }

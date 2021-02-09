@@ -9,6 +9,7 @@ import { AirlineComponent } from './companies/airline.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RentACarComponent } from './companies/rent-a-car.component';
+import { ReserveRentaCarComponent } from './reserve-car/reserve-car.component';
 
 //import { UserService } from './users/user';
 //import { UserService } from './users/user.service';
@@ -44,6 +45,7 @@ import { FlightComponent } from './companies/flight.component';
 import {CommonModule} from '@angular/common';
 import { AirlineadmindashboardComponent } from './airlineadmindashboard.component';
 import { ReserveFlightComponent } from './reserve-flight/reserve-flight.component';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { ReserveFlightComponent } from './reserve-flight/reserve-flight.componen
     AddRentacarComponent,
     FlightComponent,
     AirlineadmindashboardComponent,
-    ReserveFlightComponent
+    ReserveFlightComponent, 
+    ReserveRentaCarComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,7 @@ import { ReserveFlightComponent } from './reserve-flight/reserve-flight.componen
         MatButtonModule,
         MatFormFieldModule,
         MatNativeDateModule,  
-    //MatNativeDateModule,  
+  //  MatNativeDateModule,  
     MatIconModule,  
     MatRadioModule,  
     MatCardModule,  

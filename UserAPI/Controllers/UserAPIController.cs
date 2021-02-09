@@ -24,9 +24,13 @@ namespace UserAPI.Controllers
         {
             AngularEntities2 DB = new AngularEntities2();
             var Obj = DB.Usp_Login(lg.Email, lg.Password).ToList<Usp_Login_Result>().FirstOrDefault();
-            if (Obj == null) return NotFound();
-      
-            else return Ok(Obj.UserType);
+
+
+            if (Obj == null)
+                return NotFound();
+            else
+                return Ok(Obj.UserType);
+                       
        
         }
 

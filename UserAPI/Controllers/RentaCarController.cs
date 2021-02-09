@@ -14,6 +14,8 @@ namespace UserAPI.Controllers
     {
 
         AngularEntities2 objEntity = new AngularEntities2();
+
+
         [HttpGet]
         [Route("AllRentaCars")]
         public IQueryable<RentaCar> GetRentaCars()
@@ -38,8 +40,9 @@ namespace UserAPI.Controllers
             try
             {
                 rentaCar = objEntity.RentaCars.Find(rentaCarId);
+
                 if (rentaCar == null)
-                    return NotFound();
+                  return NotFound();
             }
             catch (Exception)
             {
@@ -48,6 +51,7 @@ namespace UserAPI.Controllers
 
             return Ok(rentaCar);
         }
+
 
 
         [HttpGet]
@@ -89,6 +93,35 @@ namespace UserAPI.Controllers
 
         }
 
+
+        [HttpGet]
+        [Route("SortRentaCarsByName")]
+        public IQueryable<RentaCar> SortRentaCarsByName()
+        {
+            try
+            {
+                return objEntity.RentaCars.OrderBy(o => o.Name);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("SortRentaCarsByCity")]
+        public IQueryable<RentaCar> SortRentaCarsByCity()
+        {
+            try
+            {
+                return objEntity.RentaCars.OrderBy(o => o.City);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         [HttpPost]
         [Route("InsertRentaCar")]
@@ -162,5 +195,8 @@ namespace UserAPI.Controllers
 
             return Ok(rentaCar);
         }
+
+
+
     }
 }

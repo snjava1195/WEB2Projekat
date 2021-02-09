@@ -1,51 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="AngularModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="AngularModelStoreContainer">
-    <EntitySet Name="UserDetails" EntityType="AngularModel.Store.UserDetails" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Airlines" EntityType="AngularModel.Store.Airlines" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="RentaCars" EntityType="AngularModel.Store.RentaCars" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="BranchOffices" EntityType="AngularModel.Store.BranchOffices" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Cars" EntityType="AngularModel.Store.Cars" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AirlineDetails" EntityType="AngularModel.Store.AirlineDetails" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Flights" EntityType="AngularModel.Store.Flights" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="FlightReservations" EntityType="AngularModel.Store.FlightReservations" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Kartas" EntityType="AngularModel.Store.Kartas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Presedanjes" EntityType="AngularModel.Store.Presedanjes" store:Type="Tables" Schema="dbo" />
-  </EntityContainer>
-  <EntityType Name="UserDetails">
+<Schema Namespace="AngularModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AirlineDetails">
     <Key>
-      <PropertyRef Name="UserId" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="ConfirmPassword" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="UserType" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AdminId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Airlines">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="RentaCars">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Rate" Type="float" Nullable="false" />
-    <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="RatedBy" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="BranchOffices">
     <Key>
@@ -53,8 +25,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RentaCarId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Cars">
     <Key>
@@ -62,37 +34,15 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RentaCarId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Rate" Type="float" Nullable="false" />
-    <Property Name="RatedBy" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Seats" Type="int" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="RatedBy" Type="int" Nullable="false" />
+    <Property Name="Rate" Type="float" Nullable="false" />
     <Property Name="Reserved" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AirlineDetails">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="AdminId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Flights">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DatumPoletanja" Type="datetime" Nullable="false" />
-    <Property Name="DatumSletanja" Type="datetime" Nullable="false" />
-    <Property Name="VremeTrajanjaLeta" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="DuzinaPutovanja" Type="bigint" Nullable="false" />
-    <Property Name="BrojPresedanja" Type="int" Nullable="false" />
-    <Property Name="Cena" Type="bigint" Nullable="false" />
-    <Property Name="MestoPoletanja" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="MestoSletanja" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="OcenaLeta" Type="int" Nullable="false" />
-    <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="FlightReservations">
     <Key>
@@ -102,21 +52,79 @@
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="FlightId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Flights">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DatumPoletanja" Type="datetime" Nullable="false" />
+    <Property Name="DatumSletanja" Type="datetime" Nullable="false" />
+    <Property Name="VremeTrajanjaLeta" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DuzinaPutovanja" Type="bigint" Nullable="false" />
+    <Property Name="BrojPresedanja" Type="int" Nullable="false" />
+    <Property Name="Cena" Type="bigint" Nullable="false" />
+    <Property Name="MestoPoletanja" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MestoSletanja" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OcenaLeta" Type="int" Nullable="false" />
+    <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Kartas">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BrojLeta" Type="int" Nullable="false" />
-    <Property Name="Popust" Type="bigint" Nullable="true" />
-    <Property Name="Cena" Type="bigint" Nullable="true" />
+    <Property Name="Popust" Type="bigint" />
+    <Property Name="Cena" Type="bigint" />
   </EntityType>
   <EntityType Name="Presedanjes">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Lokacija" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Lokacija" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="IdLeta" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="RentaCars">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Rate" Type="float" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserType" Type="int" Nullable="false" />
+  </EntityType>
+  <Function Name="Usp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="AngularModelStoreContainer">
+    <EntitySet Name="AirlineDetails" EntityType="Self.AirlineDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Airlines" EntityType="Self.Airlines" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BranchOffices" EntityType="Self.BranchOffices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FlightReservations" EntityType="Self.FlightReservations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Flights" EntityType="Self.Flights" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kartas" EntityType="Self.Kartas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Presedanjes" EntityType="Self.Presedanjes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RentaCars" EntityType="Self.RentaCars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
 </Schema>

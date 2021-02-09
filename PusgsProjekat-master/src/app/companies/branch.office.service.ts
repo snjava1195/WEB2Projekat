@@ -34,6 +34,8 @@ export class BranchOfficeService{
         return this.http.delete<number>(this.url + '/DeleteBranchOffice?id=' + branchOfficeId, httpOptions);
     }
 
-
+    getBranchOfficesFromRentaCar(rentaCarID: Int16Array): Observable<BranchOffice[]> {
+        return this.http.get<BranchOffice[]>(this.url + '/BranchOfficesFromRentaCar?rentaCarID=' + rentaCarID);
+    }
 
 }

@@ -13,6 +13,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { validateHorizontalPosition } from '@angular/cdk/overlay';
 import { off } from 'process';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-add-rentacar',
@@ -60,14 +61,16 @@ export class AddRentacarComponent implements OnInit {
 
     this.carForm = this.carFb.group({
       CarName: ['', [Validators.required]],
-      CarPrice: ['', [Validators.required]],
-      CarRci: ['', [Validators.required]]
+      Price: ['', [Validators.required]],
+      Brand: ['', [Validators.required]],
+      Type: ['', [Validators.required]],
+      Seats: ['', [Validators.required]],
+      Year: ['', [Validators.required]]
     });
 
     this.officeForm = this.officeFb.group({
       BranchOfficeName:['', [Validators.required]],
-      BranchOfficeAddress:['' ,[Validators.required]],
-      OfficeRci:['', [Validators.required]]
+      BranchOfficeAddress:['' ,[Validators.required]]
     });
 
     this.rateForm = this.rateFb.group({
@@ -96,6 +99,7 @@ export class AddRentacarComponent implements OnInit {
    this.branchOffices = this.branchOfficeService.getBranchOffices();
  }
 
+
   createRentaCar(rentaCar: RentACar)
   {
     this.rentaCarService.createRentaCar(rentaCar).subscribe(
@@ -116,9 +120,9 @@ export class AddRentacarComponent implements OnInit {
 
   onSelectRentaCar(rentaCar: RentACar): void{
     this.selectedRentACar = rentaCar;  
-    this.carForm.controls.CarRci.setValue(rentaCar.Id);   
-    this.officeForm.controls.OfficeRci.setValue(rentaCar.Id);
-}
+   }
+
+
 
 
   updateRentaCar(rentaCar: RentACar)
@@ -192,26 +196,32 @@ onReset(){
   this.carForm.reset();
   this.officeForm.reset();
   this.rateForm.reset();
+
   this.message = '';
-  this.loadRentaCars();
+
+  this.loadRentaCars(); 
   this.loadCars();
   this.loadBranchOffices();
+
   this.selectedRentACar = null;
   this.selectedCar = null;
   this.selectedBranchOffice = null;
 }
 
 
-onSelectCar(car : Car): void{
+onSelectCar(car : Car){
   this.selectedCar = car;
-  this.carForm.controls.CarRci.setValue(this.selectedCar.RentaCarId);
 }
 
 
 createCar(car: Car){
   car.Name = this.carForm.get('CarName').value;
-  car.RentaCarId = this.carForm.get('CarRci').value;
-  car.Price = this.carForm.get('CarPrice').value;
+  car.RentaCarId = this.selectedRentACar.Id;
+  car.Price = this.carForm.get('Price').value;
+  car.Brand = this.carForm.get('Brand').value;
+  car.Type = this.carForm.get('Type').value;
+  car.Seats = this.carForm.get('Seats').value;
+  car.Year = this.carForm.get('Year').value;
 
    this.carService.createCar(car).subscribe(
     ()=>{
@@ -226,13 +236,21 @@ createCar(car: Car){
 
 updateCar(car: Car){
   car.Id = this.selectedCar.Id;
-  car.RentaCarId = this.carForm.get('CarRci').value;
 
   if(this.carForm.get('CarName').value)
   car.Name = this.carForm.get('CarName').value;
 
-  if(this.carForm.get('CarPrice').value)
-  car.Price = this.carForm.get('CarPrice').value;
+  if(this.carForm.get('Price').value)
+  car.Price = this.carForm.get('Price').value;
+
+  if(this.carForm.get('Brand').value)
+  car.Price = this.carForm.get('Brand').value;
+
+  if(this.carForm.get('Seats').value)
+  car.Price = this.carForm.get('Seats').value;
+
+  if(this.carForm.get('Year').value)
+  car.Price = this.carForm.get('Year').value;
 
   this.carService.updateCar(car).subscribe(
     () =>{
@@ -285,13 +303,12 @@ deleteCar(car: Car){
 
 onSelectBranchOffice(branchOffice: BranchOffice){
   this.selectedBranchOffice = branchOffice;
-  this.officeForm.controls.OfficeRci.setValue(branchOffice.RentaCarId);
 }
 
 createBranchOffice(office: BranchOffice){
   office.Name = this.officeForm.get('BranchOfficeName').value;
   office.Address = this.officeForm.get('BranchOfficeAddress').value;
-  office.RentaCarId = this.officeForm.get('OfficeRci').value;
+ office.RentaCarId = this.selectedRentACar.Id;
 
   this.branchOfficeService.createBranchOffice(office).subscribe(
     () => {
@@ -306,9 +323,8 @@ createBranchOffice(office: BranchOffice){
 
 updateBranchOffice(office: BranchOffice){
   office.Id = this.selectedBranchOffice.Id;
-  office.RentaCarId = this.officeForm.get('OfficeRci').value;
 
-  if(this.officeForm.get('BranchOfficeName').value )
+  if(this.officeForm.get('BranchOfficeName').value)
       office.Name = this.officeForm.get('BranchOfficeName').value;
 
   if(this.officeForm.get('BranchOfficeAddress').value)    

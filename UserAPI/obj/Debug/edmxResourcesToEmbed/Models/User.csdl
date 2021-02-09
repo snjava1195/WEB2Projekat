@@ -17,7 +17,7 @@
   <EntityContainer Name="AngularEntities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
     <FunctionImport Name="Usp_Login" ReturnType="Collection(AngularModel.Usp_Login_Result)">
-      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="Airlines" EntityType="AngularModel.Airline" />
@@ -32,8 +32,8 @@
   </EntityContainer>
   <ComplexType Name="Usp_Login_Result">
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="UserType" Nullable="false" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
   </ComplexType>
   <EntityType Name="Airline">
     <Key>
@@ -76,6 +76,10 @@
     <Property Name="RatedBy" Type="Int32" Nullable="false" />
     <Property Name="Price" Type="Double" Nullable="false" />
     <Property Name="Reserved" Type="Boolean" Nullable="false" />
+    <Property Name="Brand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Seats" Type="Int32" Nullable="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="AirlineDetail">
     <Key>

@@ -298,3 +298,11 @@ C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Antlr3.Runtime.pd
 C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\obj\Debug\UserAPI.csproj.CopyComplete
 C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\obj\Debug\UserAPI.csprojAssemblyReference.cache
+C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\System.IdentityModel.Tokens.Jwt.xml
