@@ -48,13 +48,15 @@
 
             <br>
 
-            <table class="table table-hover" style="border-spacing: 2px">
-                <th> Rent-a-car services: </th>
-                <tr [class.selected]="rc === selectedRentaCar" *ngFor="let rc of rentaCars | async" (click)="onSelect(rc)">
-                    <td>
-                        {{ rc.Name }}
-                    </td>
-                </tr>
+            <table mat-table  data-source="rentaCars" class="table table-hover" style="border-spacing: 2px">
+                <thead>  Rent-a-car services:  </thead>
+                <tbody>
+                    <tr [class.selected]="rc === selectedRentaCar" *ngFor="let rc of rentaCars | async" (click)="onSelect(rc)">
+                        <td >
+                            {{ rc.Name }}
+                        </td>
+                    </tr> 
+                </tbody>
             </table>
 
 
@@ -137,7 +139,7 @@
 
 
 
-            <form [formGroup]="reservationForm" [hidden]="!showResForm">
+            <form [formGroup]="reservationForm" [hidden]="!showResForm" >
                 <table>
                     <tr>
                         <td>
@@ -177,8 +179,8 @@
 
                                     <td class="tbl1">
                                         <mat-form-field class="demo-full-width">
-                                            <select matNativeControl formControlName="BranchOfficeFrom">
-                                                <option *ngFor="let office of selectedRentaCar.BranchOffices | async"
+                                            <select matNativeControl formControlName="BranchOfficeFrom"  >
+                                                <option *ngFor="let office of branchOffices | async"
                                                     [value]="office.Name"> {{office.Name }} </option>
                                             </select>
                                         </mat-form-field>
@@ -193,7 +195,7 @@
                                 <tr>
                                     <td> To: </td>
                                     <td class="tbl1">
-                                        <mat-form-field class="demo-full-width">
+                                        <mat-form-field class="demo-full-width" >
                                             <input formControlName="DateTo" matInput [matDatepicker]="DateTo">
                                             <mat-datepicker-toggle matSuffix [for]="DateTo"> </mat-datepicker-toggle>
                                             <mat-datepicker #DateTo></mat-datepicker>
@@ -201,9 +203,9 @@
                                     </td>
 
                                     <td class="tbl1">
-                                        <mat-form-field class="demo-full-width">
-                                            <select matNativeControl formControlName="BranchOfficeTo">
-                                                <option *ngFor="let office of selectedRentaCar.BranchOffices | async"
+                                        <mat-form-field class="demo-full-width"  >
+                                            <select matNativeControl formControlName="BranchOfficeTo"  >
+                                                <option *ngFor="let office of branchOffices | async"
                                                     [value]="office.Name"> {{ office.Name }} </option>
                                             </select>
                                         </mat-form-field>

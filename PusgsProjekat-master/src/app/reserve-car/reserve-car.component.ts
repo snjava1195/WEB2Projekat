@@ -3,11 +3,12 @@ import { RentACar } from "src/app/companies/rent-a-car";
 import { RentACarService } from "src/app/companies/rent-a-car.service";
 import { Car } from 'src/app/companies/car';
 import { CarService } from "src/app/companies/car.service"; 
-import { from, Observable } from 'rxjs';
+import { from, Observable, forkJoin } from 'rxjs';
 import { BranchOfficeService } from "src/app/companies/branch.office.service";
 import { FormBuilder, Validators, NgForm, FormGroup, FormControl, ReactiveFormsModule} from "@angular/forms";
 import { ThrowStmt } from "@angular/compiler";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { BranchOffice } from "../companies/branch.office";
 
 @Component({
     selector: 'reserve-car',
@@ -30,6 +31,8 @@ export class ReserveRentaCarComponent implements OnInit{
     selectedCar: Car;
     cars: Observable<Car[]>;
 
+    branchOffices: Observable<BranchOffice[]>;
+
     showResForm: boolean;
 
 
@@ -38,7 +41,6 @@ constructor( private rentACarService: RentACarService,
     private fb: FormBuilder ){}
 
 ngOnInit(): void{
-
 
     this.loadRentaCars();
 
@@ -52,13 +54,18 @@ ngOnInit(): void{
 
      this.cars = null; 
 
+
      this.reservationForm = this.fb.group({
         Type: ['', [Validators.required]],
         DateFrom: ['', [Validators.required]],
-        BranchOfficeFrom: ['', [Validators.required]],
+        BranchOfficeFrom: ['', [Validators.required]], 
         DateTo: ['', [Validators.required]],
         BranchOfficeTo: ['', [Validators.required]]
       }); 
+      
+
+     
+
 }
 
 
@@ -78,7 +85,7 @@ onReset() {
 
 
 loadRentaCars(){
-  this.rentaCars = this.rentACarService.getRentaCars();                        
+  this.rentaCars = this.rentACarService.getRentaCars();
 } 
 
 
@@ -88,6 +95,7 @@ onSelect(rc: RentACar): void{
     this.selectedRentaCar.Cars = this.carService.getCarsFromRentaCar(rc.Id);
     this.selectedRentaCar.BranchOffices = this.branchOfficeService.getBranchOfficesFromRentaCar(rc.Id);  
     
+    this.branchOffices = this.selectedRentaCar.BranchOffices;
     this.showResForm = false;
 
     this.donecarsearch = false;
@@ -124,8 +132,6 @@ searchCars(){
 
 showCar(car: Car){
        this.selectedCar = car;
-
-     //  this.donecarsearch = true;
 }
  
  
@@ -136,7 +142,8 @@ onSelectCar(car: Car) : void {
 
 reserveCar(){
  /// id ulogovanog korisnika is session
-    console.log('rezervisan je ' + this.selectedCar.Name);
+   
+    console.log('rezervisan je ' + this.selectedCar.Name + ' za korisnika ' +  sessionStorage.getItem('3') );
 }
 
 

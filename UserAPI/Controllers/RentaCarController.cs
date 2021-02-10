@@ -21,7 +21,7 @@ namespace UserAPI.Controllers
         public IQueryable<RentaCar> GetRentaCars()
         {
             try
-            {
+            {                   
                 return objEntity.RentaCars;
             }
             catch (Exception)
