@@ -12,6 +12,12 @@ namespace UserAPI
         {
             // Web API configuration and services
 
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
+            var cors = new EnableCorsAttribute("*", "*", "*");//origins,headers,methods   
+            cors.Headers.Add("Access-Control-Allow-Origin");
+            config.EnableCors(cors);
+
+
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -20,9 +26,7 @@ namespace UserAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
-            var cors = new EnableCorsAttribute("*", "*", "*");//origins,headers,methods   
-            config.EnableCors(cors);
+
         }
     }
 }

@@ -18,7 +18,7 @@ export class UserService{
     getAllUser(): Observable<User[]> {  
         return this.http.get<User[]>(this.url + '/AllUserDetails');  
       }  
-      getUserById(userId: Int16Array): Observable<User> {  
+      getUserById(userId: string /*Int16Array*/): Observable<User> {  
         return this.http.get<User>(this.url + '/GetUserDetailsById/' + userId);  
       }  
       createUser(user: User): Observable<User> {  
@@ -49,4 +49,8 @@ export class UserService{
       }
       
 
+      getUserByEmail(userEmail: string): Observable<User>{
+        const httpOptions = { headers: new HttpHeaders({'Content-Type' : 'application/json' }) }; 
+        return this.http.get<User>(this.url + '/GetUserDetailsByEmail?userEmail=' + userEmail, httpOptions);
+      }
 }

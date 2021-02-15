@@ -55,8 +55,11 @@ export class CarService{
         return this.http.get<Car[]>(this.url + '/CarsFromRentaCar?rentaCarID=' + rentaCarID);
     }
 
-    getSearchedCars( type: Int16Array, rentaCarID : Int16Array) : Observable<Car[]>{
-        return this.http.get<Car[]>(this.url + '/GetCarsByType?type=' + type + '&rentaCarId=' + rentaCarID);
+
+    getSearchedCars(rentaCarID : Int16Array, type: Int16Array, seats: Int16Array,
+         minPrice: number, maxPrice: number) : Observable<Car[]>{
+        return this.http.get<Car[]>(this.url + '/SearchedCars?rentaCarId=' + rentaCarID
+        + '&type='+ type + '&seats=' + seats + '&minPrice=' + minPrice + '&maxPrice='+ maxPrice);
     }
 
 

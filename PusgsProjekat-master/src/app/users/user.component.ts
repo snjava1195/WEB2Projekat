@@ -71,7 +71,7 @@ export class UserComponent implements OnInit{
         this.CreateUser(user);  
         this.userForm.reset();  
       }  
-      loadUserToEdit(userId: Int16Array) {  
+      loadUserToEdit(userId: string /*Int16Array*/) {  
         this.userService.getUserById(userId).subscribe(user=> {  
           this.message = null;  
           this.dataSaved = false;  

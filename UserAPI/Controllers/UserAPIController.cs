@@ -10,9 +10,12 @@ using System.Web.Http;
 using UserAPI.Models;
 using UserAPI.Models.Enums;
 using static UserAPI.Models.Login;
+using System.Web.Http.Cors;
+using System.Web;
 
 namespace UserAPI.Controllers
 {
+  
     [RoutePrefix("Api/User")]
     public class UserAPIController : ApiController
     {
@@ -70,6 +73,30 @@ namespace UserAPI.Controllers
 
             return Ok(objUsr);
         }
+
+
+        [HttpGet]
+        [Route("GetUserDetailsByEmail")]
+        public IHttpActionResult GetUserDetailsByEmail(string userEmail)
+        {
+            UserDetail objUsr = new UserDetail();
+
+            try
+            {
+                objUsr = objEntity.UserDetails.Where(user => user.Email == userEmail).FirstOrDefault();
+
+                if (objUsr == null)
+                    return NotFound();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(objUsr);
+        }
+
+
 
         [HttpPost]
         [Route("InsertUserDetails")]

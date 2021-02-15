@@ -118,15 +118,11 @@ namespace UserAPI.Controllers
 
         [HttpGet]
         [Route("GetCarsByType")]
-        public IQueryable<Car> GetCarsType(int type, int rentaCarId)
+        public IQueryable<Car> GetCarsType(int type)
         {
             try
             {
-                if (rentaCarId == 0)
-                      return objEntity.Cars.Where(t => t.Type == type);
-                else
-                    return GetCarsFromRentaCar(rentaCarId).Where(t => t.Type == type);
-
+                 return objEntity.Cars.Where(t => t.Type == type);
             }
             catch (Exception)
             {
@@ -134,6 +130,41 @@ namespace UserAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetCarsBySeats")]
+        public IQueryable<Car> GetCarsBySeats(int seats)
+        {
+            try
+            {
+                return objEntity.Cars.Where(s => s.Seats >= seats);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("SearchedCars")]
+        public IQueryable<Car> SearchedCars(int rentaCarId, int type, int seats, 
+            double minPrice, double maxPrice)
+        {
+            IQueryable<Car> searchedCars = GetCarsFromRentaCar(rentaCarId);
+
+            try
+            {
+                searchedCars = searchedCars.Intersect(GetCarsType(type));
+                searchedCars = searchedCars.Intersect(GetCarsBySeats(seats));
+                searchedCars = searchedCars.Intersect(GetCarPrice(minPrice, maxPrice));
+
+                return searchedCars;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         [HttpPost]
         [Route("InsertCar")]
@@ -201,7 +232,7 @@ namespace UserAPI.Controllers
 
         [HttpDelete]
         [Route("DeleteCar")]
-        public IHttpActionResult DeleteRentaCar(int id)
+        public IHttpActionResult DeleteCar(int id)
         {
             Car car = objEntity.Cars.Find(id);
             if (car == null)

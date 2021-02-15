@@ -9,6 +9,12 @@ import { FormBuilder, Validators, NgForm, FormGroup, FormControl, ReactiveFormsM
 import { ThrowStmt } from "@angular/compiler";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { BranchOffice } from "../companies/branch.office";
+import { CookieService } from "ngx-cookie-service";
+import { User } from "../users/user";
+import { timingSafeEqual } from "crypto";
+import { UserService } from "../users/user.service";
+import { ReserveCarService } from "./reserve-car.service";
+import { CarReservation } from "./car-reservation";
 
 @Component({
     selector: 'reserve-car',
@@ -35,14 +41,19 @@ export class ReserveRentaCarComponent implements OnInit{
 
     showResForm: boolean;
 
+    loggedUser: User;
+    carReservation: CarReservation;
+    message = null;
 
-constructor( private rentACarService: RentACarService, 
+constructor(private fb: FormBuilder, private rentACarService: RentACarService, 
     private carService: CarService, private branchOfficeService: BranchOfficeService, 
-    private fb: FormBuilder ){}
+    private cookieService: CookieService, private userService: UserService, 
+    private reserveCarService: ReserveCarService ){}
 
 ngOnInit(): void{
 
     this.loadRentaCars();
+    this.getLoggedUser();
 
      this.parameter = null;
      this.foundRentaCars = null;
@@ -53,19 +64,20 @@ ngOnInit(): void{
      this.showResForm = false;
 
      this.cars = null; 
-
+     this.loggedUser = null;
+     this.carReservation = null;
 
      this.reservationForm = this.fb.group({
         Type: ['', [Validators.required]],
         DateFrom: ['', [Validators.required]],
         BranchOfficeFrom: ['', [Validators.required]], 
         DateTo: ['', [Validators.required]],
-        BranchOfficeTo: ['', [Validators.required]]
+        BranchOfficeTo: ['', [Validators.required]], 
+        Passengers: ['', Validators.required],
+        MinPrice: [''],
+        MaxPrice: ['']
       }); 
-      
-
-     
-
+          
 }
 
 
@@ -81,6 +93,7 @@ onReset() {
     this.selectedCar = null;
     this.reservationForm.reset();
     this.showResForm = false;
+    this.message = null;
 }
 
 
@@ -126,12 +139,23 @@ sortRentaCars() : void{
 
 
 searchCars(){
-    this.cars = this.carService.getSearchedCars( this.reservationForm.get('Type').value, this.selectedRentaCar.Id);
+    if(!this.reservationForm.get('MinPrice').value )
+    this.reservationForm.controls['MinPrice'].setValue(0);
+
+    if(!this.reservationForm.get('MaxPrice').value )
+    this.reservationForm.controls['MaxPrice'].setValue(100);
+
+    this.cars = this.carService.getSearchedCars( this.selectedRentaCar.Id, this.reservationForm.get('Type').value,
+    this.reservationForm.get('Passengers').value, this.reservationForm.get('MinPrice').value, this.reservationForm.get('MaxPrice').value );
+
     this.donecarsearch = true;
 }
 
 showCar(car: Car){
        this.selectedCar = car;
+
+       this.reservationForm.controls['Type'].setValue(car.Type);
+       this.showResForm = true;
 }
  
  
@@ -140,10 +164,40 @@ onSelectCar(car: Car) : void {
 }
 
 
-reserveCar(){
- /// id ulogovanog korisnika is session
+getLoggedUser(){
+    this.userService.getUserById(this.cookieService.get('loggedId')).subscribe(
+        (val) => {
+            this.loggedUser = val;
+        });
+}
+
+
+
+
+reserveCar(cr: CarReservation){
    
-    console.log('rezervisan je ' + this.selectedCar.Name + ' za korisnika ' +  sessionStorage.getItem('3') );
+    cr.CarId = this.selectedCar.Id;
+    cr.UserId = this.loggedUser.UserId;
+
+    cr.DateFrom = this.reservationForm.get('DateFrom').value;
+    cr.DateTo = this.reservationForm.get('DateTo').value;     
+
+    this.reserveCarService.isCarReserved(cr.CarId, cr.DateFrom, cr.DateTo).subscribe(
+        (val)=>{
+            if(val){
+                this.message = 'This car is taken. Please, try another one.';
+                this.selectedCar = null; 
+            }
+            else{             
+               this.reserveCarService.createCarReservation(cr).subscribe(
+                    () => {
+                        this.message = 'You reserved the car.';
+                         this.selectedCar = null;
+                    });                
+            }
+        });       
+
+
 }
 
 

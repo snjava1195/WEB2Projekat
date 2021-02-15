@@ -196,6 +196,7 @@
     <Compile Include="Controllers\AirlineController.cs" />
     <Compile Include="Controllers\BranchOfficeController.cs" />
     <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\CarReservationController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RentaCarController.cs" />
@@ -214,6 +215,9 @@
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Car.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarReservation.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Enums\UserType.cs" />

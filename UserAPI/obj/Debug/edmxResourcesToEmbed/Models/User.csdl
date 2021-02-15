@@ -29,6 +29,7 @@
     <EntitySet Name="FlightReservations" EntityType="AngularModel.FlightReservation" />
     <EntitySet Name="Kartas" EntityType="AngularModel.Karta" />
     <EntitySet Name="Presedanjes" EntityType="AngularModel.Presedanje" />
+    <EntitySet Name="CarReservations" EntityType="AngularModel.CarReservation" />
   </EntityContainer>
   <ComplexType Name="Usp_Login_Result">
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
@@ -131,5 +132,15 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Lokacija" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="IdLeta" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarReservation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
 </Schema>

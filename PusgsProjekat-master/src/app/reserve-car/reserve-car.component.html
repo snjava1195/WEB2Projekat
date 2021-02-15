@@ -161,7 +161,34 @@
 
                                         <mat-error>
                                             <span
-                                                *ngIf="!reservationForm.get('Type').value && reservationForm.get('Type').touched"></span>
+                                                *ngIf="!reservationForm.get('Type').value && reservationForm.get('Type').touched">
+                                            </span>
+                                        </mat-error>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td> Number of passengers: </td>
+                                    <td class="tbl1">
+                                        <mat-form-field class="demo-full-width">
+                                            <select matNativeControl formControlName="Passengers"  >
+                                                <option value="1"> 1 </option>
+                                                <option value="2"> 2 </option>
+                                                <option value="3"> 3 </option>
+                                                <option value="4"> 4 </option>
+                                                <option value="5"> 5 </option>
+                                                <option value="6"> 6 </option>
+                                                <option value="7"> 7 </option>
+                                                <option value="8"> 8 </option>
+                                                <option value="9"> 9 </option>
+                                                <option value="10"> 10 </option>
+                                            </select>
+                                        </mat-form-field>
+
+                                        <mat-error>
+                                            <span
+                                                *ngIf="!reservationForm.get('BranchOfficeFrom').value && reservationForm.get('BranchOfficeFrom').touched">
+                                            </span>
                                         </mat-error>
                                     </td>
                                 </tr>
@@ -187,9 +214,17 @@
 
                                         <mat-error>
                                             <span
-                                                *ngIf="!reservationForm.get('BranchOfficeFrom').value && reservationForm.get('BranchOfficeFrom').touched"></span>
+                                                *ngIf="!reservationForm.get('BranchOfficeFrom').value && reservationForm.get('BranchOfficeFrom').touched">
+                                            </span>
                                         </mat-error>
                                     </td>
+
+                                    <td>  min €/day </td>
+                                    <td class="tbl1">
+                                        <mat-form-field class="demo-full-width">
+                                            <input  formControlName="MinPrice"  matInput >
+                                        </mat-form-field>
+                                    </td>   
                                 </tr>
 
                                 <tr>
@@ -212,16 +247,24 @@
 
                                         <mat-error>
                                             <span
-                                                *ngIf="!reservationForm.get('BranchOfficeTo').value && reservationForm.get('BranchOfficeTo').touched"></span>
+                                                *ngIf="!reservationForm.get('BranchOfficeTo').value && reservationForm.get('BranchOfficeTo').touched">
+                                            </span>
                                         </mat-error>
                                     </td>
+
+                                    <td>  max €/day </td>
+                                    <td class="tbl1">
+                                        <mat-form-field class="demo-full-width">
+                                            <input  formControlName="MaxPrice"  matInput >
+                                        </mat-form-field>
+                                    </td> 
                                 </tr>
 
                             </table>
                         </td>
                 </table>
 
-                <button type="button" mat-raised-button color="accent" (click)="searchCars()"> show cars </button>
+                <button type="button" mat-raised-button color="accent" (click)="searchCars()"  > show cars </button>
 
 
             </form>
@@ -310,12 +353,16 @@
 
 
         <tr>
-            <button type="button" (click)="reserveCar()"> reserve </button>
+            <button type="button" (click)="reserveCar(this.reservationForm.value)"  [disabled]="!reservationForm.valid" > reserve </button>
         </tr>
 
     </table>
 </div>
    
+<h3> {{ message }} </h3>
+
+
+<button type="button" routerLink="/userdashboard" routerLinkActive="active"  > back </button>
 
 
 </div>
