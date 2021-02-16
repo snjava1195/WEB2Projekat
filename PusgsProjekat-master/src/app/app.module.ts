@@ -66,6 +66,8 @@ import { CarAdminDashboardComponent } from './caradmindashboard.component';
     AirlineadmindashboardComponent,
     ReserveFlightComponent, 
     ReserveRentaCarComponent, 
+    CarAdminDashboardComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

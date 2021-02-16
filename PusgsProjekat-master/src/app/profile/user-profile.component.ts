@@ -15,6 +15,7 @@ import { CookieService } from "ngx-cookie-service";
 export class UserProfileComponent implements OnInit{
 
 loggedUser: User;
+username: string;
 
 constructor(private userService: UserService, private cookieService: CookieService){}
 
@@ -28,6 +29,7 @@ getLoggedUser(){
     this.userService.getUserById(this.cookieService.get('loggedId')).subscribe(
         (val) => {
             this.loggedUser = val;
+            this.username = val.Name;
         });
 }
 

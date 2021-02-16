@@ -1,7 +1,5 @@
 <ul>
     <li><a class="navbar-item" routerLink="/addRentacar" routerLinkActive="active"> Add rent-a-car companies </a></li>
-
-    <li><a class="navibar-item"> car admin: {{ username  }} </a> </li>
-    <!--<li><a class="navbar-item" routerLink="/login" routerLinkActive="active">Login</a></li>-->
-    
+    <li><a class="navibar-item" routerLink="/userProfile" routerLinkActive="active" > car admin: {{ username  }} </a> </li>
+    <li> <a class="navibar-item" routerLink="/view"  routerLinkActive="active" (click)="logout()" > Logout </a> </li>
 </ul>

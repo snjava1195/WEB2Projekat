@@ -305,3 +305,4 @@ C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.Identit
 C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.IdentityModel.Logging.xml
 C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\jovan\Desktop\jana\jana\WEB2\WEB2Projekat\UserAPI\obj\Debug\UserAPI.csprojAssemblyReference.cache

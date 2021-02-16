@@ -78,12 +78,6 @@ const routes: Routes = [
     {
       path: 'caradmindashboard',
       component: CarAdminDashboardComponent,
-      children: [
-            {
-              path: 'addRentacar',
-              component: AddRentacarComponent
-            }
-        ]
     },
 
     {
@@ -107,7 +101,7 @@ const routes: Routes = [
 //  ]
 {
     path: 'companies',
-    component: AdminComponent,
+    component: AdminComponent /*,
     children: [
       {
         path: 'addAirline',
@@ -117,8 +111,8 @@ const routes: Routes = [
         path: 'addRentacar',
         component: AddRentacarComponent
       }
-    ]
-  },
+    ] */
+},
 
 
 /*{

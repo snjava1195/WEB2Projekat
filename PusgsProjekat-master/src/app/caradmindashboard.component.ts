@@ -9,6 +9,7 @@ import { UserService } from 'src/app/users/user.service';
   styleUrls: ['./user-dashboard/user-dashboard.component.css']
 
 })
+
 export class CarAdminDashboardComponent {
 
   loggedAdmin: User;
@@ -29,5 +30,13 @@ export class CarAdminDashboardComponent {
         });
     }
  } 
+
+
+logout(){
+  this.loggedAdmin = null;
+  this.cookieService.delete('loggedId');
+}
+
+
 
 }
