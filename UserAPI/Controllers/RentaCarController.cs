@@ -74,6 +74,9 @@ namespace UserAPI.Controllers
         }
 
 
+
+
+
         [HttpGet]
         [Route("GetRentaCarByLocation/{rentaCarLocation}")]
         public IQueryable<RentaCar> GetRentaCarByLocation(string rentaCarLocation)

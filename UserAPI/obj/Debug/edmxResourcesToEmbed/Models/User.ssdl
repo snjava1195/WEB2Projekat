@@ -37,6 +37,8 @@
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="DateFrom" Type="date" Nullable="false" />
     <Property Name="DateTo" Type="date" Nullable="false" />
+    <Property Name="CarName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="Cars">
     <Key>

@@ -19,5 +19,7 @@ namespace UserAPI.Models
         public int UserId { get; set; }
         public System.DateTime DateFrom { get; set; }
         public System.DateTime DateTo { get; set; }
+        public string CarName { get; set; }
+        public double Price { get; set; }
     }
 }

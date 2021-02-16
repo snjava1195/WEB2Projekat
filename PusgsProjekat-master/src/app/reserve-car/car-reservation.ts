@@ -7,6 +7,11 @@ export class CarReservation{
     DateFrom: Date;
     DateTo: Date;
 
+    CarName: string;
+
+
+    Price: number;
+    
     constructor(){}
     
 }

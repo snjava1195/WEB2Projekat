@@ -33,8 +33,8 @@ namespace UserAPI.Controllers
 
 
         [HttpGet]
-        [Route("GetCarRseservationById/{carReservationId}")]
-        public IHttpActionResult GeCarReservationById(string carReservationId)
+        [Route("GetCarReservationById/{carReservationId}")]
+        public IHttpActionResult GetCarReservationById(string carReservationId)
         {
             CarReservation cr = new CarReservation();
             int ID = Convert.ToInt32(carReservationId);
@@ -102,6 +102,52 @@ namespace UserAPI.Controllers
         }
 
 
+        [HttpGet]
+        [Route("CarReservationPast/{crId}")]
+        public bool CarReservationPast(string crId)
+        {
+            int ID = Convert.ToInt32(crId);
+
+            try
+            {
+               CarReservation cr = objEntity.CarReservations.Find(ID);
+
+                    if (cr.DateTo.AddDays(1) < DateTime.Today)
+                        return false;
+                    else
+                        return true;
+            
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("MinTwoDaysLeft/{crId}")]
+        public bool MinTwoDaysLeft(string crId)
+        {
+            int ID = Convert.ToInt32(crId);
+
+            try
+            {
+                CarReservation cr = objEntity.CarReservations.Find(ID);
+
+                if (cr.DateFrom.AddDays(1) < DateTime.Today.AddDays(3))
+                    return false;
+                else
+                    return true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         [HttpPost]
         [Route("InsertCarReservation")]
         public IHttpActionResult PostCarReservation(CarReservation data)
@@ -120,6 +166,8 @@ namespace UserAPI.Controllers
 
             return Ok(data);
         }
+
+
 
 
         [HttpPut]
@@ -144,6 +192,8 @@ namespace UserAPI.Controllers
                     cr.UserId = data.UserId;
                     cr.DateFrom = data.DateFrom;
                     cr.DateTo = data.DateTo;
+                    cr.CarName = data.CarName;
+                    cr.Price = data.Price;
                 }
                 objEntity.SaveChanges();
             }
@@ -160,9 +210,9 @@ namespace UserAPI.Controllers
 
         [HttpDelete]
         [Route("DeleteCarReservation")]
-        public IHttpActionResult DeleteCarReservation(int id)
+        public IHttpActionResult DeleteCarReservation(int rcId)
         {
-            CarReservation cr = objEntity.CarReservations.Find(id);
+            CarReservation cr = objEntity.CarReservations.Find(rcId);
 
             if (cr == null)
             {

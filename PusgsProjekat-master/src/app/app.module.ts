@@ -43,6 +43,8 @@ import { FlightComponent } from './companies/flight.component';
 import {CommonModule} from '@angular/common';
 import { AirlineadmindashboardComponent } from './airlineadmindashboard.component';
 import { ReserveFlightComponent } from './reserve-flight/reserve-flight.component';
+import { UserProfileComponent } from './profile/user-profile.component';
+import { CarAdminDashboardComponent } from './caradmindashboard.component';
 
 
 @NgModule({
@@ -63,7 +65,7 @@ import { ReserveFlightComponent } from './reserve-flight/reserve-flight.componen
     FlightComponent,
     AirlineadmindashboardComponent,
     ReserveFlightComponent, 
-    ReserveRentaCarComponent
+    ReserveRentaCarComponent, 
   ],
   imports: [
     BrowserModule,

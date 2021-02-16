@@ -10,10 +10,7 @@ import { CarService } from '../companies/car.service';
 import { BranchOfficeService } from '../companies/branch.office.service';
 import { BranchOffice } from '../companies/branch.office';
 import { ThisReceiver } from '@angular/compiler';
-import { validateHorizontalPosition } from '@angular/cdk/overlay';
-import { off } from 'process';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { timingSafeEqual } from 'crypto';
+
 
 @Component({
   selector: 'app-add-rentacar',
@@ -29,7 +26,6 @@ export class AddRentacarComponent implements OnInit {
   rentaCarForm: any;
   carForm: any;
   officeForm: any;
-  rateForm: any;
 
   selectedRentACar: RentACar;
   selectedCar: Car;
@@ -42,8 +38,7 @@ export class AddRentacarComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private rentaCarService: RentACarService,
              private carFb: FormBuilder, private carService: CarService,
-            private officeFb : FormBuilder, private branchOfficeService: BranchOfficeService,
-            private rateFb: FormBuilder ) {}
+            private officeFb : FormBuilder, private branchOfficeService: BranchOfficeService) {}
 
   ngOnInit(): void {
     this.loadRentaCars();
@@ -73,9 +68,6 @@ export class AddRentacarComponent implements OnInit {
       BranchOfficeAddress:['' ,[Validators.required]]
     });
 
-    this.rateForm = this.rateFb.group({
-      Rate: ['', [Validators.required]]
-    });
   }
 
   clickHelp(){
@@ -168,34 +160,11 @@ export class AddRentacarComponent implements OnInit {
   }
 
 
-rateRentaCar(rentaCar: RentACar, rate: number){
-  rentaCar.Id = this.selectedRentACar.Id;
-  rentaCar.Rate = this.selectedRentACar.Rate;
-  rentaCar.RatedBy = this.selectedRentACar.RatedBy;
-
-  var newRate: number =
-  newRate =  Number.parseInt((rentaCar.Rate * rentaCar.RatedBy).toString())
-            + Number.parseInt(rate.toString());
-  rentaCar.RatedBy++;
-  rentaCar.Rate = Number.parseFloat(( newRate/rentaCar.RatedBy).toString());
-  
-
-  this.rentaCarService.updateRentaCar(rentaCar).subscribe(
-    () =>{
-      this.message = 'Rent-a-car is rated.';
-      this.loadRentaCars();
-      this.saved = true;
-      this.rateForm.reset();
-      this.selectedRentACar = null;
-    }
-  );
-} 
   
 onReset(){
   this.rentaCarForm.reset();
   this.carForm.reset();
   this.officeForm.reset();
-  this.rateForm.reset();
 
   this.message = '';
 
@@ -263,30 +232,6 @@ updateCar(car: Car){
   );
 }
 
-
-rateCar(car: Car, rate: number){
-  car.Id = this.selectedCar.Id;
-  car.Rate = this.selectedCar.Rate;
-  car.RatedBy = this.selectedCar.RatedBy;
- 
-  var newRate: number = 
-  Number.parseInt((car.Rate * car.RatedBy).toString())
-  + Number.parseInt(rate.toString());
-  car.RatedBy ++;
-  car.Rate = Number.parseFloat(( newRate / car.RatedBy).toString());
-
-
-  this.carService.updateCar(car).subscribe(
-    () =>{
-      this.message = 'Car is rated.';
-      this.loadCars();
-      this.saved = true;
-      this.selectedCar = null;
-      this.rateForm.reset();
-    }
-  );
-   
-}
 
 
 deleteCar(car: Car){

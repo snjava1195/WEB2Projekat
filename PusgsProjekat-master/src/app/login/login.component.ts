@@ -43,7 +43,6 @@ export class LoginComponent {
     this.userService.getUserByEmail(this.loginForm.get('Email').value).subscribe(
       (val) => {
          this.loggedUserId =  val.UserId.toString();
-       //  sessionStorage.setItem('loggedId', this.loggedUserId);
           this.cookieService.set('loggedId', this.loggedUserId.toString())
       });
   }

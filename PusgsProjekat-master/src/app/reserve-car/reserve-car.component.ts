@@ -11,7 +11,6 @@ import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { BranchOffice } from "../companies/branch.office";
 import { CookieService } from "ngx-cookie-service";
 import { User } from "../users/user";
-import { timingSafeEqual } from "crypto";
 import { UserService } from "../users/user.service";
 import { ReserveCarService } from "./reserve-car.service";
 import { CarReservation } from "./car-reservation";
@@ -45,6 +44,8 @@ export class ReserveRentaCarComponent implements OnInit{
     carReservation: CarReservation;
     message = null;
 
+    fullPrice: number;
+
 constructor(private fb: FormBuilder, private rentACarService: RentACarService, 
     private carService: CarService, private branchOfficeService: BranchOfficeService, 
     private cookieService: CookieService, private userService: UserService, 
@@ -66,6 +67,7 @@ ngOnInit(): void{
      this.cars = null; 
      this.loggedUser = null;
      this.carReservation = null;
+     this.fullPrice = 0;
 
      this.reservationForm = this.fb.group({
         Type: ['', [Validators.required]],
@@ -94,6 +96,7 @@ onReset() {
     this.reservationForm.reset();
     this.showResForm = false;
     this.message = null;
+    this.fullPrice = 0;
 }
 
 
@@ -151,6 +154,15 @@ searchCars(){
     this.donecarsearch = true;
 }
 
+
+
+getDays(){
+    var dateTo = new Date(this.reservationForm.get('DateTo').value);
+    var dateFrom = new Date(this.reservationForm.get('DateFrom').value);
+   
+    this.fullPrice = this.selectedCar.Price * (dateTo.getDate() - dateFrom.getDate()  );
+}
+
 showCar(car: Car){
        this.selectedCar = car;
 
@@ -158,7 +170,8 @@ showCar(car: Car){
        this.showResForm = true;
 }
  
- 
+
+
 onSelectCar(car: Car) : void {
      this.selectedCar = car;
 }
@@ -180,7 +193,12 @@ reserveCar(cr: CarReservation){
     cr.UserId = this.loggedUser.UserId;
 
     cr.DateFrom = this.reservationForm.get('DateFrom').value;
-    cr.DateTo = this.reservationForm.get('DateTo').value;     
+    cr.DateTo = this.reservationForm.get('DateTo').value;  
+        
+
+    cr.CarName = this.selectedCar.Name;
+   
+    cr.Price = this.fullPrice;    
 
     this.reserveCarService.isCarReserved(cr.CarId, cr.DateFrom, cr.DateTo).subscribe(
         (val)=>{
@@ -199,6 +217,7 @@ reserveCar(cr: CarReservation){
 
 
 }
+
 
 
 

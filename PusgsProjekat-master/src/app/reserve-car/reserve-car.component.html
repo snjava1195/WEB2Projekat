@@ -151,11 +151,11 @@
                                         <mat-form-field class="demo-full-width">
                                             <select matNativeControl formControlName="Type" matInput>
                                                 <option value="1"> hatchback </option>
-                                                <option value="2"> limuzina </option>
-                                                <option value="3"> džip </option>
-                                                <option value="4"> karavan </option>
-                                                <option value="5"> kabriolet </option>
-                                                <option value="6"> kupe </option>
+                                                <option value="2"> limousine </option>
+                                                <option value="3"> jeep </option>
+                                                <option value="4"> caravan </option>
+                                                <option value="5"> cabriolet </option>
+                                                <option value="6"> coupe </option>
                                             </select>
                                         </mat-form-field>
 
@@ -277,7 +277,7 @@
 
     <br>
 
-    <!--p *ngIf="donecarsearch && "> Nema dostupnih vozila koja odgovaraju pretrazi. </p-->
+  
 
 <div *ngIf="selectedCar || donecarsearch " >
 
@@ -290,6 +290,7 @@
             <td> type </td>
             <td> rate </td>
             <td> price <br> (€/day) </td>
+            <td>  full price (€) </td>
             <td> year </td>
             <td> seats </td>
         </tr>
@@ -310,6 +311,12 @@
             <td>
                 {{ selectedCar.Price }}
             </td>
+            <td *ngIf="fullPrice == 0" >
+                &nbsp;
+             </td>
+             <td *ngIf="fullPrice != 0" >
+                 {{  fullPrice }}
+             </td>
             <td>
                 {{ selectedCar.Year }}
             </td>
@@ -339,6 +346,12 @@
                 <td>
                     {{ c.Price }}
                 </td>
+                <td *ngIf="fullPrice == 0" >
+                   &nbsp;
+                </td>
+                <td *ngIf="fullPrice != 0" >
+                    {{  fullPrice }}
+                </td>
                 <td>
                     {{ c.Year }}
                 </td>
@@ -353,7 +366,13 @@
 
 
         <tr>
-            <button type="button" (click)="reserveCar(this.reservationForm.value)"  [disabled]="!reservationForm.valid" > reserve </button>
+            <td>
+                <button type="button" (click)="getDays()" [disabled]="!reservationForm.valid" > check price </button>
+            </td>
+
+            <td>
+                <button type="button" (click)="reserveCar(this.reservationForm.value)"  [disabled]="!reservationForm.valid" > reserve </button>
+            </td>
         </tr>
 
     </table>

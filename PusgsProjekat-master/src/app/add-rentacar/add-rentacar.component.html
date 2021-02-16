@@ -114,11 +114,11 @@
                       <mat-form-field class="demo-full-width">
                           <select matNativeControl formControlName="Type" matInput>
                               <option value="1"> hatchback </option>
-                              <option value="2"> limuzina </option>
-                              <option value="3"> džip </option>
-                              <option value="4"> karavan </option>
-                              <option value="5"> kabriolet </option>
-                              <option value="6"> kupe </option>
+                              <option value="2"> limousine </option>
+                              <option value="3"> jeep </option>
+                              <option value="4"> caravan </option>
+                              <option value="5"> cabriolet </option>
+                              <option value="6"> coupe </option>
                           </select>
                       </mat-form-field>
 
@@ -187,15 +187,6 @@
   
              <br><br>
 
-             <form [formGroup]="rateForm">
-                      <label> rate: </label>
-                      <mat-form-field class="demo-full-width" >  
-                          <input  formControlName="Rate" matInput >  
-                      </mat-form-field>  
-                      <mat-error>  
-                         <span *ngIf="!rateForm.get('Rate').value && rateForm.get('Rate').touched"></span>  
-                      </mat-error> 
-             </form>
 
 
       <table class="table table-hover" style="border-spacing: 10px" >  
@@ -272,7 +263,6 @@
                 <button type="button" mat-raised-button color="accent"
                  [disabled]="!(selectedRentACar && (rentaCarForm.get('Name').valid || rentaCarForm.get('Address').valid || rentaCarForm.get('City').valid || rentaCarForm.get('Description').valid) )" 
                  (click)="updateRentaCar(selectedRentACar)" > Update rent-a-car </button>  
-                <button type="button" mat-raised-button color="accent" [disabled]="!(selectedRentACar && this.rateForm.valid)" (click)="rateRentaCar(selectedRentACar, this.rateForm.get('Rate').value)" > Rate rent-a-car</button> 
                 <button type="button" mat-raised-button color="accent" [disabled]="!selectedRentACar" (click)="deleteRentaCar(selectedRentACar.Id)" > Delete rent-a-car </button> 
               </td>
            </tr>
@@ -280,7 +270,6 @@
            <tr>
               <td>
                 <button type="button" mat-raised-button color="accent" [disabled]="!(selectedCar && (carForm.get('CarName').valid || carForm.get('Price').valid ) || carForm.get('Type').valid || carForm.get('Brand').valid || carForm.get('Seats').valid || carForm.get('Year').valid   )" (click)="updateCar(selectedCar)" > Update car </button>
-                <button type="button"  mat-raised-button color="accent" [disabled]="!(selectedCar && this.rateForm.valid)" (click)="rateCar(selectedCar, this.rateForm.get('Rate').value )" >Rate car </button>
                 <button type="button" mat-raised-button color="accent" [disabled]="!selectedCar" (click)="deleteCar(selectedCar)" >  Delete car </button>
               </td>
             </tr> 

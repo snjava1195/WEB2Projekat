@@ -42,6 +42,8 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="DateFrom" Type="date" Nullable="false" />
           <Property Name="DateTo" Type="date" Nullable="false" />
+          <Property Name="CarName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Cars">
           <Key>
@@ -289,6 +291,8 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CarName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -429,6 +433,8 @@
           <EntitySetMapping Name="CarReservations">
             <EntityTypeMapping TypeName="AngularModel.CarReservation">
               <MappingFragment StoreEntitySet="CarReservations">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CarName" ColumnName="CarName" />
                 <ScalarProperty Name="DateTo" ColumnName="DateTo" />
                 <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

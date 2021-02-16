@@ -6,7 +6,8 @@ import { UserService } from 'src/app/users/user.service';
 @Component({
   selector: 'car-admin-dashboard',
   templateUrl: './caradmindashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  styleUrls: ['./user-dashboard/user-dashboard.component.css']
+
 })
 export class CarAdminDashboardComponent {
 
