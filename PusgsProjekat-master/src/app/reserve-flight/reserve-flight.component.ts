@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReserveFlightComponent implements OnInit {
 
+  seatsLayout= {
+  	totalRows:10,
+	seatsPerRow:6,
+	seatNaming:'rowType',
+	booked:['1A','5D']   
+}
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  
+  getSelected(event){
+    //Do stuff
+      console.log(event)
+    }
 }

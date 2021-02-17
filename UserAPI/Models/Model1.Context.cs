@@ -15,10 +15,10 @@ namespace UserAPI.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class AngularEntities2 : DbContext
+    public partial class AngularEntities3 : DbContext
     {
-        public AngularEntities2()
-            : base("name=AngularEntities2")
+        public AngularEntities3()
+            : base("name=AngularEntities3")
         {
         }
     
@@ -27,29 +27,28 @@ namespace UserAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<UserDetail> UserDetails { get; set; }
-        public virtual DbSet<Airline> Airlines { get; set; }
-        public virtual DbSet<RentaCar> RentaCars { get; set; }
-        public virtual DbSet<BranchOffice> BranchOffices { get; set; }
-        public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<AirlineDetail> AirlineDetails { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Flight> Flights { get; set; }
         public virtual DbSet<FlightReservation> FlightReservations { get; set; }
         public virtual DbSet<Karta> Kartas { get; set; }
         public virtual DbSet<Presedanje> Presedanjes { get; set; }
+        public virtual DbSet<RentaCar> RentaCars { get; set; }
+        public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<Usermaster> Usermasters { get; set; }
+        public virtual DbSet<UserActivation> UserActivations { get; set; }
     
-        public virtual ObjectResult<Usp_Login_Result> Usp_Login(string username, string password)
+        public virtual ObjectResult<Usp_Login_Result> Usp_Login(string userName, string password)
         {
-            var usernameParameter = username != null ?
-                new ObjectParameter("Username", username) :
-                new ObjectParameter("Username", typeof(string));
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
     
             var passwordParameter = password != null ?
                 new ObjectParameter("Password", password) :
                 new ObjectParameter("Password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Usp_Login_Result>("Usp_Login", usernameParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Usp_Login_Result>("Usp_Login", userNameParameter, passwordParameter);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Web.Http;
 using UserAPI.Models;
 using UserAPI.Models.Enums;
@@ -16,17 +17,17 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/User")]
     public class UserAPIController : ApiController
     {
-        AngularEntities2 objEntity = new AngularEntities2();
+        AngularEntities3 objEntity = new AngularEntities3();
        
         [Route("UserLogin")]
         [HttpPost]
         public IHttpActionResult Login(Login lg)
         {
-            AngularEntities2 DB = new AngularEntities2();
+            AngularEntities3 DB = new AngularEntities3();
             var Obj = DB.Usp_Login(lg.Email, lg.Password).ToList<Usp_Login_Result>().FirstOrDefault();
             if (Obj == null) return NotFound();
       
-            else return Ok(Obj.UserType);
+            else return Ok(Obj);
        
         }
 
@@ -88,6 +89,7 @@ namespace UserAPI.Controllers
                         data.UserType = Convert.ToInt32(UserType.User);
                         objEntity.UserDetails.Add(data);
                         objEntity.SaveChanges();
+                        SendActivationEmail(data);
                     }
                 }
             }
@@ -163,5 +165,55 @@ namespace UserAPI.Controllers
             else
                 return NotFound();
         }
+
+        private void SendActivationEmail(UserDetail user)
+        {
+            Guid activationCode = Guid.NewGuid();
+            
+            objEntity.UserActivations.Add(new UserActivation
+            {
+                UserId = user.UserId,
+                ActivationCode = activationCode
+            });
+            objEntity.SaveChanges();
+
+            using (MailMessage mm = new MailMessage("snjava1195@gmail.com", user.Email))
+            {
+                mm.Subject = "Account Activation";
+                string body = "Hello " + user.Email + ",";
+                body += "<br /><br />Please click the following link to activate your account";
+                body += "<br /><a href = '" + string.Format("http://localhost:4200/verification/{0}",activationCode) + "'>Click here to activate your account.</a>";
+                body += "<br /><br />Thanks";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                NetworkCredential NetworkCred = new NetworkCredential("snjava1195@gmail.com", "11208995vs");
+                //smtp.Timeout = 10000;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteToken")]
+        public IHttpActionResult DeleteToken(string userToken)
+        {
+            Guid activationCode = new Guid(userToken.ToString());
+     
+            UserActivation userActivation = objEntity.UserActivations.Where(p => p.ActivationCode == activationCode).FirstOrDefault();
+            if (userActivation != null)
+            {
+                objEntity.UserActivations.Remove(userActivation);
+                objEntity.SaveChanges();
+            }
+                return Ok();
+        }
+
     }
 }
+

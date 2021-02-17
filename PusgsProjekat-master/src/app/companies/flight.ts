@@ -5,11 +5,14 @@ export class Flight{
     VremeTrajanjaLeta: string;
     DuzinaPutovanja: BigInt;
     BrojPresedanja: Int16Array;
-    Cena: BigInt;
+    CenaBiznisKlase: BigInt;
+    CenaEkonomskeKlase: BigInt;
+    CenaPrveKlase: BigInt;
     MestoPoletanja: string;
     MestoSletanja: string;
     OcenaLeta: Int16Array;
     IdAvioKompanije: Int16Array;
+    BrojSedista: Int16Array;
     
     from: string;
     to: string;

@@ -38,13 +38,14 @@ export class LoginComponent {
   login() {
     this.LoginService.Login(this.loginForm.value).subscribe(
       user => {
-          if(user==0)
+        debugger;
+          if(user.UserType==0)
             this.router.navigate(['/admindashboard']);
-          else if(user==1)
-            this.router.navigate(['/userdashboard']);
-          else if(user==2)
+          else if(user.UserType==1)
+            this.router.navigate(['/userdashboard/' + user.UserId]);
+          else if(user.UserType==2)
             this.router.navigate(['/caradmindashboard']);
-          else if(user==3)
+          else if(user.UserType==3)
             this.router.navigate(['/airlineadmindashboard'])
         
       });

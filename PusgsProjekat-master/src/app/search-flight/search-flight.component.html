@@ -8,7 +8,7 @@
       </mat-toolbar>  
     <br><br>  
       <mat-card-content>  
-        <form [formGroup]="flightForm"(ngSubmit)="onFormSubmit()">  
+        <form [formGroup]="searchFlightForm" (ngSubmit)="onFormSubmit()">  
                 <table>  
                   <tr>  
                     
@@ -52,7 +52,7 @@
                           <span *ngIf="!flightForm.get('DatumSletanja').value && flightForm.get('DatumSletanja').touched"></span>  
                         </mat-error>  
                       </td>   -->
-                    <td class="tbl1">  
+                    <!-- <td class="tbl1">  
                         <mat-form-field class="demo-full-width">  
                           <input formControlName="VremeTrajanjaLeta"  matInput placeholder="Vreme trajanja leta">  
                           <span class="text-danger" *ngIf="(flightForm.get('VremeTrajanjaLeta').touched || flightForm.get('VremeTrajanjaLeta').dirty) && 
@@ -84,76 +84,66 @@
                       </td>   
                       <td class="tbl1">  
                         <mat-form-field class="demo-full-width">  
-                          <input formControlName="CenaBiznisKlase"  matInput placeholder="CenaBiznisKlase"> 
-                          <span class="text-danger" *ngIf="(flightForm.get('CenaBiznisKlase').touched || flightForm.get('CenaBiznisKlase').dirty) && 
-                          flightForm.get('CenaBiznisKlase').errors">Cena Biznis Klase:</span>  
+                          <input formControlName="Cena"  matInput placeholder="Cena"> 
+                          <span class="text-danger" *ngIf="(flightForm.get('Cena').touched || flightForm.get('Cena').dirty) && 
+                          flightForm.get('Cena').errors">Cena:</span>  
                         </mat-form-field>  
                         <mat-error>  
-                          <span *ngIf="!flightForm.get('CenaBiznisKlase').value && flightForm.get('CenaBiznisKlase').touched"></span>  
+                          <span *ngIf="!flightForm.get('Cena').value && flightForm.get('Cena').touched"></span>  
                         </mat-error>  
-                      </td>    
-                      <td class="tbl1">  
-                        <mat-form-field class="demo-full-width">  
-                          <input formControlName="CenaEkonomskeKlase"  matInput placeholder="CenaEkonomskeKlase"> 
-                          <span class="text-danger" *ngIf="(flightForm.get('CenaEkonomskeKlase').touched || flightForm.get('CenaEkonomskeKlase').dirty) && 
-                          flightForm.get('CenaEkonomskeKlase').errors">Cena Ekonomske Klase:</span>  
-                        </mat-form-field>  
-                        <mat-error>  
-                          <span *ngIf="!flightForm.get('CenaEkonomskeKlase').value && flightForm.get('CenaEkonomskeKlase').touched"></span>  
-                        </mat-error>  
-                      </td>
-                      <td class="tbl1">  
-                        <mat-form-field class="demo-full-width">  
-                          <input formControlName="CenaPrveKlase"  matInput placeholder="CenaPrveKlase"> 
-                          <span class="text-danger" *ngIf="(flightForm.get('CenaPrveKlase').touched || flightForm.get('CenaPrveKlase').dirty) && 
-                          flightForm.get('CenaPrveKlase').errors">Cena Prve Klase:</span>  
-                        </mat-form-field>  
-                        <mat-error>  
-                          <span *ngIf="!flightForm.get('CenaPrveKlase').value && flightForm.get('CenaPrveKlase').touched"></span>  
-                        </mat-error>  
-                      </td>
+                      </td>     -->
                       <td class="tbl1">  
                         <mat-form-field class="demo-full-width">  
                           <input formControlName="MestoPoletanja"  matInput placeholder="Mesto Poletanja"> 
-                          <span class="text-danger" *ngIf="(flightForm.get('MestoPoletanja').touched || flightForm.get('MestoPoletanja').dirty) && 
-                          flightForm.get('MestoPoletanja').errors">Mesto Poletanja:</span>  
+                          <span class="text-danger" *ngIf="(searchFlightForm.get('MestoPoletanja').touched || searchFlightForm.get('MestoPoletanja').dirty) && 
+                          searchFlightForm.get('MestoPoletanja').errors">Mesto Poletanja:</span>  
                         </mat-form-field>  
                         <mat-error>  
-                          <span *ngIf="!flightForm.get('MestoPoletanja').value && flightForm.get('MestoPoletanja').touched"></span>  
+                          <span *ngIf="!searchFlightForm.get('MestoPoletanja').value && searchFlightForm.get('MestoPoletanja').touched"></span>  
                         </mat-error>  
                       </td>   
                       <td class="tbl1">  
                         <mat-form-field class="demo-full-width">  
                           <input formControlName="MestoSletanja"  matInput placeholder="Mesto Sletanja"> 
-                          <span class="text-danger" *ngIf="(flightForm.get('MestoSletanja').touched || flightForm.get('MestoSletanja').dirty) && 
-                          flightForm.get('MestoSletanja').errors">Mesto Sletanja:</span>  
+                          <span class="text-danger" *ngIf="(searchFlightForm.get('MestoSletanja').touched || searchFlightForm.get('MestoSletanja').dirty) && 
+                          searchFlightForm.get('MestoSletanja').errors">Mesto Sletanja:</span>  
                         </mat-form-field>  
                         <mat-error>  
-                          <span *ngIf="!flightForm.get('MestoSletanja').value && flightForm.get('MestoSletanja').touched"></span>  
+                          <span *ngIf="!searchFlightForm.get('MestoSletanja').value && searchFlightForm.get('MestoSletanja').touched"></span>  
                         </mat-error>  
                       </td>   
                       <td class="tbl1">
                         <div class="form-group col-sm-3">   
-                          <label for="company">Country</label>  
-                          <select  class="form-control"  formControlName="AirlineAdmin"  [(ngModel)]="SelAirlineId">
+                          <label for="company">Klasa:</label>  
+                          <select  class="form-control"  formControlName="Class"  [(ngModel)]="SelClass">
                             <option value="">--Select--</option>  
-                            <option *ngFor="let User of _allAirlineIds | async" value={{User.Id}}>  
-                                {{User.Id}}  
+                            <option *ngFor="let Class of allClasses" value={{Class.name}}>  
+                                {{Class.name}}  
+                            </option>  
+                      </select>  
+                      </div>  
+                      </td>
+                      <td class="tbl1">
+                        <div class="form-group col-sm-3">   
+                          <label for="company">Pravac:</label>  
+                          <select  class="form-control"  formControlName="Pravac"  [(ngModel)]="SelPravac">
+                            <option value="">--Select--</option>  
+                            <option *ngFor="let Pravac of allPravci" value={{Pravac.name}}>  
+                                {{Pravac.name}}  
                             </option>  
                       </select>  
                       </div>  
                       </td>
                       <td class="tbl1">  
                         <mat-form-field class="demo-full-width">  
-                          <input formControlName="BrojSedista"  matInput placeholder="BrojSedista"> 
-                          <span class="text-danger" *ngIf="(flightForm.get('BrojSedista').touched || flightForm.get('BrojSedista').dirty) && 
-                          flightForm.get('BrojSedista').errors">Broj Sedista:</span>  
+                          <input formControlName="BrojPutnika"  matInput placeholder="Broj Putnika"> 
+                          <span class="text-danger" *ngIf="(searchFlightForm.get('BrojPutnika').touched || searchFlightForm.get('BrojPutnika').dirty) && 
+                          searchFlightForm.get('BrojPutnika').errors">Broj Putnika:</span>  
                         </mat-form-field>  
                         <mat-error>  
-                          <span *ngIf="!flightForm.get('BrojSedista').value && flightForm.get('BrojSedista').touched"></span>  
+                          <span *ngIf="!searchFlightForm.get('BrojPutnika').value && searchFlightForm.get('BrojPutnika').touched"></span>  
                         </mat-error>  
-                      </td>
-
+                      </td> 
                     <!-- <td class="tbl1">
                       <div class="form-group col-sm-3">   
                         <label for="company">Country</label>  
@@ -175,8 +165,8 @@
                     </td>   -->
                     <td></td>  
                     <td  class="content-center">  
-                      <button type="submit" mat-raised-button color="accent"[disabled]="!flightForm.valid">Submit</button>      
-                      <button type="reset" mat-raised-button color="accent" (click)="resetForm()">Reset</button>  
+                      <button type="submit" mat-raised-button color="accent"[disabled]="!searchFlightForm.valid">Potrazi</button>      
+                      <!-- <button type="reset" mat-raised-button color="accent" (click)="resetForm()">Reset</button>   -->
                     </td>  
                     <td>  
                       <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
@@ -185,6 +175,46 @@
                     </td>  
                   </tr>  
                 </table>  
+                <table class="table" >  
+                    <tr ngclass="btn-primary">  
+                  <!--    <th class="tbl2">User ID</th>  -->
+                      <th class="tbl2">DatumSletanja</th>  
+                      <th class="tbl2">VremeTrajanjaLeta</th>  
+                      <th class="tbl2">DuzinaPutovanja</th>  
+                      <th class="tbl2">BrojPresedanja</th>  
+                      <th class="tbl2">CenaBiznisKlase</th>
+                      <th class="tbl2">CenaEkonomskeKlase</th>
+                      <th class="tbl2">CenaPrveKlase</th>  
+                      <th class="tbl2">MestoPoletanja</th>  
+                      <th class="tbl2">MestoSletanja</th>  
+                      <th class="tbl2">OcenaLeta</th>
+                      <th class="tbl2">IdAvioKompanije</th>
+                      <th class="tbl2">BrojSedista</th>
+                      <th class="tbl2">Rezervisi</th>
+
+                    </tr>  
+                    <tr *ngFor="let flight of allFlights | async">  
+                   <!--  <td class="tbl2">{{user.UserId}}</td>  --> 
+                      <td class="tbl2">{{flight.DatumSletanja}}</td>  
+                      <td class="tbl2">{{flight.VremeTrajanjaLeta}}</td>  
+                      <td class="tbl2">{{flight.DuzinaPutovanja}}</td>  
+                      <td class="tbl2">{{flight.BrojPresedanja}}</td>  
+                      <td class="tbl2">{{flight.CenaBiznisKlase}}</td>
+                      <td class="tbl2">{{flight.CenaEkonomskeKlase}}</td> 
+                      <td class="tbl2">{{flight.CenaPrveKlase}}</td> 
+                      <td class="tbl2">{{flight.MestoPoletanja}}</td>
+                      <td class="tbl2">{{flight.MestoSletanja}}</td> 
+                      <td class="tbl2">{{flight.OcenaLeta}}</td>  
+                      <td class="tbl2">{{flight.IdAvioKompanije}}</td>
+                      <td class="tbl2">{{flight.BrojSedista}}</td>
+                      <td class="tbl2">{{flight.Rezervisi}}</td>
+                      <td class="tbl2">  
+                        <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="reserveFlight(flight.Id)">Reserve</button> 
+                         
+                          <!-- <button type="button" class="btn btn-info"matTooltip="Click Edit Button" [routerLink]="['/flightreservation']">Register</button> -->
+                      </td>  
+                      </tr>
+                </table>
     <!-- <br><br>  
           <table class="table" >  
               <tr ngclass="btn-primary">  
@@ -225,3 +255,4 @@
       </mat-card-content>  
     </mat-card>  
     </div>  
+

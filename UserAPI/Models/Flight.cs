@@ -18,12 +18,15 @@ namespace UserAPI.Models
         public Nullable<System.DateTime> DatumPoletanja { get; set; }
         public Nullable<System.DateTime> DatumSletanja { get; set; }
         public string VremeTrajanjaLeta { get; set; }
-        public Nullable<long> DuzinaPutovanja { get; set; }
+        public Nullable<int> DuzinaPutovanja { get; set; }
         public Nullable<int> BrojPresedanja { get; set; }
-        public Nullable<long> Cena { get; set; }
+        public Nullable<long> CenaBiznisKlase { get; set; }
+        public Nullable<long> CenaEkonomskeKlase { get; set; }
+        public Nullable<long> CenaPrveKlase { get; set; }
         public string MestoPoletanja { get; set; }
         public string MestoSletanja { get; set; }
         public Nullable<int> OcenaLeta { get; set; }
         public int IdAvioKompanije { get; set; }
+        public Nullable<int> BrojSedista { get; set; }
     }
 }

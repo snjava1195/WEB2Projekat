@@ -39,11 +39,14 @@ import { LoginService } from './login.service';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddAirlineComponent } from './add-airline/add-airline.component';
-import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
+//import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
 import { FlightComponent } from './companies/flight.component';
 import {CommonModule} from '@angular/common';
 import { AirlineadmindashboardComponent } from './airlineadmindashboard.component';
+import { ShowReservationsComponent } from './show-reservations/show-reservations.component';
+import { SearchFlightComponent } from './search-flight/search-flight.component';
 import { ReserveFlightComponent } from './reserve-flight/reserve-flight.component';
+import { VerificationComponent } from './verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -59,10 +62,13 @@ import { ReserveFlightComponent } from './reserve-flight/reserve-flight.componen
     RegisterComponent,
     AdminComponent,
     AddAirlineComponent,
-    AddRentacarComponent,
+   // AddRentacarComponent,
     FlightComponent,
     AirlineadmindashboardComponent,
-    ReserveFlightComponent
+    ShowReservationsComponent,
+    SearchFlightComponent,
+    ReserveFlightComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,11 @@ export class LoginService {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };  
    return this.http.post<any>(this.Url+'/UserLogin',model,{ headers: this.header});  
   }  
-
+  gotoLogin(userToken:string)
+  {
+      debugger;
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
+        return this.http.post<string>(this.Url + '/DeleteToken?userToken=' + userToken, httpOptions);
+  }
    
 }  

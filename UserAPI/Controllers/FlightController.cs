@@ -12,7 +12,7 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/Flight")]
     public class FlightController : ApiController
     {
-        AngularEntities2 objEntity = new AngularEntities2();
+        AngularEntities3 objEntity = new AngularEntities3();
         [HttpGet]
         [Route("AllFlightDetails")]
         public IQueryable<Flight> GetAirline()
@@ -34,7 +34,7 @@ namespace UserAPI.Controllers
             var check = new List<Flight>();
             try
             {
-                using (var context = new AngularEntities2())
+                using (var context = new AngularEntities3())
                 {
                     var flights = from f in context.Flights
                                   where f.IdAvioKompanije == airlineId
@@ -69,7 +69,9 @@ namespace UserAPI.Controllers
                 var flights = new Flight()
                 {
                     BrojPresedanja = data.BrojPresedanja,
-                    Cena = data.Cena,
+                    CenaBiznisKlase = data.CenaBiznisKlase,
+                    CenaEkonomskeKlase = data.CenaEkonomskeKlase,
+                    CenaPrveKlase = data.CenaPrveKlase,
                     DatumPoletanja = dt,
                     DatumSletanja = dt2,
                     DuzinaPutovanja = data.DuzinaPutovanja,
@@ -78,7 +80,8 @@ namespace UserAPI.Controllers
                     MestoPoletanja = data.MestoPoletanja,
                     MestoSletanja = data.MestoSletanja,
                     OcenaLeta = data.OcenaLeta,
-                    VremeTrajanjaLeta = data.VremeTrajanjaLeta
+                    VremeTrajanjaLeta = data.VremeTrajanjaLeta,
+                    BrojSedista = data.BrojSedista
 
                 };
                 //try { 
@@ -86,7 +89,7 @@ namespace UserAPI.Controllers
                 objEntity.SaveChanges();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

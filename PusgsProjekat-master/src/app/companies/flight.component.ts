@@ -35,10 +35,13 @@ export class FlightComponent implements OnInit {
        VremeTrajanjaLeta: ['', [Validators.required]],
        DuzinaPutovanja: ['', [Validators.required]],
        BrojPresedanja: ['', [Validators.required]],
-       Cena: ['', [Validators.required]],
+       CenaBiznisKlase: ['', [Validators.required]],
+       CenaEkonomskeKlase: ['', [Validators.required]],
+       CenaPrveKlase: ['', [Validators.required]],
        MestoPoletanja: ['', [Validators.required]],
        MestoSletanja: ['', [Validators.required]],
-       AirlineAdmin: ['', [Validators.required]]
+       AirlineAdmin: ['', [Validators.required]],
+       BrojSedista: ['', [Validators.required]]
 
         });
         this.FillAirlineIds();
@@ -72,9 +75,12 @@ export class FlightComponent implements OnInit {
           this.flightForm.get('VremeTrajanjaLeta').setValue(flight.VremeTrajanjaLeta);  
           this.flightForm.get('DuzinaPutovanja').setValue(flight.DuzinaPutovanja);
           this.flightForm.get('BrojPresedanja').setValue(flight.BrojPresedanja);
-          this.flightForm.get('Cena').setValue(flight.Cena);
+          this.flightForm.get('CenaBiznisKlase').setValue(flight.CenaBiznisKlase);
+          this.flightForm.get('CenaEkonomskeKlase').setValue(flight.CenaEkonomskeKlase);
+          this.flightForm.get('CenaPrveKlase').setValue(flight.CenaPrveKlase);
           this.flightForm.get('MestoPoletanja').setValue(flight.MestoPoletanja);
           this.flightForm.get('MestoSletanja').setValue(flight.MestoSletanja);
+          this.flightForm.get('BrojSedista').setValue(flight.BrojSedista);
         });  
       
       }  

@@ -11,9 +11,13 @@ import {BaseComponent} from './base/base.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddAirlineComponent } from './add-airline/add-airline.component';
-import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
+import {ShowReservationsComponent} from './show-reservations/show-reservations.component';
+//import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
 import {AirlineadmindashboardComponent} from './airlineadmindashboard.component';
 import {FlightComponent} from './companies/flight.component';
+import { SearchFlightComponent } from './search-flight/search-flight.component';
+import { ReserveFlightComponent } from './reserve-flight/reserve-flight.component';
+import { VerificationComponent } from './verification/verification.component';
 const routes: Routes = [
 {
   path: '',
@@ -34,6 +38,10 @@ const routes: Routes = [
             component: AirlineComponent
         },
         {
+          path: 'searchflight',
+          component: SearchFlightComponent
+        },
+        {
           path: 'rent-a-car',
           component: RentACarComponent
         },
@@ -48,11 +56,11 @@ const routes: Routes = [
             {
               path: 'addAirline',
               component: AddAirlineComponent
-            },
-            {
-              path: 'addRentacar',
-              component: AddRentacarComponent
-            }
+             },
+            // {
+            //   path: 'addRentacar',
+            //   component: AddRentacarComponent
+            // }
           ]
         }
 
@@ -71,8 +79,9 @@ const routes: Routes = [
       ]*/
     },
     {
-      path: 'userdashboard',
+      path: 'userdashboard/:id',
       component: UserDashboardComponent,
+     // pathMatch: 'full'
  /*     children: [
         {
           path: 'airline',
@@ -93,10 +102,10 @@ const routes: Routes = [
         path: 'addAirline',
         component: AddAirlineComponent
       },
-      {
-        path: 'addRentacar',
-        component: AddRentacarComponent
-      }
+      // {
+      //   path: 'addRentacar',
+      //   component: AddRentacarComponent
+      // }
     ]
   },
 /*{
@@ -129,7 +138,7 @@ const routes: Routes = [
 },
 
 {
-  path: 'airline',
+  path: 'airline/:id',
   component: AirlineComponent
 },
 
@@ -144,18 +153,37 @@ const routes: Routes = [
 },
 
 {
-  path: 'addRentacar',
-  component: AddRentacarComponent
+  path:'searchFlight',
+  component: SearchFlightComponent
 },
+
+{
+  path:'showallreservations',
+  component: ShowReservationsComponent
+},
+
+{
+  path:'flightreservation',
+  component: ReserveFlightComponent
+},
+{
+  path:'verification/:id',
+  component: VerificationComponent
+},
+// {
+//   path: 'addRentacar',
+//   component: AddRentacarComponent
+// },
 /*{
   path: 'admindashboard',
   component: AdminDashboardComponent
 },
-
-{
-  path: 'userdashboard',
-  component: UserDashboardComponent
-}*/
+*/
+// {
+//   path: 'userdashboard/:id',
+//   component: UserDashboardComponent,
+//   pathMatch:'full'
+// },
 
 {
   path: 'view',

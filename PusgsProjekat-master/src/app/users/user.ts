@@ -9,6 +9,7 @@ export class User{
     City: string;
     Email : string;
     Role: number;
+    UserType: Int16Array;
     
 
    
