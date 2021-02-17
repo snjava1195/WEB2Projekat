@@ -6,6 +6,7 @@ import { CarService } from "src/app/companies/car.service";
 import { Observable } from 'rxjs';
 import { BranchOfficeService } from "./branch.office.service";
 import { TagPlaceholder } from "@angular/compiler/src/i18n/i18n_ast";
+import { threadId } from "worker_threads";
 
 @Component({
     selector: 'rent-a-car',
@@ -14,8 +15,6 @@ import { TagPlaceholder } from "@angular/compiler/src/i18n/i18n_ast";
 })
 
 export class RentACarComponent implements OnInit {
-    rentaCarForm: any;
-
     rentACars: Observable<RentACar[]>;
     selectedRentACar: RentACar;
 
@@ -32,16 +31,27 @@ export class RentACarComponent implements OnInit {
     maxPrice: any;
 
     constructor(private rentACarService: RentACarService, private carService: CarService, 
-        private branchOfficeService: BranchOfficeService){
-        this.selectedRentACar = new RentACar('','','', 0);
-        
-        this.carToSearch = '';
-        this.donesearch = false;
-    }
+        private branchOfficeService: BranchOfficeService){}
 
 
     ngOnInit(): void {
         this.loadRentACars();
+
+        this.selectedRentACar = null;       
+        this.selectedCar = null;
+        this.carToSearch = '';
+        this.donesearch = false;
+    }
+
+    onReset(){
+        this.selectedRentACar = null;       
+        this.selectedCar = null;
+        this.carToSearch = '';
+        this.donesearch = false;
+
+        this.by = null;   
+        this.maxPrice = null;
+        this.minPrice = null;
     }
 
     loadRentACars(){
@@ -50,8 +60,8 @@ export class RentACarComponent implements OnInit {
 
     onSelect(rc: RentACar): void{
         this.selectedRentACar = rc;
-        this.selectedRentACar.Cars = this.carService.getCars();  
-        this.selectedRentACar.BranchOffices = this.branchOfficeService.getBranchOffices();        
+        this.selectedRentACar.Cars = this.carService.getCarsFromRentaCar(rc.Id);  
+        this.selectedRentACar.BranchOffices = this.branchOfficeService.getBranchOfficesFromRentaCar(rc.Id);       
     }
 
 
@@ -76,13 +86,12 @@ export class RentACarComponent implements OnInit {
             }
         }
 
-
        }     
         this.by = null;   
         this.maxPrice = null;
         this.minPrice = null;
 
-       
+        this.donesearch = true; 
     }
 
 
@@ -93,7 +102,8 @@ export class RentACarComponent implements OnInit {
            (val) => {
                this.foundAtRentaCar = val.Name;
        });
-       this.donesearch = true;  
+
+       this.selectedCar = car; 
     }
 
 

@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import { FormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../users/user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +17,14 @@ export class LoginComponent {
   model: any={};
   errorMessage: string;
 
+  loggedUserId: string;
+
   constructor(
     private LoginService: LoginService,
     private fb: FormBuilder,
     private router: Router,
-    ) { }
+    private userService: UserService, 
+    private cookieService: CookieService) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -27,15 +32,25 @@ export class LoginComponent {
       Password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     });
 
-    sessionStorage.removeItem('Email');
-    sessionStorage.clear();
+    this.logout();
   }
 
   togglePassword() {
     this.password = !this.password;
   }
 
+  loggedUser() {
+    this.userService.getUserByEmail(this.loginForm.get('Email').value).subscribe(
+      (val) => {
+         this.loggedUserId =  val.UserId.toString();
+          this.cookieService.set('loggedId', this.loggedUserId.toString())
+      });
+  }
+
+
   login() {
+    this.loggedUser();
+
     this.LoginService.Login(this.loginForm.value).subscribe(
       user => {
         debugger;
@@ -50,4 +65,11 @@ export class LoginComponent {
         
       });
   };
+
+
+  logout(){
+      this.cookieService.delete('loggedId');
+  }
+
+
 }

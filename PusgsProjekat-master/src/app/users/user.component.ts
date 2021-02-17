@@ -5,7 +5,6 @@ import { FormBuilder, Validators, NgForm, FormGroup, FormControl} from "@angular
 import { ToastrService } from 'ngx-toastr';
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
-import { Button } from 'protractor';
 
 
 @Component({
@@ -71,7 +70,7 @@ export class UserComponent implements OnInit{
         this.CreateUser(user);  
         this.userForm.reset();  
       }  
-      loadUserToEdit(userId: Int16Array) {  
+      loadUserToEdit(userId: string /*Int16Array*/) {  
         this.userService.getUserById(userId).subscribe(user=> {  
           this.message = null;  
           this.dataSaved = false;  

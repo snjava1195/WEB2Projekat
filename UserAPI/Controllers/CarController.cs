@@ -12,7 +12,6 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/Car")]
     public class CarController : ApiController
     {
-
         AngularEntities2 objEntity = new AngularEntities2();
 
 
@@ -25,6 +24,21 @@ namespace UserAPI.Controllers
                 return objEntity.Cars;
             }
             catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("CarsFromRentaCar")]
+        public IQueryable<Car> GetCarsFromRentaCar(int rentaCarID)
+        {
+            try
+            {
+                return objEntity.Cars.Where(c => c.RentaCarId == rentaCarID);
+            }
+            catch(Exception)
             {
                 throw;
             }
@@ -102,6 +116,56 @@ namespace UserAPI.Controllers
         }
 
 
+        [HttpGet]
+        [Route("GetCarsByType")]
+        public IQueryable<Car> GetCarsType(int type)
+        {
+            try
+            {
+                 return objEntity.Cars.Where(t => t.Type == type);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Route("GetCarsBySeats")]
+        public IQueryable<Car> GetCarsBySeats(int seats)
+        {
+            try
+            {
+                return objEntity.Cars.Where(s => s.Seats >= seats);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("SearchedCars")]
+        public IQueryable<Car> SearchedCars(int rentaCarId, int type, int seats, 
+            double minPrice, double maxPrice)
+        {
+            IQueryable<Car> searchedCars = GetCarsFromRentaCar(rentaCarId);
+
+            try
+            {
+                searchedCars = searchedCars.Intersect(GetCarsType(type));
+                searchedCars = searchedCars.Intersect(GetCarsBySeats(seats));
+                searchedCars = searchedCars.Intersect(GetCarPrice(minPrice, maxPrice));
+
+                return searchedCars;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [HttpPost]
         [Route("InsertCar")]
         public IHttpActionResult PostCar(Car data)
@@ -112,6 +176,8 @@ namespace UserAPI.Controllers
             {
                 data.Rate = 0;
                 data.RatedBy = 0;
+                data.Reserved = false;
+
                 objEntity.Cars.Add(data);
                 objEntity.SaveChanges();
             }
@@ -147,6 +213,9 @@ namespace UserAPI.Controllers
                     car.Price = data.Price;
                     car.RentaCarId = data.RentaCarId;
                     car.Reserved = data.Reserved;
+                    car.Seats = data.Seats;
+                    car.Type = data.Type;
+                    car.Brand = data.Brand;
                 }
                 objEntity.SaveChanges();
             }
@@ -163,7 +232,7 @@ namespace UserAPI.Controllers
 
         [HttpDelete]
         [Route("DeleteCar")]
-        public IHttpActionResult DeleteRentaCar(int id)
+        public IHttpActionResult DeleteCar(int id)
         {
             Car car = objEntity.Cars.Find(id);
             if (car == null)
@@ -176,6 +245,11 @@ namespace UserAPI.Controllers
 
             return Ok(car);
         }
+
+
+
+
+
 
     }
 }

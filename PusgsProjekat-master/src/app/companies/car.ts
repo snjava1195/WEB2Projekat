@@ -6,12 +6,12 @@ export class Car{
     Rate: number;
     Price: number;
     RatedBy: number;
+    Reserved: boolean;
+    Seats: number;
+    Brand: string;
+    Type: number;
+    Year: number;
 
-    constructor(id: Int16Array, rci: Int16Array, n :string, p: number )
-    {
-        this.Name = n;
-        this.Id =id;
-        this.RentaCarId = rci;
-        this.Price = p;
-    }
+    constructor(){}
+    
 }

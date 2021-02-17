@@ -1,0 +1,184 @@
+<ul>
+    <li> <a class="navibar-item" routerLink="/userdashboard" routerLinkActive="active" > back </a></li>
+    <li><a class="navibar-item"> user: {{ username }} </a> </li>
+</ul>
+
+
+<div class="container">
+    <mat-card>
+        <mat-card-content>
+            <form [formGroup]="userForm">
+
+                <table>
+                    <tr>
+                        <td> Name: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="Name" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span *ngIf="!userForm.get('Name').value && userForm.get('Name').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Last name: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="LastName" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span
+                                    *ngIf="!userForm.get('LastName').value && userForm.get('LastName').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Password: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="Password" matInput>
+                            </mat-form-field>
+                            <mat-error>
+                                <span
+                                    *ngIf="!userForm.get('Password').value && userForm.get('Password').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Confirm password: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="ConfirmPassword" matInput>
+                            </mat-form-field>
+                            <mat-error>
+                                <span
+                                    *ngIf="!userForm.get('ConfirmPassword').value && userForm.get('ConfirmPassword').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Email: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="Email" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span *ngIf="!userForm.get('Email').value && userForm.get('Email').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Phone: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="Phone" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span *ngIf="!userForm.get('Phone').value && userForm.get('Phone').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> City: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="City" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span *ngIf="!userForm.get('City').value && userForm.get('City').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+            </form>
+
+            <br>
+
+            <table>
+                <tr>
+                    <td>
+                        <button type="button" mat-raised-button color="accent" (click)="onSubmit(this.loggedUser)"> Submit </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <button type="reset" mat-raised-button color="accent" (click)="onReset()"> Reset </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p *ngIf="saved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success"
+                            align="left">
+                            {{message}}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+
+            <table>
+                <th> Friends: </th>
+                <tr *ngFor="let friend of friends | async">
+                    <td> {{ friend.Name }} </td>
+                    <td> {{ friend.LastName }} </td>
+                </tr>
+                <br>
+                <tr>
+                    search for a new friend:
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" [(ngModel)]="userToSearch">
+                    </td>
+                    <td>
+                        <button type="button" [disabled]="userToSearch == null" (click)="searchUsers()"> search</button>
+                    </td>
+                </tr>
+            </table>
+
+
+
+            <table [hidden]="!donesearch">
+                <th> Users you found: </th>
+                <tr [class.selected]="n === selectedUser" *ngFor="let n of usersFoundByName | async"
+                    (click)="onSelectUser(n)">
+                    <td > {{ n.Name }} </td>
+                    <td > {{ n.LastName }} </td>
+                </tr>
+                <tr [class.selected]="ln === selectedUser" *ngFor="let ln of usersFoundByLastName | async"
+                    (click)="onSelectUser(ln)">
+                    <td > {{ ln.Name }} </td>
+                    <td > {{ ln.LastName }} </td>
+                </tr>
+                <br>
+                <tr>
+                    <td>
+                        <button type="button" [disabled]="selectedUser == null" (click)="addFriend()"> add friend </button>
+                    </td>
+                </tr>
+
+            </table>
+
+
+
+        </mat-card-content>
+    </mat-card>
+</div>

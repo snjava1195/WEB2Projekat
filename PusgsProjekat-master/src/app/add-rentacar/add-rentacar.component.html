@@ -2,19 +2,17 @@
 <div class="container">  
   
   <mat-card>  
-    <mat-toolbar color="accent">  
+    <!--mat-toolbar color="accent">  
       <div align="center" style="color:white;text-align: right;">  
         CRUD operation in Angular 7 using Web api and Sql Database  
       </div>    
-    </mat-toolbar>  
-  <br><br>  
+    </mat-toolbar-->  
+ 
 
   <button  type="button" (click)="clickHelp()" style="float: right;"> *help </button>
   
-  <p [hidden]="!help" style="float: right;"> Klik na naziv rent-a-car kompanije za update ili delete, 
-    ili da biste joj dodali vozilo/filijalu na '+'. 
-    Klik na naziv vozila, za update ili delete.
-   Klik na naziv filijale, za update ili delete.</p>
+  <p [hidden]="!help" style="float: right;"> Klik na naziv rent-a-car kompanije za update ili delete. </p>
+
 
 
 
@@ -79,81 +77,8 @@
               </table>  
             </form>  
   <br><br>  
-            <form [formGroup]="carForm" > 
-              <table>
-                 <tr>
-                   <td>car name: </td>
-                   <td class="tbl1">  
-                     <mat-form-field class="demo-full-width">  
-                         <input  formControlName="CarName" matInput  >  
-                     </mat-form-field>  
-                     <mat-error>  
-                        <span *ngIf="!carForm.get('CarName').value && carForm.get('CarName').touched"></span>  
-                     </mat-error>  
-                   </td>
 
-                    <td>car price: </td>
-                   <td class="tbl1">  
-                    <mat-form-field class="demo-full-width">  
-                        <input  formControlName="CarPrice" matInput  >  
-                    </mat-form-field>  
-                    <mat-error>  
-                       <span *ngIf="!carForm.get('CarPrice').value && carForm.get('CarPrice').touched"></span>  
-                    </mat-error>  
-                  </td>
 
-                   <td>
-                       <mat-form-field class="demo-full-width">  
-                           <input  formControlName="CarRci" matInput [hidden]>  
-                      </mat-form-field> 
-                   </td>  
-                </tr>
-              </table> 
-            </form>
-<br><br>
-             <form [formGroup]="officeForm" > 
-               <table>
-                  <tr>
-                    <td>branch office name: </td>
-                   <td class="tbl1">  
-                     <mat-form-field class="demo-full-width">  
-                         <input  formControlName="BranchOfficeName" matInput >  
-                       </mat-form-field>  
-                      <mat-error>  
-                           <span *ngIf="!officeForm.get('BranchOfficeName').value && officeForm.get('BranchOfficeName').touched"></span>  
-                       </mat-error>  
-                     </td>
-
-                  <td> branch office address: </td>  
-                   <td class="tbl1">  
-                      <mat-form-field class="demo-full-width">  
-                         <input  formControlName="BranchOfficeAddress" matInput >  
-                     </mat-form-field>  
-                     <mat-error>  
-                         <span *ngIf="!officeForm.get('BranchOfficeAddress').value && officeForm.get('BranchOfficeAddress').touched"></span>  
-                      </mat-error> 
-                     </td>
-
-                     <td>
-                       <mat-form-field class="demo-full-width">  
-                           <input  formControlName="OfficeRci" matInput [hidden]>  
-                      </mat-form-field> 
-                     </td>  
-                    </tr> 
-               </table>
-             </form>  
-  
-             <br><br>
-
-             <form [formGroup]="rateForm">
-                      <label> rate: </label>
-                      <mat-form-field class="demo-full-width" >  
-                          <input  formControlName="Rate" matInput >  
-                      </mat-form-field>  
-                      <mat-error>  
-                         <span *ngIf="!rateForm.get('Rate').value && rateForm.get('Rate').touched"></span>  
-                      </mat-error> 
-             </form>
 
 
       <table class="table table-hover" style="border-spacing: 10px" >  
@@ -163,14 +88,9 @@
               <th class="tbl2"> Address </th>  
               <th class="tbl2"> City </th>  
               <th class="tbl2"> Desription </th>   
-              <th class="tbl2"> Cars 
-                <button type="button" mat-raised-button color="accent" [disabled]="!(this.carForm.valid && selectedRentACar)"
-                 (click)="createCar(this.carForm.value)" >  <strong>+</strong> </button>
-              </th>
-              <th class="tbl2"> Price </th>
+              <th class="tbl2"> Cars </th>
+              <th class="tbl2"> Price (€/day) </th>
               <th class="tbl2"> BranchOffices 
-                <button type="button" mat-raised-button color="accent" [disabled]="!(this.officeForm.valid && selectedRentACar)"
-                 (click)="createBranchOffice(this.officeForm.value)" > <strong>+</strong> </button>
               </th>
               <th class="tbl2"> Rate </th>
             </tr>  
@@ -184,8 +104,7 @@
             
               <td class="tbl2"> 
                 <table>
-                  <tr [class.selected]="c === selectedCar  " 
-                  *ngFor="let c of cars  | async" (click)="onSelectCar(c)"> 
+                  <tr  *ngFor="let c of cars  | async"> 
                     <td class="tbl2" *ngIf="c.RentaCarId == rentaCar.Id">
                         {{  c.Name }}  
                      </td>
@@ -198,8 +117,7 @@
            
               <td class="tbl2">
                 <table>
-                  <tr [class.selected]="c === selectedCar" 
-                  *ngFor="let c of cars  | async"> 
+                  <tr *ngFor="let c of cars  | async"> 
                     <td class="tbl2" *ngIf="c.RentaCarId == rentaCar.Id">
                         {{  c.Price }}  
                      </td>
@@ -209,8 +127,7 @@
             
               <td class="tbl2">
                 <table>
-                  <tr [class.selected]="office === selectedBranchOffice" 
-                  *ngFor="let office of branchOffices  | async" (click)="onSelectBranchOffice(office)" > 
+                  <tr  *ngFor="let office of branchOffices  | async"  > 
                     <td class="tbl2" *ngIf="office.RentaCarId == rentaCar.Id">
                         {{  office.Name }}  
                      </td>
@@ -230,33 +147,23 @@
                 <button type="button" mat-raised-button color="accent"
                  [disabled]="!(selectedRentACar && (rentaCarForm.get('Name').valid || rentaCarForm.get('Address').valid || rentaCarForm.get('City').valid || rentaCarForm.get('Description').valid) )" 
                  (click)="updateRentaCar(selectedRentACar)" > Update rent-a-car </button>  
-                <button type="button" mat-raised-button color="accent" [disabled]="!(selectedRentACar && this.rateForm.valid)" (click)="rateRentaCar(selectedRentACar, this.rateForm.get('Rate').value)" > Rate rent-a-car</button> 
                 <button type="button" mat-raised-button color="accent" [disabled]="!selectedRentACar" (click)="deleteRentaCar(selectedRentACar.Id)" > Delete rent-a-car </button> 
               </td>
            </tr>
 
-           <tr>
-              <td>
-                <button type="button" mat-raised-button color="accent" [disabled]="!(selectedCar && (carForm.get('CarName').valid || carForm.get('CarPrice').valid ) )" (click)="updateCar(selectedCar)" > Update car </button>
-                <button type="button"  mat-raised-button color="accent" [disabled]="!(selectedCar && this.rateForm.valid)" (click)="rateCar(selectedCar, this.rateForm.get('Rate').value )" >Rate car </button>
-                <button type="button" mat-raised-button color="accent" [disabled]="!selectedCar" (click)="deleteCar(selectedCar)" >  Delete car </button>
-              </td>
-            </tr> 
 
-            <tr>
-              <td>                            
-                <button type="button" mat-raised-button color="accent" 
-                    [disabled]="!(selectedBranchOffice && (officeForm.get('BranchOfficeName').valid || officeForm.get('BranchOfficeAddress').valid ) )" 
-                    (click)="updateBranchOffice(selectedBranchOffice)"> Update branch office </button>
-                <button type="button"  mat-raised-button color="accent" [disabled]="!selectedBranchOffice" (click)="deleteBranchOffice(selectedBranchOffice)"> Delete branch office </button>
-              </td>
-            </tr> 
             
             <tr>
               <td>
                 <button type="reset" mat-raised-button color="accent" (click)="onReset()" >Reset</button>  
               </td>                
             </tr> 
+
+            <tr>
+              <td>
+                  <button type="button" mat-raised-button color="accent" routerLink="/admindashboard" routerLinkActive="active" > back </button>
+              </td>
+          </tr>
 
             <tr>
               <td>

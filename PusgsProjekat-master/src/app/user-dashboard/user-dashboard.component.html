@@ -1,9 +1,97 @@
 <ul>
-    <li><a class="navbar-item"  [routerLink]="['/airline/'+id]" routerLinkActive="active">Airlines</a></li>
+
+    <li><a class="navbar-item"  routerLink="/airline" routerLinkActive="active">Airlines</a></li>
     <li><a class="navbar-item"  routerLink="/rentacar" routerLinkActive="active">Rent-a-car</a></li>
-    <li><a class="navbar-item"  [routerLink]="['/searchFlight', id]" routerLinkActive="active">Search flight</a></li>
-    <li><a class="navbar-item" [routerLink] ="['/showallreservations', id]" routerLinkActive="active">Show reservations</a></li>
-    <!--<li><a class="navbar-item" routerLink="/user" routerLinkActive="active">User</a></li>-->
-    <!--<li><a class="navbar-item" routerLink="/login" routerLinkActive="active">Login</a></li>-->
-    
+    <li><a class="navbar-item"  routerLink="/reserveRentaCar" routerLinkActive="active">Reserve car at rent-a-car </a></li>
+
+    <li><a class="navibar-item" routerLink="/userProfile" routerLinkActive="active" > user: {{ username }} </a> </li>
+    <li> <a class="navibar-item" routerLink="/view"  routerLinkActive="active" (click)="logout()" > Logout </a> </li>
 </ul>
+
+
+<table >
+    <tr>
+        <td>
+            <table>
+                <th> My car reservations </th>
+                <tr   [class.selected]="cr === selectedCarReservation" *ngFor="let cr of carReservations | async" (click)="onSelectCarReservation(cr)"  >
+                    <td> {{ cr.CarName }} </td>
+                    <td> {{ cr.DateFrom | date:'mediumDate' }} - {{ cr.DateTo | date:'mediumDate' }} </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <br>
+
+    <tr>
+        <td>
+            <table [hidden]="!selectedCarReservation">
+                <tr> Car </tr>
+                <tr> 
+                    <td> rent-a-car service </td> 
+                    <td> service rate </td>
+                    <td> brand </td>
+                    <td> name </td>
+                    <td> type </td>
+                    <td> car rate </td>
+                    <td> price  </td>
+                    <td> year </td>
+                    <td> seats </td>
+                </tr>
+                <tr>
+                    <td> {{ rentaCarName }} </td>
+                    <td *ngIf="rentaCarRate != 0"> 
+                       {{ rentaCarRate }}
+                    </td>
+                    <td *ngIf="rentaCarRate == 0"> 
+                        &nbsp;
+                    </td>
+                    <td> {{ selectedCar.Brand }} </td>
+                    <td> {{ selectedCar.Name }} </td>
+                    <td *ngIf="selectedCar.Type == 1">
+                        hatchback
+                    </td>
+                    <td *ngIf="selectedCar.Type == 2">
+                        limousine
+                    </td>
+                    <td *ngIf="selectedCar.Type == 3">
+                        jeep
+                    </td>
+                    <td *ngIf="selectedCar.Type == 4">
+                        caravan
+                    </td>
+                    <td *ngIf="selectedCar.Type == 5">
+                        cabriolet
+                    </td>
+                    <td *ngIf="selectedCar.Type == 6">
+                        coupe
+                    </td>
+                    <td> {{ selectedCar.Rate }} </td>
+                    <td> {{ price  }} </td>
+                    <td> {{ selectedCar.Year }} </td>
+                    <td> {{ selectedCar.Seats }} </td>
+                </tr>
+                <tr>
+                    <td colspan="2">  <button type="button" [disabled]="(rate==0 || past )" (click)="rateRentaCar()"> rate rent-a-car service </button></td>
+                    
+                    <td>
+                        <select [(ngModel)]="rate" >
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                        </select>
+                     </td>
+                    
+                    <td colspan="2"> <button type="button" [disabled]="(rate==0 || past)" (click)="rateCar()" > rate car </button></td>
+                    <td colspan="2"> <button type="button" [disabled]="!stillOnTime" (click)="cancelCarReservation()" > cancel car reservation </button></td>
+                    <td colspan="2"> <button type="button" (click)="onReset()" > reset </button> </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+</table>
+

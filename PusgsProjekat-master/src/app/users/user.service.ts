@@ -18,7 +18,7 @@ export class UserService{
     getAllUser(): Observable<User[]> {  
         return this.http.get<User[]>(this.url + '/AllUserDetails');  
       }  
-      getUserById(userId: Int16Array): Observable<User> {  
+      getUserById(userId: string /*Int16Array*/): Observable<User> {  
         return this.http.get<User>(this.url + '/GetUserDetailsById/' + userId);  
       }  
       createUser(user: User): Observable<User> {  
@@ -42,11 +42,24 @@ export class UserService{
         return this.http.post<number>(this.url2 + '/SetAsCarAdmin?email=' + email, httpOptions);
       }
 
-      addAirlineAdmin(email:string): Observable<number>
+      addAirlineAdmin(email: string): Observable<number>
       {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
         return this.http.post<number>(this.url2 + '/SetAsAirlineAdmin?email=' + email, httpOptions);
       }
       
 
+      getUserByEmail(userEmail: string): Observable<User>{
+          return this.http.get<User>(this.url + '/GetUserDetailsByEmail?userEmail=' + userEmail);
+      }
+
+      getUsersByName(userName: string): Observable<User[]>{
+          return this.http.get<User[]>(this.url + '/GetUserDetailsByName?userName=' + userName);
+      }
+
+      getUsersByLastName(userName: string): Observable<User[]>{
+        return this.http.get<User[]>(this.url + '/GetUserDetailsByLastName?userName=' + userName);
+      }
+
+      
 }

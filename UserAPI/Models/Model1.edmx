@@ -10,43 +10,58 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdminId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Car">
+        <EntityType Name="Airlines">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RentaCarId" Type="int" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Rate" Type="bigint" />
-          <Property Name="RatedBy" Type="int" />
-          <Property Name="Price" Type="bigint" />
-          <Property Name="Reserved" Type="bit" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Flight">
+        <EntityType Name="BranchOffices">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DatumPoletanja" Type="datetime" />
-          <Property Name="DatumSletanja" Type="datetime" />
-          <Property Name="VremeTrajanjaLeta" Type="varchar" MaxLength="50" />
-          <Property Name="DuzinaPutovanja" Type="int" />
-          <Property Name="BrojPresedanja" Type="int" />
-          <Property Name="CenaBiznisKlase" Type="bigint" />
-          <Property Name="CenaEkonomskeKlase" Type="bigint" />
-          <Property Name="CenaPrveKlase" Type="bigint" />
-          <Property Name="MestoPoletanja" Type="varchar" MaxLength="50" />
-          <Property Name="MestoSletanja" Type="varchar" MaxLength="50" />
-          <Property Name="OcenaLeta" Type="int" />
-          <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
-          <Property Name="BrojSedista" Type="int" />
+          <Property Name="RentaCarId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="FlightReservation">
+        <EntityType Name="CarReservations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DateFrom" Type="date" Nullable="false" />
+          <Property Name="DateTo" Type="date" Nullable="false" />
+          <Property Name="CarName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RentaCarId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Seats" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="RatedBy" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="Reserved" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FlightReservations">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -54,7 +69,31 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="FlightId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Karta">
+        <EntityType Name="Flights">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatumPoletanja" Type="datetime" Nullable="false" />
+          <Property Name="DatumSletanja" Type="datetime" Nullable="false" />
+          <Property Name="VremeTrajanjaLeta" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DuzinaPutovanja" Type="bigint" Nullable="false" />
+          <Property Name="BrojPresedanja" Type="int" Nullable="false" />
+          <Property Name="Cena" Type="bigint" Nullable="false" />
+          <Property Name="MestoPoletanja" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MestoSletanja" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OcenaLeta" Type="int" Nullable="false" />
+          <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Friendships">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Friend1" Type="int" Nullable="false" />
+          <Property Name="Friend2" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kartas">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -63,7 +102,7 @@
           <Property Name="Popust" Type="bigint" />
           <Property Name="Cena" Type="bigint" />
         </EntityType>
-        <EntityType Name="Presedanje">
+        <EntityType Name="Presedanjes">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -71,24 +110,17 @@
           <Property Name="Lokacija" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdLeta" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="RentaCar">
+        <EntityType Name="RentaCars">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Address" Type="varchar" MaxLength="50" />
-          <Property Name="Description" Type="varchar" MaxLength="50" />
-          <Property Name="Rate" Type="bigint" />
-          <Property Name="City" Type="varchar" MaxLength="50" />
-          <Property Name="RatedBy" Type="int" />
-        </EntityType>
-        <EntityType Name="UserActivation">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RatedBy" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserDetails">
           <Key>
@@ -104,82 +136,136 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserType" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Usermaster">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PasswordConfirm" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsApporved" Type="int" />
-          <Property Name="Status" Type="int" />
-          <Property Name="TotalCnt" Type="int" />
-        </EntityType>
         <Function Name="Usp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="AngularModelStoreContainer">
           <EntitySet Name="AirlineDetails" EntityType="Self.AirlineDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FlightReservation" EntityType="Self.FlightReservation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Karta" EntityType="Self.Karta" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Presedanje" EntityType="Self.Presedanje" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RentaCar" EntityType="Self.RentaCar" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserActivation" EntityType="Self.UserActivation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Airlines" EntityType="Self.Airlines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BranchOffices" EntityType="Self.BranchOffices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarReservations" EntityType="Self.CarReservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FlightReservations" EntityType="Self.FlightReservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flights" EntityType="Self.Flights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Friendships" EntityType="Self.Friendships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kartas" EntityType="Self.Kartas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presedanjes" EntityType="Self.Presedanjes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentaCars" EntityType="Self.RentaCars" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usermaster" EntityType="Self.Usermaster" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AngularModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AirlineDetail">
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="AngularEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <FunctionImport Name="Usp_Login" ReturnType="Collection(AngularModel.Usp_Login_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Airlines" EntityType="AngularModel.Airline" />
+          <EntitySet Name="RentaCars" EntityType="AngularModel.RentaCar" />
+          <EntitySet Name="BranchOffices" EntityType="AngularModel.BranchOffice" />
+          <EntitySet Name="Cars" EntityType="AngularModel.Car" />
+          <EntitySet Name="AirlineDetails" EntityType="AngularModel.AirlineDetail" />
+          <EntitySet Name="Flights" EntityType="AngularModel.Flight" />
+          <EntitySet Name="FlightReservations" EntityType="AngularModel.FlightReservation" />
+          <EntitySet Name="Kartas" EntityType="AngularModel.Karta" />
+          <EntitySet Name="Presedanjes" EntityType="AngularModel.Presedanje" />
+          <EntitySet Name="CarReservations" EntityType="AngularModel.CarReservation" />
+          <EntitySet Name="Friendships" EntityType="AngularModel.Friendship" />
+        </EntityContainer>
+        <ComplexType Name="Usp_Login_Result">
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserType" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Airline">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AdminId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RentaCar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BranchOffice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RentaCarId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Car">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RentaCarId" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Rate" Type="Int64" />
-          <Property Name="RatedBy" Type="Int32" />
-          <Property Name="Price" Type="Int64" />
-          <Property Name="Reserved" Type="Boolean" />
+          <Property Name="RentaCarId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="RatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Reserved" Type="Boolean" Nullable="false" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Seats" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AirlineDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Flight">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DatumPoletanja" Type="DateTime" Precision="3" />
-          <Property Name="DatumSletanja" Type="DateTime" Precision="3" />
-          <Property Name="VremeTrajanjaLeta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DuzinaPutovanja" Type="Int32" />
-          <Property Name="BrojPresedanja" Type="Int32" />
-          <Property Name="CenaBiznisKlase" Type="Int64" />
-          <Property Name="CenaEkonomskeKlase" Type="Int64" />
-          <Property Name="CenaPrveKlase" Type="Int64" />
-          <Property Name="MestoPoletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MestoSletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OcenaLeta" Type="Int32" />
+          <Property Name="DatumPoletanja" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="DatumSletanja" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="VremeTrajanjaLeta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DuzinaPutovanja" Type="Int64" Nullable="false" />
+          <Property Name="BrojPresedanja" Type="Int32" Nullable="false" />
+          <Property Name="Cena" Type="Int64" Nullable="false" />
+          <Property Name="MestoPoletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MestoSletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OcenaLeta" Type="Int32" Nullable="false" />
           <Property Name="IdAvioKompanije" Type="Int32" Nullable="false" />
-          <Property Name="BrojSedista" Type="Int32" />
         </EntityType>
         <EntityType Name="FlightReservation">
           <Key>
@@ -203,234 +289,189 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Lokacija" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lokacija" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdLeta" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="RentaCar">
+        <EntityType Name="CarReservation">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Rate" Type="Int64" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RatedBy" Type="Int32" />
-        </EntityType>
-        <EntityType Name="UserDetail">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UserType" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Usermaster">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PasswordConfirm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IsApporved" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="TotalCnt" Type="Int32" />
-        </EntityType>
-        <EntityContainer Name="AngularEntities3" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AirlineDetails" EntityType="Self.AirlineDetail" />
-          <EntitySet Name="Cars" EntityType="Self.Car" />
-          <EntitySet Name="Flights" EntityType="Self.Flight" />
-          <EntitySet Name="FlightReservations" EntityType="Self.FlightReservation" />
-          <EntitySet Name="Kartas" EntityType="Self.Karta" />
-          <EntitySet Name="Presedanjes" EntityType="Self.Presedanje" />
-          <EntitySet Name="RentaCars" EntityType="Self.RentaCar" />
-          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
-          <EntitySet Name="Usermasters" EntityType="Self.Usermaster" />
-          <FunctionImport Name="Usp_Login" ReturnType="Collection(AngularModel.Usp_Login_Result)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="UserActivations" EntityType="AngularModel.UserActivation" />
-        </EntityContainer>
-        <ComplexType Name="Usp_Login_Result">
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ConfirmPassword" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="UserType" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="UserActivation">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
+          <Property Name="CarId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ActivationCode" Type="Guid" Nullable="false" />
+          <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CarName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Friendship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Friend1" Type="Int32" Nullable="false" />
+          <Property Name="Friend2" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AngularModelStoreContainer" CdmEntityContainer="AngularEntities3">
-          <EntitySetMapping Name="AirlineDetails">
-            <EntityTypeMapping TypeName="AngularModel.AirlineDetail">
-              <MappingFragment StoreEntitySet="AirlineDetails">
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AngularModelStoreContainer" CdmEntityContainer="AngularEntities2">
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.UserDetail)">
+        <MappingFragment StoreEntitySet="UserDetails">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Airlines">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Airline)">
+        <MappingFragment StoreEntitySet="Airlines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RentaCars">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.RentaCar)">
+        <MappingFragment StoreEntitySet="RentaCars">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="RatedBy" ColumnName="RatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BranchOffices">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.BranchOffice)">
+        <MappingFragment StoreEntitySet="BranchOffices">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RentaCarId" ColumnName="RentaCarId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Car)">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Seats" ColumnName="Seats" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cars">
-            <EntityTypeMapping TypeName="AngularModel.Car">
-              <MappingFragment StoreEntitySet="Car">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="RentaCarId" ColumnName="RentaCarId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="RatedBy" ColumnName="RatedBy" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Reserved" ColumnName="Reserved" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Flights">
-            <EntityTypeMapping TypeName="AngularModel.Flight">
-              <MappingFragment StoreEntitySet="Flight">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DatumPoletanja" ColumnName="DatumPoletanja" />
-                <ScalarProperty Name="DatumSletanja" ColumnName="DatumSletanja" />
-                <ScalarProperty Name="VremeTrajanjaLeta" ColumnName="VremeTrajanjaLeta" />
-                <ScalarProperty Name="DuzinaPutovanja" ColumnName="DuzinaPutovanja" />
-                <ScalarProperty Name="BrojPresedanja" ColumnName="BrojPresedanja" />
-                <ScalarProperty Name="CenaBiznisKlase" ColumnName="CenaBiznisKlase" />
-                <ScalarProperty Name="CenaEkonomskeKlase" ColumnName="CenaEkonomskeKlase" />
-                <ScalarProperty Name="CenaPrveKlase" ColumnName="CenaPrveKlase" />
-                <ScalarProperty Name="MestoPoletanja" ColumnName="MestoPoletanja" />
-                <ScalarProperty Name="MestoSletanja" ColumnName="MestoSletanja" />
-                <ScalarProperty Name="OcenaLeta" ColumnName="OcenaLeta" />
-                <ScalarProperty Name="IdAvioKompanije" ColumnName="IdAvioKompanije" />
-                <ScalarProperty Name="BrojSedista" ColumnName="BrojSedista" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FlightReservations">
-            <EntityTypeMapping TypeName="AngularModel.FlightReservation">
-              <MappingFragment StoreEntitySet="FlightReservation">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FlightId" ColumnName="FlightId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Kartas">
-            <EntityTypeMapping TypeName="AngularModel.Karta">
-              <MappingFragment StoreEntitySet="Karta">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="BrojLeta" ColumnName="BrojLeta" />
-                <ScalarProperty Name="Popust" ColumnName="Popust" />
-                <ScalarProperty Name="Cena" ColumnName="Cena" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Presedanjes">
-            <EntityTypeMapping TypeName="AngularModel.Presedanje">
-              <MappingFragment StoreEntitySet="Presedanje">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Lokacija" ColumnName="Lokacija" />
-                <ScalarProperty Name="IdLeta" ColumnName="IdLeta" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RentaCars">
-            <EntityTypeMapping TypeName="AngularModel.RentaCar">
-              <MappingFragment StoreEntitySet="RentaCar">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="RatedBy" ColumnName="RatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="AngularModel.UserDetail">
-              <MappingFragment StoreEntitySet="UserDetails">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usermasters">
-            <EntityTypeMapping TypeName="AngularModel.Usermaster">
-              <MappingFragment StoreEntitySet="Usermaster">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PasswordConfirm" ColumnName="PasswordConfirm" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="IsApporved" ColumnName="IsApporved" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="TotalCnt" ColumnName="TotalCnt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <ScalarProperty Name="RentaCarId" ColumnName="RentaCarId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="RatedBy" ColumnName="RatedBy" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Reserved" ColumnName="Reserved" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AirlineDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.AirlineDetail)">
+        <MappingFragment StoreEntitySet="AirlineDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flights">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Flight)">
+        <MappingFragment StoreEntitySet="Flights">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DatumPoletanja" ColumnName="DatumPoletanja" />
+          <ScalarProperty Name="DatumSletanja" ColumnName="DatumSletanja" />
+          <ScalarProperty Name="VremeTrajanjaLeta" ColumnName="VremeTrajanjaLeta" />
+          <ScalarProperty Name="DuzinaPutovanja" ColumnName="DuzinaPutovanja" />
+          <ScalarProperty Name="BrojPresedanja" ColumnName="BrojPresedanja" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="MestoPoletanja" ColumnName="MestoPoletanja" />
+          <ScalarProperty Name="MestoSletanja" ColumnName="MestoSletanja" />
+          <ScalarProperty Name="OcenaLeta" ColumnName="OcenaLeta" />
+          <ScalarProperty Name="IdAvioKompanije" ColumnName="IdAvioKompanije" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlightReservations">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.FlightReservation)">
+        <MappingFragment StoreEntitySet="FlightReservations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kartas">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Karta)">
+        <MappingFragment StoreEntitySet="Kartas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BrojLeta" ColumnName="BrojLeta" />
+          <ScalarProperty Name="Popust" ColumnName="Popust" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Presedanjes">
+      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Presedanje)">
+        <MappingFragment StoreEntitySet="Presedanjes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Lokacija" ColumnName="Lokacija" />
+          <ScalarProperty Name="IdLeta" ColumnName="IdLeta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Usp_Login" FunctionName="AngularModel.Store.Usp_Login">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AngularModel.Usp_Login_Result">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="UserActivations">
-            <EntityTypeMapping TypeName="AngularModel.UserActivation">
-              <MappingFragment StoreEntitySet="UserActivation">
-                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+          <EntitySetMapping Name="CarReservations">
+            <EntityTypeMapping TypeName="AngularModel.CarReservation">
+              <MappingFragment StoreEntitySet="CarReservations">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CarName" ColumnName="CarName" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CarId" ColumnName="CarId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+          <EntitySetMapping Name="Friendships">
+            <EntityTypeMapping TypeName="AngularModel.Friendship">
+              <MappingFragment StoreEntitySet="Friendships">
+                <ScalarProperty Name="Friend2" ColumnName="Friend2" />
+                <ScalarProperty Name="Friend1" ColumnName="Friend1" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -444,7 +485,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

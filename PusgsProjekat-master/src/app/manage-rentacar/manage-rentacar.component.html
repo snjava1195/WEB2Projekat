@@ -1,0 +1,248 @@
+
+<div class="container">  
+  
+    <mat-card>  
+      <!--mat-toolbar color="accent">  
+        <div align="center" style="color:white;text-align: right;">  
+          CRUD operation in Angular 7 using Web api and Sql Database  
+        </div>    
+      </mat-toolbar-->  
+   
+  
+    <button  type="button" (click)="clickHelp()" style="float: right;"> *help </button>
+    
+    <p [hidden]="!help" style="float: right;">  Klik na naziv vozila, za update ili delete.
+         Klik na naziv filijale, za update ili delete. </p>
+
+  
+  
+  
+      <mat-card-content>  
+      
+              <form [formGroup]="carForm" > 
+                <table>
+                  <tr>
+                    <td>car name: </td>
+                    <td>brand: </td>
+                    <td>car type: </td>
+                    <td>car price: </td>
+                    <td> number of seats: </td>
+                    <td> year: </td>
+                  </tr>
+  
+                   <tr>
+  
+                     <td class="tbl1">  
+                       <mat-form-field class="demo-full-width">  
+                           <input  formControlName="CarName" matInput  >  
+                       </mat-form-field>  
+                       <mat-error>  
+                          <span *ngIf="!carForm.get('CarName').value && carForm.get('CarName').touched"></span>  
+                       </mat-error>  
+                     </td>
+  
+                     <td class="tbl1">  
+                       <mat-form-field class="demo-full-width">  
+                           <input  formControlName="Brand" matInput  >  
+                       </mat-form-field>  
+                       <mat-error>  
+                          <span *ngIf="!carForm.get('Brand').value && carForm.get('Brand').touched"></span>  
+                       </mat-error>  
+                     </td>
+  
+                       <td class="tbl1">
+                        <mat-form-field class="demo-full-width">
+                            <select matNativeControl formControlName="Type" matInput>
+                                <option value="1"> hatchback </option>
+                                <option value="2"> limousine </option>
+                                <option value="3"> jeep </option>
+                                <option value="4"> caravan </option>
+                                <option value="5"> cabriolet </option>
+                                <option value="6"> coupe </option>
+                            </select>
+                        </mat-form-field>
+  
+                        <mat-error>
+                            <span
+                                *ngIf="!carForm.get('Type').value && carForm.get('Type').touched"></span>
+                        </mat-error>
+  
+                     </td>
+  
+                     <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                          <input  formControlName="Price" matInput  >  
+                      </mat-form-field>  
+                      <mat-error>  
+                         <span *ngIf="!carForm.get('Price').value && carForm.get('Price').touched"></span>  
+                      </mat-error>  
+                    </td>
+  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                          <input  formControlName="Seats" matInput  >  
+                      </mat-form-field>  
+                      <mat-error>  
+                         <span *ngIf="!carForm.get('Seats').value && carForm.get('Seats').touched"></span>  
+                      </mat-error>  
+                    </td>
+  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                          <input  formControlName="Year" matInput  >  
+                      </mat-form-field>  
+                      <mat-error>  
+                         <span *ngIf="!carForm.get('Year').value && carForm.get('Year').touched"></span>  
+                      </mat-error>  
+                    </td>
+                  </tr>
+                </table> 
+              </form>
+  <br><br>
+               <form [formGroup]="officeForm" > 
+                 <table>
+                    <tr>
+                      <td>branch office name: </td>
+                     <td class="tbl1">  
+                       <mat-form-field class="demo-full-width">  
+                           <input  formControlName="BranchOfficeName" matInput >  
+                         </mat-form-field>  
+                        <mat-error>  
+                             <span *ngIf="!officeForm.get('BranchOfficeName').value && officeForm.get('BranchOfficeName').touched"></span>  
+                         </mat-error>  
+                       </td>
+  
+                    <td> branch office address: </td>  
+                     <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                           <input  formControlName="BranchOfficeAddress" matInput >  
+                       </mat-form-field>  
+                       <mat-error>  
+                           <span *ngIf="!officeForm.get('BranchOfficeAddress').value && officeForm.get('BranchOfficeAddress').touched"></span>  
+                        </mat-error> 
+                       </td>
+                      </tr> 
+                 </table>
+               </form>  
+    
+               <br><br>
+  
+  
+  
+        <table class="table table-hover" style="border-spacing: 10px" >  
+            <tbody>
+              <tr ngclass="btn-primary">   
+                <th class="tbl2"> Name </th>  
+                <th class="tbl2"> Address </th>  
+                <th class="tbl2"> City </th>  
+                <th class="tbl2"> Desription </th>   
+                <th class="tbl2"> Cars 
+                  <button type="button" mat-raised-button color="accent" [disabled]="!(this.carForm.valid && selectedRentACar)"
+                   (click)="createCar(this.carForm.value)" >  <strong>+</strong> </button>
+                </th>
+                <th class="tbl2"> Price (€/day) </th>
+                <th class="tbl2"> BranchOffices 
+                  <button type="button" mat-raised-button color="accent" [disabled]="!(this.officeForm.valid && selectedRentACar)"
+                   (click)="createBranchOffice(this.officeForm.value)" > <strong>+</strong> </button>
+                </th>
+                <th class="tbl2"> Rate </th>
+              </tr>  
+            
+              <tr  [class.selected]="rentaCar === selectedRentACar"
+              *ngFor="let rentaCar of rentaCars | async" > 
+                <td class="tbl2"  (click)="onSelectRentaCar(rentaCar)" >{{ rentaCar.Name }}</td>  
+                <td class="tbl2">{{ rentaCar.Address }}</td>  
+                <td class="tbl2">{{ rentaCar.City }}</td>  
+                <td class="tbl2">{{ rentaCar.Description }}</td>  
+              
+                <td class="tbl2"> 
+                  <table>
+                    <tr [class.selected]="c === selectedCar  " 
+                    *ngFor="let c of cars  | async" (click)="onSelectCar(c)"> 
+                      <td class="tbl2" *ngIf="c.RentaCarId == rentaCar.Id">
+                          {{  c.Name }}  
+                       </td>
+                       <td class="tbl2" *ngIf="c.RentaCarId == rentaCar.Id">
+                        {{  c.Rate.toFixed(2) }}  
+                     </td> 
+                   </tr>
+                  </table>
+                </td>
+             
+                <td class="tbl2">
+                  <table>
+                    <tr [class.selected]="c === selectedCar" 
+                    *ngFor="let c of cars  | async"> 
+                      <td class="tbl2" *ngIf="c.RentaCarId == rentaCar.Id">
+                          {{  c.Price }}  
+                       </td>
+                   </tr>
+                  </table>
+                </td>
+              
+                <td class="tbl2">
+                  <table>
+                    <tr [class.selected]="office === selectedBranchOffice" 
+                    *ngFor="let office of branchOffices  | async" (click)="onSelectBranchOffice(office)" > 
+                      <td class="tbl2" *ngIf="office.RentaCarId == rentaCar.Id">
+                          {{  office.Name }}  
+                       </td>
+                       <td class="tbl2" *ngIf="office.RentaCarId == rentaCar.Id">
+                        {{  office.Address }}  
+                     </td>
+                   </tr>
+                  </table>
+                </td>
+                <td class="tbl2">{{ rentaCar.Rate.toFixed(2) }}</td>  
+  
+             </tr>  
+  
+
+  
+             <tr>
+                <td>
+                  <button type="button" mat-raised-button color="accent" [disabled]="!(selectedCar && ((carForm.get('CarName').valid || carForm.get('Price').valid ) 
+                  || carForm.get('Type').valid || carForm.get('Brand').valid || carForm.get('Seats').valid || carForm.get('Year').valid  ) )"
+                   (click)="updateCar(selectedCar)" > Update car </button>
+
+                  <button type="button" mat-raised-button color="accent" [disabled]="!selectedCar" (click)="deleteCar(selectedCar)" >  Delete car </button>
+                </td>
+              </tr> 
+  
+              <tr>
+                <td>                            
+                  <button type="button" mat-raised-button color="accent" 
+                      [disabled]="!(selectedBranchOffice && (officeForm.get('BranchOfficeName').valid || officeForm.get('BranchOfficeAddress').valid ) )" 
+                      (click)="updateBranchOffice(selectedBranchOffice)"> Update branch office </button>
+
+                  <button type="button"  mat-raised-button color="accent" [disabled]="!selectedBranchOffice" (click)="deleteBranchOffice(selectedBranchOffice)"> Delete branch office </button>
+                </td>
+              </tr> 
+              
+              <tr>
+                <td>
+                  <button type="reset" mat-raised-button color="accent" (click)="onReset()" >Reset</button>  
+                </td>                
+              </tr> 
+  
+              <tr>
+                <td>
+                    <button type="button" mat-raised-button color="accent" routerLink="/caradmindashboard" routerLinkActive="active" > back </button>
+                </td>
+            </tr>
+  
+              <tr>
+                <td>
+                  <p *ngIf="saved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                    {{message}}  
+                  </p>
+                </td>
+             </tr>
+  
+            </tbody>  
+          </table>  
+            
+  
+      </mat-card-content>  
+    </mat-card>  
+    </div>  

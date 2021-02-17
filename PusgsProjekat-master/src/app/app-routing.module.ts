@@ -11,13 +11,15 @@ import {BaseComponent} from './base/base.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddAirlineComponent } from './add-airline/add-airline.component';
-import {ShowReservationsComponent} from './show-reservations/show-reservations.component';
-//import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
+import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
 import {AirlineadmindashboardComponent} from './airlineadmindashboard.component';
 import {FlightComponent} from './companies/flight.component';
-import { SearchFlightComponent } from './search-flight/search-flight.component';
-import { ReserveFlightComponent } from './reserve-flight/reserve-flight.component';
-import { VerificationComponent } from './verification/verification.component';
+import { ReserveRentaCarComponent } from './reserve-car/reserve-car.component';
+import { UserProfileComponent } from './profile/user-profile.component';
+import { CarAdminDashboardComponent } from './caradmindashboard.component';
+import { AdminProfileComponent } from './profile/admin-profile.component';
+import { ManageRentacarComponent } from './manage-rentacar/manage-rentacar.component';
+
 const routes: Routes = [
 {
   path: '',
@@ -38,10 +40,6 @@ const routes: Routes = [
             component: AirlineComponent
         },
         {
-          path: 'searchflight',
-          component: SearchFlightComponent
-        },
-        {
           path: 'rent-a-car',
           component: RentACarComponent
         },
@@ -56,11 +54,11 @@ const routes: Routes = [
             {
               path: 'addAirline',
               component: AddAirlineComponent
-             },
-            // {
-            //   path: 'addRentacar',
-            //   component: AddRentacarComponent
-            // }
+            },
+            {
+              path: 'addRentacar',
+              component: AddRentacarComponent
+            }
           ]
         }
 
@@ -78,11 +76,20 @@ const routes: Routes = [
 
       ]*/
     },
+
     {
-      path: 'userdashboard/:id',
+      path: 'caradmindashboard',
+      component: CarAdminDashboardComponent,
+    },
+
+    {
+      path: 'userdashboard',
       component: UserDashboardComponent,
-     // pathMatch: 'full'
- /*     children: [
+  /*    children: [
+        {
+          path: 'reserveRentaCar',   <- ovde???
+          component: ReserveRentaCarComponent
+        }
         {
           path: 'airline',
           component: AirlineComponent
@@ -90,24 +97,26 @@ const routes: Routes = [
         {
           path: 'rentacar',
           component: RentACarComponent
-        }
-      ]*/
+        } */
+    //  ]
     },
 //  ]
 {
     path: 'companies',
-    component: AdminComponent,
+    component: AdminComponent /*,
     children: [
       {
         path: 'addAirline',
         component: AddAirlineComponent
       },
-      // {
-      //   path: 'addRentacar',
-      //   component: AddRentacarComponent
-      // }
-    ]
-  },
+      {
+        path: 'addRentacar',
+        component: AddRentacarComponent
+      }
+    ] */
+},
+
+
 /*{
   path: 'rentacar',
   component: RentACarComponent
@@ -138,7 +147,7 @@ const routes: Routes = [
 },
 
 {
-  path: 'airline/:id',
+  path: 'airline',
   component: AirlineComponent
 },
 
@@ -153,37 +162,40 @@ const routes: Routes = [
 },
 
 {
-  path:'searchFlight',
-  component: SearchFlightComponent
+  path: 'addRentacar',
+  component: AddRentacarComponent
 },
 
 {
-  path:'showallreservations',
-  component: ShowReservationsComponent
+  path: 'reserveRentaCar',
+  component: ReserveRentaCarComponent
 },
 
 {
-  path:'flightreservation',
-  component: ReserveFlightComponent
+  path: 'userProfile',
+  component: UserProfileComponent
 },
+
 {
-  path:'verification/:id',
-  component: VerificationComponent
+  path: 'adminProfile',
+  component: AdminProfileComponent
 },
-// {
-//   path: 'addRentacar',
-//   component: AddRentacarComponent
-// },
+
+{
+  path: 'manageRentacar',
+  component: ManageRentacarComponent
+},
+
+
 /*{
   path: 'admindashboard',
   component: AdminDashboardComponent
 },
-*/
-// {
-//   path: 'userdashboard/:id',
-//   component: UserDashboardComponent,
-//   pathMatch:'full'
-// },
+
+{
+  path: 'userdashboard',
+  component: UserDashboardComponent
+}*/
 
 {
   path: 'view',
@@ -192,7 +204,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes) ],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }) ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -9,10 +9,8 @@ import { runInThisContext } from 'vm';
 import { CarService } from '../companies/car.service';
 import { BranchOfficeService } from '../companies/branch.office.service';
 import { BranchOffice } from '../companies/branch.office';
-//import { ThisReceiver } from '@angular/compiler';
-import { validateHorizontalPosition } from '@angular/cdk/overlay';
-import { off } from 'process';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ThisReceiver } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-add-rentacar',
@@ -28,7 +26,6 @@ export class AddRentacarComponent implements OnInit {
   rentaCarForm: any;
   carForm: any;
   officeForm: any;
-  rateForm: any;
 
   selectedRentACar: RentACar;
   selectedCar: Car;
@@ -41,8 +38,7 @@ export class AddRentacarComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private rentaCarService: RentACarService,
              private carFb: FormBuilder, private carService: CarService,
-            private officeFb : FormBuilder, private branchOfficeService: BranchOfficeService,
-            private rateFb: FormBuilder ) {}
+            private officeFb : FormBuilder, private branchOfficeService: BranchOfficeService) {}
 
   ngOnInit(): void {
     this.loadRentaCars();
@@ -60,19 +56,18 @@ export class AddRentacarComponent implements OnInit {
 
     this.carForm = this.carFb.group({
       CarName: ['', [Validators.required]],
-      CarPrice: ['', [Validators.required]],
-      CarRci: ['', [Validators.required]]
+      Price: ['', [Validators.required]],
+      Brand: ['', [Validators.required]],
+      Type: ['', [Validators.required]],
+      Seats: ['', [Validators.required]],
+      Year: ['', [Validators.required]]
     });
 
     this.officeForm = this.officeFb.group({
       BranchOfficeName:['', [Validators.required]],
-      BranchOfficeAddress:['' ,[Validators.required]],
-      OfficeRci:['', [Validators.required]]
+      BranchOfficeAddress:['' ,[Validators.required]]
     });
 
-    this.rateForm = this.rateFb.group({
-      Rate: ['', [Validators.required]]
-    });
   }
 
   clickHelp(){
@@ -96,6 +91,7 @@ export class AddRentacarComponent implements OnInit {
    this.branchOffices = this.branchOfficeService.getBranchOffices();
  }
 
+
   createRentaCar(rentaCar: RentACar)
   {
     this.rentaCarService.createRentaCar(rentaCar).subscribe(
@@ -116,9 +112,9 @@ export class AddRentacarComponent implements OnInit {
 
   onSelectRentaCar(rentaCar: RentACar): void{
     this.selectedRentACar = rentaCar;  
-    this.carForm.controls.CarRci.setValue(rentaCar.Id);   
-    this.officeForm.controls.OfficeRci.setValue(rentaCar.Id);
-}
+   }
+
+
 
 
   updateRentaCar(rentaCar: RentACar)
@@ -164,179 +160,21 @@ export class AddRentacarComponent implements OnInit {
   }
 
 
-rateRentaCar(rentaCar: RentACar, rate: number){
-  rentaCar.Id = this.selectedRentACar.Id;
-  rentaCar.Rate = this.selectedRentACar.Rate;
-  rentaCar.RatedBy = this.selectedRentACar.RatedBy;
-
-  var newRate: number =
-  newRate =  Number.parseInt((rentaCar.Rate * rentaCar.RatedBy).toString())
-            + Number.parseInt(rate.toString());
-  rentaCar.RatedBy++;
-  rentaCar.Rate = Number.parseFloat(( newRate/rentaCar.RatedBy).toString());
-  
-
-  this.rentaCarService.updateRentaCar(rentaCar).subscribe(
-    () =>{
-      this.message = 'Rent-a-car is rated.';
-      this.loadRentaCars();
-      this.saved = true;
-      this.rateForm.reset();
-      this.selectedRentACar = null;
-    }
-  );
-} 
   
 onReset(){
   this.rentaCarForm.reset();
   this.carForm.reset();
   this.officeForm.reset();
-  this.rateForm.reset();
+
   this.message = '';
-  this.loadRentaCars();
+
+  this.loadRentaCars(); 
   this.loadCars();
   this.loadBranchOffices();
+
   this.selectedRentACar = null;
   this.selectedCar = null;
   this.selectedBranchOffice = null;
-}
-
-
-onSelectCar(car : Car): void{
-  this.selectedCar = car;
-  this.carForm.controls.CarRci.setValue(this.selectedCar.RentaCarId);
-}
-
-
-createCar(car: Car){
-  car.Name = this.carForm.get('CarName').value;
-  car.RentaCarId = this.carForm.get('CarRci').value;
-  car.Price = this.carForm.get('CarPrice').value;
-
-   this.carService.createCar(car).subscribe(
-    ()=>{
-      this.message = 'Car is created.'
-      this.loadCars();
-      this.saved = true;
-      this.carForm.reset();
-      this.selectedRentACar = null;
-    }
-  );
-}
-
-updateCar(car: Car){
-  car.Id = this.selectedCar.Id;
-  car.RentaCarId = this.carForm.get('CarRci').value;
-
-  if(this.carForm.get('CarName').value)
-  car.Name = this.carForm.get('CarName').value;
-
-  if(this.carForm.get('CarPrice').value)
-  car.Price = this.carForm.get('CarPrice').value;
-
-  this.carService.updateCar(car).subscribe(
-    () =>{
-      this.message = 'Car is updated.';
-      this.loadCars();
-      this.saved = true;
-      this.carForm.reset();
-      this.selectedCar = null;
-    }
-  );
-}
-
-
-rateCar(car: Car, rate: number){
-  car.Id = this.selectedCar.Id;
-  car.Rate = this.selectedCar.Rate;
-  car.RatedBy = this.selectedCar.RatedBy;
- 
-  var newRate: number = 
-  Number.parseInt((car.Rate * car.RatedBy).toString())
-  + Number.parseInt(rate.toString());
-  car.RatedBy ++;
-  car.Rate = Number.parseFloat(( newRate / car.RatedBy).toString());
-
-
-  this.carService.updateCar(car).subscribe(
-    () =>{
-      this.message = 'Car is rated.';
-      this.loadCars();
-      this.saved = true;
-      this.selectedCar = null;
-      this.rateForm.reset();
-    }
-  );
-   
-}
-
-
-deleteCar(car: Car){
-  if (confirm("Are you sure you want to delete this ?")) {   
-    this.carService.deleteCar(car.Id).subscribe(
-        () => {
-          this.message = 'Car is deleted.';
-          this.loadCars();
-          this.carForm.reset();
-          this.selectedCar = null;
-    }); 
-  }  
-}
-
-onSelectBranchOffice(branchOffice: BranchOffice){
-  this.selectedBranchOffice = branchOffice;
-  this.officeForm.controls.OfficeRci.setValue(branchOffice.RentaCarId);
-}
-
-createBranchOffice(office: BranchOffice){
-  office.Name = this.officeForm.get('BranchOfficeName').value;
-  office.Address = this.officeForm.get('BranchOfficeAddress').value;
-  office.RentaCarId = this.officeForm.get('OfficeRci').value;
-
-  this.branchOfficeService.createBranchOffice(office).subscribe(
-    () => {
-        this.message = 'Branch office is created.'
-        this.saved = true;
-        this.loadBranchOffices();
-        this.officeForm.reset();
-        this.selectedRentACar = null;
-    }
-  );
-}
-
-updateBranchOffice(office: BranchOffice){
-  office.Id = this.selectedBranchOffice.Id;
-  office.RentaCarId = this.officeForm.get('OfficeRci').value;
-
-  if(this.officeForm.get('BranchOfficeName').value )
-      office.Name = this.officeForm.get('BranchOfficeName').value;
-
-  if(this.officeForm.get('BranchOfficeAddress').value)    
-   office.Address = this.officeForm.get('BranchOfficeAddress').value;
-
-
-  this.branchOfficeService.updateBranchOffice(office).subscribe(
-    () =>{
-      this.message = 'Branch office is updated.';
-      this.loadBranchOffices();
-      this.saved = true;
-      this.officeForm.reset();
-      this.selectedBranchOffice = null;
-    }
-  );
-}
-
-
-deleteBranchOffice(office: BranchOffice){
-  if (confirm("Are you sure you want to delete this ?")) {   
-    this.branchOfficeService.deleteBranchOffice(office.Id).subscribe(
-        () => {
-          this.message = 'Branch office is deleted.';
-          this.loadBranchOffices();
-          this.officeForm.reset();
-          this.selectedBranchOffice = null;
-    }); 
-  }  
 }
 
 

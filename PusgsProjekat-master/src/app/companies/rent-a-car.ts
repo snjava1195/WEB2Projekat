@@ -15,11 +15,7 @@ export class RentACar{
     Cars: Observable<Car[]>;
     BranchOffices: Observable<BranchOffice[]>;
 
-    constructor(n: string, a: string, d: string, r: number){
-        this.Name = n;
-        this.Address = a;
-        this.Description = d;
-        this.Rate = r;
-    }
+    constructor(){}
+    
 
 }

@@ -9,14 +9,13 @@ import { AirlineComponent } from './companies/airline.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RentACarComponent } from './companies/rent-a-car.component';
+import { ReserveRentaCarComponent } from './reserve-car/reserve-car.component';
 
 //import { UserService } from './users/user';
 //import { UserService } from './users/user.service';
 import { UserComponent } from './users/user.component';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
-import {  
-  MatButtonModule  
-} from '@angular/material/button';  
+import {  MatButtonModule } from '@angular/material/button';  
 import{ MatMenuModule} from '@angular/material/menu';
 import{ MatDatepickerModule} from '@angular/material/datepicker';
 
@@ -39,14 +38,15 @@ import { LoginService } from './login.service';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddAirlineComponent } from './add-airline/add-airline.component';
-//import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
+import { AddRentacarComponent } from './add-rentacar/add-rentacar.component';
 import { FlightComponent } from './companies/flight.component';
 import {CommonModule} from '@angular/common';
 import { AirlineadmindashboardComponent } from './airlineadmindashboard.component';
-import { ShowReservationsComponent } from './show-reservations/show-reservations.component';
-import { SearchFlightComponent } from './search-flight/search-flight.component';
 import { ReserveFlightComponent } from './reserve-flight/reserve-flight.component';
-import { VerificationComponent } from './verification/verification.component';
+import { UserProfileComponent } from './profile/user-profile.component';
+import { CarAdminDashboardComponent } from './caradmindashboard.component';
+import { AdminProfileComponent } from './profile/admin-profile.component';
+import { ManageRentacarComponent } from './manage-rentacar/manage-rentacar.component';
 
 @NgModule({
   declarations: [
@@ -62,13 +62,15 @@ import { VerificationComponent } from './verification/verification.component';
     RegisterComponent,
     AdminComponent,
     AddAirlineComponent,
-   // AddRentacarComponent,
+    AddRentacarComponent,
     FlightComponent,
     AirlineadmindashboardComponent,
-    ShowReservationsComponent,
-    SearchFlightComponent,
-    ReserveFlightComponent,
-    VerificationComponent
+    ReserveFlightComponent, 
+    ReserveRentaCarComponent, 
+    CarAdminDashboardComponent,
+    UserProfileComponent, 
+    AdminProfileComponent, 
+    ManageRentacarComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,7 @@ import { VerificationComponent } from './verification/verification.component';
         MatButtonModule,
         MatFormFieldModule,
         MatNativeDateModule,  
-    //MatNativeDateModule,  
+  //  MatNativeDateModule,  
     MatIconModule,  
     MatRadioModule,  
     MatCardModule,  

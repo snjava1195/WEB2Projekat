@@ -47,4 +47,13 @@ export class RentACarService{
     }
 
 
+    sortRentaCarsByName(): Observable<RentACar[]> {
+        return this.http.get<RentACar[]>(this.url + '/SortRentaCarsByName');
+    }
+
+    sortRentaCarsByCity() : Observable<RentACar[]>{
+        return this.http.get<RentACar[]>(this.url + '/SortRentaCarsByCity');
+    }
+
+
 }

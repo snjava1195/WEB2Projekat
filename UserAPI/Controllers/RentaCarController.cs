@@ -14,12 +14,14 @@ namespace UserAPI.Controllers
     {
 
         AngularEntities2 objEntity = new AngularEntities2();
+
+
         [HttpGet]
         [Route("AllRentaCars")]
         public IQueryable<RentaCar> GetRentaCars()
         {
             try
-            {
+            {                   
                 return objEntity.RentaCars;
             }
             catch (Exception)
@@ -34,13 +36,13 @@ namespace UserAPI.Controllers
         public IHttpActionResult GetRentaCarById(int rentaCarId)
         {
             RentaCar rentaCar= new RentaCar();
-           // int ID = Convert.ToInt32(rentaCarId);
 
             try
             {
                 rentaCar = objEntity.RentaCars.Find(rentaCarId);
+
                 if (rentaCar == null)
-                    return NotFound();
+                  return NotFound();
             }
             catch (Exception)
             {
@@ -49,6 +51,7 @@ namespace UserAPI.Controllers
 
             return Ok(rentaCar);
         }
+
 
 
         [HttpGet]
@@ -71,6 +74,9 @@ namespace UserAPI.Controllers
         }
 
 
+
+
+
         [HttpGet]
         [Route("GetRentaCarByLocation/{rentaCarLocation}")]
         public IQueryable<RentaCar> GetRentaCarByLocation(string rentaCarLocation)
@@ -90,6 +96,35 @@ namespace UserAPI.Controllers
 
         }
 
+
+        [HttpGet]
+        [Route("SortRentaCarsByName")]
+        public IQueryable<RentaCar> SortRentaCarsByName()
+        {
+            try
+            {
+                return objEntity.RentaCars.OrderBy(o => o.Name);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("SortRentaCarsByCity")]
+        public IQueryable<RentaCar> SortRentaCarsByCity()
+        {
+            try
+            {
+                return objEntity.RentaCars.OrderBy(o => o.City);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         [HttpPost]
         [Route("InsertRentaCar")]
@@ -163,5 +198,8 @@ namespace UserAPI.Controllers
 
             return Ok(rentaCar);
         }
+
+
+
     }
 }

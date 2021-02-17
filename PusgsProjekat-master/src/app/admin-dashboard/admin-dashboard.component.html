@@ -1,9 +1,12 @@
 <ul>
+   
     <li><a class="navbar-item"  routerLink="/airline" routerLinkActive="active">Airlines</a></li>
     <li><a class="navbar-item"  routerLink="/rentacar" routerLinkActive="active">Rent-a-car</a></li>
-    <li><a class="navbar-item" routerLink="/user" routerLinkActive="active">User</a></li>
+    <li><a class="navbar-item" routerLink="/user" routerLinkActive="active"> Manage users </a></li>
     <li><a class="navbar-item" routerLink="/companies" routerLinkActive="active">Add companies</a></li>
     <li><a class="navbar-item" routerLink="/searchFlight" routerLinkActive="active">Search flight</a></li>
     <!--<li><a class="navbar-item" routerLink="/login" routerLinkActive="active">Login</a></li>-->
     
+    <li><a class="navibar-item" routerLink="/adminProfile" routerLinkActive="active" >  admin: {{ username  }} </a> </li>
+    <li> <a class="navibar-item" routerLink="/view"  routerLinkActive="active" (click)="logout()" > Logout </a> </li>
 </ul>

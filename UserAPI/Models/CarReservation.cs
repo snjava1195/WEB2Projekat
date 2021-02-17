@@ -12,18 +12,14 @@ namespace UserAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usermaster
+    public partial class CarReservation
     {
+        public int Id { get; set; }
+        public int CarId { get; set; }
         public int UserId { get; set; }
-        public string Email { get; set; }
-        public string Name { get; set; }
-        public string Password { get; set; }
-        public string PasswordConfirm { get; set; }
-        public string Phone { get; set; }
-        public string City { get; set; }
-        public string LastName { get; set; }
-        public Nullable<int> IsApporved { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<int> TotalCnt { get; set; }
+        public System.DateTime DateFrom { get; set; }
+        public System.DateTime DateTo { get; set; }
+        public string CarName { get; set; }
+        public double Price { get; set; }
     }
 }

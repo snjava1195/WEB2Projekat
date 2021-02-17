@@ -1,0 +1,138 @@
+<ul>
+    <li> <a class="navibar-item" (click)="onBack()" > back </a></li>
+    <li><a class="navibar-item"> admin: {{ username }} </a> </li>
+</ul>
+
+<div class="container">
+    <mat-card>
+        <mat-card-content>
+            <form [formGroup]="adminForm">
+
+                <table>
+                    <tr>
+                        <td> Name: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="Name" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span *ngIf="!adminForm.get('Name').value && adminForm.get('Name').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Last name: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="LastName" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span
+                                    *ngIf="!adminForm.get('LastName').value && adminForm.get('LastName').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Password: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="Password" matInput>
+                            </mat-form-field>
+                            <mat-error>
+                                <span
+                                    *ngIf="!adminForm.get('Password').value && adminForm.get('Password').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Confirm password: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="ConfirmPassword" matInput>
+                            </mat-form-field>
+                            <mat-error>
+                                <span
+                                    *ngIf="!adminForm.get('ConfirmPassword').value && adminForm.get('ConfirmPassword').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Email: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="Email" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span *ngIf="!adminForm.get('Email').value && adminForm.get('Email').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Phone: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="Phone" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span *ngIf="!adminForm.get('Phone').value && adminForm.get('Phone').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> City: </td>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="City" matInput>
+
+                            </mat-form-field>
+                            <mat-error>
+                                <span *ngIf="!adminForm.get('City').value && adminForm.get('City').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+            <br>
+
+            <table>
+                <tr>
+                    <td>
+                        <button type="button" mat-raised-button color="accent" (click)="onSubmit(this.loggedUser)">
+                            Submit </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <button type="reset" mat-raised-button color="accent" (click)="onReset()"> Reset </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p *ngIf="saved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success"
+                            align="left">
+                            {{message}}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+    
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
