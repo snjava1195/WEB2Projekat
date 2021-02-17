@@ -6,6 +6,7 @@ import {FlightSearch} from './flight-search';
 import { DatePipe } from '@angular/common';
 import { Flight } from '../companies/flight';
 import { ActivatedRoute } from '@angular/router';
+import { ShowReservations } from '../show-reservations/show-reservations';
 
 @Component({
   selector: 'app-search-flight',
@@ -20,7 +21,7 @@ export class SearchFlightComponent implements OnInit {
   //public Pravac: {name: string}[] = [];
   allClasses: Array<Class>;
   allPravci: Array<Pravac>;
-  allFlights: Observable<Flight[]>;
+  allFlights: Observable<ShowReservations[]>;
   searchFlightForm: any;
   datumPoletanja: any;
     datumSletanja: any;
@@ -36,7 +37,7 @@ export class SearchFlightComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.allClasses =  [{ name:'nesto'}, { name:'nestodrugo'}]
+    this.allClasses =  [{ name:'Prva klasa'}, { name:'Biznis klasa'}, {name:'Ekonomska klasa'}]
     this.allPravci = [{name: 'Jedan pravac'}, {name: 'Povratna'}];
     this.searchFlightForm = this.formbulider.group({
       //   UserId: ['', [Validators.required]],
@@ -87,14 +88,15 @@ export class SearchFlightComponent implements OnInit {
          // this.dat.reset();
         }  
       );  
+      debugger;
       this.allFlights = this.searchFlightService.searchFlight(airline.DatumPoletanja, airline.DatumSletanja, airline.MestoPoletanja, airline.MestoSletanja, airline.Klasa, airline.Pravac, airline.BrojPutnika);
       
     }  
     
-    reserveFlight(flightId: Int16Array)
+    reserveFlight(flightId: Int16Array, price:BigInt)
     {
       debugger;
-      this.searchFlightService.reserveFlight(flightId, this.id).subscribe(()=>{
+      this.searchFlightService.reserveFlight(flightId, this.id, price).subscribe(()=>{
         this.dataSaved = true;
       });
       

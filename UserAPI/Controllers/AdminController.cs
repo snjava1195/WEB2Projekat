@@ -12,13 +12,13 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/Admin")]
     public class AdminController : ApiController
     {
-        AngularEntities3 objEntity = new AngularEntities3();
+        AngularEntities2 objEntity = new AngularEntities2();
 
         [Route("SetAsCarAdmin")]
         [HttpPost]
         public IHttpActionResult SetUserAdmin(string email)
         {
-            using (var objEntity = new AngularEntities3())
+            using (var objEntity = new AngularEntities2())
             {
                 var user = from u in objEntity.UserDetails where (u.Email == email) select u;
                 if (user != null)
@@ -38,7 +38,7 @@ namespace UserAPI.Controllers
         [HttpPost]
         public IHttpActionResult SetUserAsAirlineAdmin(string email)
         {
-            using (var objEntity = new AngularEntities3())
+            using (var objEntity = new AngularEntities2())
             {
                 var user = from u in objEntity.UserDetails where (u.Email == email) select u;
                 if (user != null)

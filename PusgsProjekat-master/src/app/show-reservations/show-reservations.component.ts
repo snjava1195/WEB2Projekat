@@ -3,13 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Flight } from '../companies/flight';
 import {SearchFlightService} from '../search-flight/search-flight.service';
+import { ShowReservations } from './show-reservations';
 @Component({
   selector: 'app-show-reservations',
   templateUrl: './show-reservations.component.html',
   styleUrls: ['./show-reservations.component.css']
 })
 export class ShowReservationsComponent implements OnInit {
-  allFlights: Observable<Flight[]>;
+  allFlights: Observable<ShowReservations[]>;
   Id: string;
   constructor(private searchFlightService:SearchFlightService, private activatedroute: ActivatedRoute) { 
     this.activatedroute.paramMap.subscribe(data => {

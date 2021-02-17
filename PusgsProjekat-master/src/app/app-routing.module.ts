@@ -19,7 +19,10 @@ import { UserProfileComponent } from './profile/user-profile.component';
 import { CarAdminDashboardComponent } from './caradmindashboard.component';
 import { AdminProfileComponent } from './profile/admin-profile.component';
 import { ManageRentacarComponent } from './manage-rentacar/manage-rentacar.component';
-
+import {SearchFlightComponent} from './search-flight/search-flight.component';
+import {ShowReservationsComponent} from './show-reservations/show-reservations.component';
+import {ReserveFlightComponent} from './reserve-flight/reserve-flight.component';
+import {VerificationComponent} from './verification/verification.component';
 const routes: Routes = [
 {
   path: '',
@@ -83,7 +86,7 @@ const routes: Routes = [
     },
 
     {
-      path: 'userdashboard',
+      path: 'userdashboard/:id',
       component: UserDashboardComponent,
   /*    children: [
         {
@@ -101,6 +104,10 @@ const routes: Routes = [
     //  ]
     },
 //  ]
+    {
+      path:'userdashboard',
+      component: UserDashboardComponent
+    },
 {
     path: 'companies',
     component: AdminComponent /*,
@@ -186,6 +193,24 @@ const routes: Routes = [
   component: ManageRentacarComponent
 },
 
+{
+  path:'searchFlight',
+  component: SearchFlightComponent
+},
+
+{
+  path:'showallreservations',
+  component: ShowReservationsComponent
+},
+
+{
+  path:'flightreservation',
+  component: ReserveFlightComponent
+},
+{
+  path:'verification/:id',
+  component: VerificationComponent
+},
 
 /*{
   path: 'admindashboard',

@@ -47,6 +47,9 @@ import { UserProfileComponent } from './profile/user-profile.component';
 import { CarAdminDashboardComponent } from './caradmindashboard.component';
 import { AdminProfileComponent } from './profile/admin-profile.component';
 import { ManageRentacarComponent } from './manage-rentacar/manage-rentacar.component';
+import { ShowReservationsComponent } from './show-reservations/show-reservations.component';
+import { SearchFlightComponent } from './search-flight/search-flight.component';
+import { VerificationComponent } from './verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,10 @@ import { ManageRentacarComponent } from './manage-rentacar/manage-rentacar.compo
     CarAdminDashboardComponent,
     UserProfileComponent, 
     AdminProfileComponent, 
-    ManageRentacarComponent
+    ManageRentacarComponent,
+    ShowReservationsComponent,
+    SearchFlightComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,

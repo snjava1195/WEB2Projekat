@@ -9,6 +9,7 @@ import { Car } from '../companies/car';
 import { CarService } from '../companies/car.service';
 import { RentACarService } from '../companies/rent-a-car.service';
 import { RentACar } from '../companies/rent-a-car';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -28,7 +29,7 @@ export class UserDashboardComponent{
   rentaCarName: string;
   rentaCarId: Int16Array;
   rentaCarRate: number;
- 
+  id: any;
 
   showCarReservation : boolean;
   selectedCar: Car;
@@ -41,7 +42,13 @@ export class UserDashboardComponent{
   
   constructor(private userService: UserService, private cookieService: CookieService, 
               private reserveCarService: ReserveCarService, private carService: CarService, 
-              private rentaCarService: RentACarService){}
+              private rentaCarService: RentACarService, private activatedroute: ActivatedRoute){
+                this.activatedroute.params.subscribe(data => {
+                  this.id = data;
+                  console.log(data);
+                })
+                 }
+            
 
             
 

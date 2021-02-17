@@ -6,6 +6,7 @@ import { CookieService } from "ngx-cookie-service";
 import { Observable } from 'rxjs';
 import { FriendService } from './friend.service';
 import { FormBuilder, Validators, NgForm, FormGroup, FormControl } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'user-profile',
@@ -18,7 +19,7 @@ export class UserProfileComponent implements OnInit{
 
 loggedUser: User;
 username: string;
-
+id: any;
 
 saved = false;
 userForm: any;
@@ -36,7 +37,12 @@ selectedUser: User;
 friends: Observable<User[]>;
 
 constructor(private userService: UserService, private friendService: FriendService,
-    private cookieService: CookieService, private fb: FormBuilder){}
+    private cookieService: CookieService, private activatedroute: ActivatedRoute, private fb: FormBuilder){
+        this.activatedroute.params.subscribe(data => {
+            this.id = data;
+            console.log(data);
+          })
+    }
 
 
 ngOnInit(){

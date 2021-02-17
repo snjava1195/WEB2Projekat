@@ -3,7 +3,8 @@
     <li><a class="navbar-item"  routerLink="/airline" routerLinkActive="active">Airlines</a></li>
     <li><a class="navbar-item"  routerLink="/rentacar" routerLinkActive="active">Rent-a-car</a></li>
     <li><a class="navbar-item"  routerLink="/reserveRentaCar" routerLinkActive="active">Reserve car at rent-a-car </a></li>
-
+    <li><a class="navbar-item"  [routerLink]="['/searchFlight', id]" routerLinkActive="active">Search flight</a></li>
+    <li><a class="navbar-item" [routerLink] ="['/showallreservations', id]" routerLinkActive="active">Show reservations</a></li>
     <li><a class="navibar-item" routerLink="/userProfile" routerLinkActive="active" > user: {{ username }} </a> </li>
     <li> <a class="navibar-item" routerLink="/view"  routerLinkActive="active" (click)="logout()" > Logout </a> </li>
 </ul>
