@@ -45,7 +45,8 @@ import { AirlineadmindashboardComponent } from './airlineadmindashboard.componen
 import { ReserveFlightComponent } from './reserve-flight/reserve-flight.component';
 import { UserProfileComponent } from './profile/user-profile.component';
 import { CarAdminDashboardComponent } from './caradmindashboard.component';
-
+import { AdminProfileComponent } from './profile/admin-profile.component';
+import { ManageRentacarComponent } from './manage-rentacar/manage-rentacar.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,9 @@ import { CarAdminDashboardComponent } from './caradmindashboard.component';
     ReserveFlightComponent, 
     ReserveRentaCarComponent, 
     CarAdminDashboardComponent,
-    UserProfileComponent
+    UserProfileComponent, 
+    AdminProfileComponent, 
+    ManageRentacarComponent
   ],
   imports: [
     BrowserModule,

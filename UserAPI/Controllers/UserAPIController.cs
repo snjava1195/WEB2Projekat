@@ -54,6 +54,7 @@ namespace UserAPI.Controllers
             }
         }
 
+
         [HttpGet]
         [Route("GetUserDetailsById/{userId}")]
         public IHttpActionResult GetUserById(string userId)
@@ -94,6 +95,36 @@ namespace UserAPI.Controllers
             }
 
             return Ok(objUsr);
+        }
+
+
+        [HttpGet]
+        [Route("GetUserDetailsByName")]
+        public IQueryable<UserDetail> GetUserDetailsByName(string userName)
+        {        
+            try
+            {
+                return objEntity.UserDetails.Where(user => user.Name.Contains(userName));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("GetUserDetailsByLastName")]
+        public IQueryable<UserDetail> GetUserDetailsByLastName(string userName)
+        {
+            try
+            {
+                return objEntity.UserDetails.Where(user =>    user.LastName.Contains(userName));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 

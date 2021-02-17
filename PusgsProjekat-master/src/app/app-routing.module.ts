@@ -17,6 +17,8 @@ import {FlightComponent} from './companies/flight.component';
 import { ReserveRentaCarComponent } from './reserve-car/reserve-car.component';
 import { UserProfileComponent } from './profile/user-profile.component';
 import { CarAdminDashboardComponent } from './caradmindashboard.component';
+import { AdminProfileComponent } from './profile/admin-profile.component';
+import { ManageRentacarComponent } from './manage-rentacar/manage-rentacar.component';
 
 const routes: Routes = [
 {
@@ -174,6 +176,15 @@ const routes: Routes = [
   component: UserProfileComponent
 },
 
+{
+  path: 'adminProfile',
+  component: AdminProfileComponent
+},
+
+{
+  path: 'manageRentacar',
+  component: ManageRentacarComponent
+},
 
 
 /*{

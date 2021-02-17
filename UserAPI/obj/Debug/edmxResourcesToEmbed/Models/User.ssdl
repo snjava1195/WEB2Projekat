@@ -80,6 +80,14 @@
     <Property Name="OcenaLeta" Type="int" Nullable="false" />
     <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Friendships">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Friend1" Type="int" Nullable="false" />
+    <Property Name="Friend2" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Kartas">
     <Key>
       <PropertyRef Name="Id" />
@@ -135,6 +143,7 @@
     <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FlightReservations" EntityType="Self.FlightReservations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Flights" EntityType="Self.Flights" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Friendships" EntityType="Self.Friendships" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Kartas" EntityType="Self.Kartas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Presedanjes" EntityType="Self.Presedanjes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RentaCars" EntityType="Self.RentaCars" Schema="dbo" store:Type="Tables" />

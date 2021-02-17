@@ -42,7 +42,7 @@ export class UserService{
         return this.http.post<number>(this.url2 + '/SetAsCarAdmin?email=' + email, httpOptions);
       }
 
-      addAirlineAdmin(email:string): Observable<number>
+      addAirlineAdmin(email: string): Observable<number>
       {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
         return this.http.post<number>(this.url2 + '/SetAsAirlineAdmin?email=' + email, httpOptions);
@@ -50,7 +50,16 @@ export class UserService{
       
 
       getUserByEmail(userEmail: string): Observable<User>{
-        const httpOptions = { headers: new HttpHeaders({'Content-Type' : 'application/json' }) }; 
-        return this.http.get<User>(this.url + '/GetUserDetailsByEmail?userEmail=' + userEmail, httpOptions);
+          return this.http.get<User>(this.url + '/GetUserDetailsByEmail?userEmail=' + userEmail);
       }
+
+      getUsersByName(userName: string): Observable<User[]>{
+          return this.http.get<User[]>(this.url + '/GetUserDetailsByName?userName=' + userName);
+      }
+
+      getUsersByLastName(userName: string): Observable<User[]>{
+        return this.http.get<User[]>(this.url + '/GetUserDetailsByLastName?userName=' + userName);
+      }
+
+      
 }

@@ -30,6 +30,7 @@
     <EntitySet Name="Kartas" EntityType="AngularModel.Karta" />
     <EntitySet Name="Presedanjes" EntityType="AngularModel.Presedanje" />
     <EntitySet Name="CarReservations" EntityType="AngularModel.CarReservation" />
+    <EntitySet Name="Friendships" EntityType="AngularModel.Friendship" />
   </EntityContainer>
   <ComplexType Name="Usp_Login_Result">
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
@@ -144,5 +145,13 @@
     <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="CarName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Price" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Friendship">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Friend1" Type="Int32" Nullable="false" />
+    <Property Name="Friend2" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

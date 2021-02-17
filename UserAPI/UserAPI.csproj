@@ -198,6 +198,7 @@
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\CarReservationController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RentaCarController.cs" />
     <Compile Include="Controllers\UserAPIController.cs" />
@@ -226,6 +227,9 @@
     </Compile>
     <Compile Include="Models\FlightConverter.cs" />
     <Compile Include="Models\FlightReservation.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Friendship.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Karta.cs">

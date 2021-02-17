@@ -31,4 +31,10 @@ export class AdminDashboardComponent  implements OnInit {
    
  } 
 
+ logout(){
+  this.loggedAdmin = null;
+  this.cookieService.delete('loggedId');
+}
+
+
 }

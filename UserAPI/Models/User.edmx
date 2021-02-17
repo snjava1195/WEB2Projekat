@@ -85,6 +85,14 @@
           <Property Name="OcenaLeta" Type="int" Nullable="false" />
           <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Friendships">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Friend1" Type="int" Nullable="false" />
+          <Property Name="Friend2" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Kartas">
           <Key>
             <PropertyRef Name="Id" />
@@ -140,6 +148,7 @@
           <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FlightReservations" EntityType="Self.FlightReservations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Flights" EntityType="Self.Flights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Friendships" EntityType="Self.Friendships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kartas" EntityType="Self.Kartas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Presedanjes" EntityType="Self.Presedanjes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RentaCars" EntityType="Self.RentaCars" Schema="dbo" store:Type="Tables" />
@@ -179,6 +188,7 @@
           <EntitySet Name="Kartas" EntityType="AngularModel.Karta" />
           <EntitySet Name="Presedanjes" EntityType="AngularModel.Presedanje" />
           <EntitySet Name="CarReservations" EntityType="AngularModel.CarReservation" />
+          <EntitySet Name="Friendships" EntityType="AngularModel.Friendship" />
         </EntityContainer>
         <ComplexType Name="Usp_Login_Result">
           <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
@@ -293,6 +303,14 @@
           <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="CarName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Friendship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Friend1" Type="Int32" Nullable="false" />
+          <Property Name="Friend2" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -439,6 +457,15 @@
                 <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CarId" ColumnName="CarId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friendships">
+            <EntityTypeMapping TypeName="AngularModel.Friendship">
+              <MappingFragment StoreEntitySet="Friendships">
+                <ScalarProperty Name="Friend2" ColumnName="Friend2" />
+                <ScalarProperty Name="Friend1" ColumnName="Friend1" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
