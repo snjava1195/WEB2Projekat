@@ -13,7 +13,7 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/SearchFlight")]
     public class SearchFlightController : ApiController
     {
-        AngularEntities2 objEntity = new AngularEntities2();
+        AngularEntities4 objEntity = new AngularEntities4();
         public List<Flight> check;
         public List<Prikaz> result = new List<Prikaz>();
         [HttpGet]
@@ -33,7 +33,7 @@ namespace UserAPI.Controllers
 
                 try
                 {
-                    using (var context = new AngularEntities2())
+                    using (var context = new AngularEntities4())
                     {
                         var flights = from f in context.Flights
                                       where f.DatumPoletanja == dt && f.DatumSletanja == dt2 && f.BrojSedista - brojPutnika != 0 && f.MestoPoletanja == mestoPoletanja && f.MestoSletanja == mestoSletanja
@@ -137,7 +137,7 @@ namespace UserAPI.Controllers
 
                 userId.GetType();
 
-                var reservation = new FlightReservation1()
+                var reservation = new FlightReservation()
                 {
                     FlightId = flightId,
                     UserId = Int16.Parse(userId),
@@ -145,7 +145,7 @@ namespace UserAPI.Controllers
 
                     };
 
-                objEntity.FlightReservation1.Add(reservation);
+                objEntity.FlightReservations.Add(reservation);
                 objEntity.SaveChanges();
                
 
@@ -167,17 +167,17 @@ namespace UserAPI.Controllers
             try
             {
                 var id = Int16.Parse(userId);
-                var reservations = new List<FlightReservation1>();
-                using (var context = new AngularEntities2())
+                var reservations = new List<FlightReservation>();
+                using (var context = new AngularEntities4())
                 {
-                    var flights = from f in context.FlightReservation1
+                    var flights = from f in context.FlightReservations
                                   where f.UserId == id
                                   select f;
 
                     reservations = flights.ToList();
                 }
               
-                foreach(FlightReservation1 f in reservations)
+                foreach(FlightReservation f in reservations)
                 {
                     var convert = objEntity.Flights.Find(f.FlightId);
                     flightsRes.Add(new Prikaz()
@@ -214,21 +214,21 @@ namespace UserAPI.Controllers
         public IHttpActionResult CancelReservation(string userId, int flightId)
         {
           
-            FlightReservation1 reservation = new FlightReservation1();
+            FlightReservation reservation = new FlightReservation();
             var id = Int16.Parse(userId);
-            using (var context = new AngularEntities2())
+            using (var context = new AngularEntities4())
             {
-                var flights = from f in context.FlightReservation1
+                var flights = from f in context.FlightReservations
                               where  f.UserId == id && f.FlightId ==flightId
                               select f;
 
                 reservation = flights.First();
             }
-            if (!objEntity.FlightReservation1.Local.Contains(reservation))
+            if (!objEntity.FlightReservations.Local.Contains(reservation))
             {
-                objEntity.FlightReservation1.Attach(reservation);
+                objEntity.FlightReservations.Attach(reservation);
             }
-                objEntity.FlightReservation1.Remove(reservation);
+                objEntity.FlightReservations.Remove(reservation);
             objEntity.SaveChanges();
 
             return Ok(reservation);

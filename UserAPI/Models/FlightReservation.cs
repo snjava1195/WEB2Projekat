@@ -17,5 +17,6 @@ namespace UserAPI.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public int FlightId { get; set; }
+        public long Price { get; set; }
     }
 }

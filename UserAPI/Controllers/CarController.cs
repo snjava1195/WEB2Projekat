@@ -12,7 +12,7 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/Car")]
     public class CarController : ApiController
     {
-        AngularEntities2 objEntity = new AngularEntities2();
+        AngularEntities4 objEntity = new AngularEntities4();
 
 
         [HttpGet]
@@ -38,7 +38,7 @@ namespace UserAPI.Controllers
             {
                 return objEntity.Cars.Where(c => c.RentaCarId == rentaCarID);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
@@ -92,7 +92,7 @@ namespace UserAPI.Controllers
         {
             try
             {
-                return objEntity.Cars.Where(c => Math.Abs(c.Rate - carRate) < 0.5);
+                return objEntity.Cars.Where(c => Math.Abs((double)c.Rate - carRate) < 0.5);
             }
             catch (Exception)
             {
@@ -122,7 +122,7 @@ namespace UserAPI.Controllers
         {
             try
             {
-                 return objEntity.Cars.Where(t => t.Type == type);
+                return objEntity.Cars.Where(t => t.Type == type);
             }
             catch (Exception)
             {
@@ -147,7 +147,7 @@ namespace UserAPI.Controllers
 
         [HttpGet]
         [Route("SearchedCars")]
-        public IQueryable<Car> SearchedCars(int rentaCarId, int type, int seats, 
+        public IQueryable<Car> SearchedCars(int rentaCarId, int type, int seats,
             double minPrice, double maxPrice)
         {
             IQueryable<Car> searchedCars = GetCarsFromRentaCar(rentaCarId);

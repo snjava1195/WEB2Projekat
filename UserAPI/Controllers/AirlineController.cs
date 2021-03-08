@@ -11,7 +11,7 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/Airline")]
     public class AirlineController : ApiController
     {
-        AngularEntities2 objEntity = new AngularEntities2();
+        AngularEntities4 objEntity = new AngularEntities4();
         [HttpGet]
         [Route("AllAirlineDetails")]
         public IQueryable<AirlineDetail> GetAirline()

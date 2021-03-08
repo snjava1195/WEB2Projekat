@@ -13,7 +13,7 @@ namespace UserAPI.Controllers
     public class BranchOfficeController : ApiController
     {
 
-        AngularEntities2 objEntity = new AngularEntities2();
+        AngularEntities4 objEntity = new AngularEntities4();
 
         [HttpGet]
         [Route("AllBranchOffices")]

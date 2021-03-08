@@ -15,11 +15,11 @@ namespace UserAPI.Models
     public partial class CarReservation
     {
         public int Id { get; set; }
-        public int CarId { get; set; }
-        public int UserId { get; set; }
-        public System.DateTime DateFrom { get; set; }
-        public System.DateTime DateTo { get; set; }
+        public Nullable<int> CarId { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<System.DateTime> DateFrom { get; set; }
+        public Nullable<System.DateTime> DateTo { get; set; }
         public string CarName { get; set; }
-        public double Price { get; set; }
+        public Nullable<long> Price { get; set; }
     }
 }

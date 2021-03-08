@@ -17,13 +17,13 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/User")]
     public class UserAPIController : ApiController
     {
-        AngularEntities2 objEntity = new AngularEntities2();
+        AngularEntities4 objEntity = new AngularEntities4();
        
         [Route("UserLogin")]
         [HttpPost]
         public IHttpActionResult Login(Login lg)
         {
-            AngularEntities2 DB = new AngularEntities2();
+            AngularEntities4 DB = new AngularEntities4();
             var Obj = DB.Usp_Login(lg.Email, lg.Password).ToList<Usp_Login_Result>().FirstOrDefault();
             if (Obj == null) return NotFound();
       

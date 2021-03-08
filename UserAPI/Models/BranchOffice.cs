@@ -15,7 +15,7 @@ namespace UserAPI.Models
     public partial class BranchOffice
     {
         public int Id { get; set; }
-        public int RentaCarId { get; set; }
+        public Nullable<int> RentaCarId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
     }

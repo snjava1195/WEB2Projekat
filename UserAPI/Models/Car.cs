@@ -15,15 +15,15 @@ namespace UserAPI.Models
     public partial class Car
     {
         public int Id { get; set; }
-        public int RentaCarId { get; set; }
+        public Nullable<int> RentaCarId { get; set; }
         public string Name { get; set; }
-        public double Rate { get; set; }
-        public int RatedBy { get; set; }
-        public double Price { get; set; }
-        public bool Reserved { get; set; }
+        public Nullable<long> Rate { get; set; }
+        public Nullable<int> RatedBy { get; set; }
+        public Nullable<long> Price { get; set; }
+        public Nullable<bool> Reserved { get; set; }
         public string Brand { get; set; }
-        public int Type { get; set; }
-        public int Seats { get; set; }
-        public int Year { get; set; }
+        public Nullable<int> Type { get; set; }
+        public Nullable<int> Seats { get; set; }
+        public Nullable<int> Year { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace UserAPI.Controllers
     public class FriendsController : ApiController
     {
 
-        AngularEntities2 objEntity = new AngularEntities2();
+        AngularEntities4 objEntity = new AngularEntities4();
 
 
         [HttpGet]
@@ -34,9 +34,9 @@ namespace UserAPI.Controllers
 
                 foreach (Friendship uf in usersFriendships)
                     if (uf.Friend1 == ID)
-                        usersFriendsIds.Add(uf.Friend2);
+                        usersFriendsIds.Add((int)uf.Friend2);
                     else
-                        usersFriendsIds.Add(uf.Friend1);
+                        usersFriendsIds.Add((int)uf.Friend1);
 
 
                 return objEntity.UserDetails.Where(u => usersFriendsIds.Contains(u.UserId));

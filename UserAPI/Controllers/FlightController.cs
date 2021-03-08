@@ -12,7 +12,7 @@ namespace UserAPI.Controllers
     [RoutePrefix("Api/Flight")]
     public class FlightController : ApiController
     {
-        AngularEntities2 objEntity = new AngularEntities2();
+        AngularEntities4 objEntity = new AngularEntities4();
         [HttpGet]
         [Route("AllFlightDetails")]
         public IQueryable<Flight> GetAirline()
@@ -34,7 +34,7 @@ namespace UserAPI.Controllers
             var check = new List<Flight>();
             try
             {
-                using (var context = new AngularEntities2())
+                using (var context = new AngularEntities4())
                 {
                     var flights = from f in context.Flights
                                   where f.IdAvioKompanije == airlineId
