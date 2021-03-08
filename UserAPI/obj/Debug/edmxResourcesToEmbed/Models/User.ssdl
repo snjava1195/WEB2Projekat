@@ -5,56 +5,66 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="AdminId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Airlines">
+  <EntityType Name="BranchOffice">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RentaCarId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="BranchOffices">
+  <EntityType Name="Car">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RentaCarId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="RentaCarId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Rate" Type="bigint" />
+    <Property Name="RatedBy" Type="int" />
+    <Property Name="Price" Type="bigint" />
+    <Property Name="Reserved" Type="bit" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="int" />
+    <Property Name="Seats" Type="int" />
+    <Property Name="Year" Type="int" />
   </EntityType>
-  <EntityType Name="CarReservations">
+  <EntityType Name="CarReservation">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CarId" Type="int" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="DateFrom" Type="date" Nullable="false" />
-    <Property Name="DateTo" Type="date" Nullable="false" />
-    <Property Name="CarName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="CarId" Type="int" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="DateFrom" Type="datetime" />
+    <Property Name="DateTo" Type="datetime" />
+    <Property Name="CarName" Type="varchar" MaxLength="50" />
+    <Property Name="Price" Type="bigint" />
   </EntityType>
-  <EntityType Name="Cars">
+  <EntityType Name="Flight">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RentaCarId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Brand" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Type" Type="int" Nullable="false" />
-    <Property Name="Seats" Type="int" Nullable="false" />
-    <Property Name="Price" Type="float" Nullable="false" />
-    <Property Name="Year" Type="int" Nullable="false" />
-    <Property Name="RatedBy" Type="int" Nullable="false" />
-    <Property Name="Rate" Type="float" Nullable="false" />
-    <Property Name="Reserved" Type="bit" Nullable="false" />
+    <Property Name="DatumPoletanja" Type="datetime" />
+    <Property Name="DatumSletanja" Type="datetime" />
+    <Property Name="VremeTrajanjaLeta" Type="varchar" MaxLength="50" />
+    <Property Name="DuzinaPutovanja" Type="int" />
+    <Property Name="BrojPresedanja" Type="int" />
+    <Property Name="CenaBiznisKlase" Type="bigint" />
+    <Property Name="CenaEkonomskeKlase" Type="bigint" />
+    <Property Name="CenaPrveKlase" Type="bigint" />
+    <Property Name="MestoPoletanja" Type="varchar" MaxLength="50" />
+    <Property Name="MestoSletanja" Type="varchar" MaxLength="50" />
+    <Property Name="OcenaLeta" Type="int" />
+    <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
+    <Property Name="BrojSedista" Type="int" />
   </EntityType>
   <EntityType Name="FlightReservations">
     <Key>
@@ -63,32 +73,17 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="FlightId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="bigint" Nullable="false" />
   </EntityType>
-  <EntityType Name="Flights">
+  <EntityType Name="Friendship">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DatumPoletanja" Type="datetime" Nullable="false" />
-    <Property Name="DatumSletanja" Type="datetime" Nullable="false" />
-    <Property Name="VremeTrajanjaLeta" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="DuzinaPutovanja" Type="bigint" Nullable="false" />
-    <Property Name="BrojPresedanja" Type="int" Nullable="false" />
-    <Property Name="Cena" Type="bigint" Nullable="false" />
-    <Property Name="MestoPoletanja" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="MestoSletanja" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="OcenaLeta" Type="int" Nullable="false" />
-    <Property Name="IdAvioKompanije" Type="int" Nullable="false" />
+    <Property Name="Friend1" Type="int" />
+    <Property Name="Friend2" Type="int" />
   </EntityType>
-  <EntityType Name="Friendships">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Friend1" Type="int" Nullable="false" />
-    <Property Name="Friend2" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Kartas">
+  <EntityType Name="Karta">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -97,7 +92,7 @@
     <Property Name="Popust" Type="bigint" />
     <Property Name="Cena" Type="bigint" />
   </EntityType>
-  <EntityType Name="Presedanjes">
+  <EntityType Name="Presedanje">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -105,17 +100,24 @@
     <Property Name="Lokacija" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="IdLeta" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="RentaCars">
+  <EntityType Name="RentaCar">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Rate" Type="float" Nullable="false" />
-    <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="RatedBy" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Rate" Type="bigint" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="RatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="UserActivation">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="UserDetails">
     <Key>
@@ -131,22 +133,39 @@
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="UserType" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Usermaster">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PasswordConfirm" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsApporved" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="TotalCnt" Type="int" />
+  </EntityType>
   <Function Name="Usp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserName" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="AngularModelStoreContainer">
     <EntitySet Name="AirlineDetails" EntityType="Self.AirlineDetails" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Airlines" EntityType="Self.Airlines" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="BranchOffices" EntityType="Self.BranchOffices" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CarReservations" EntityType="Self.CarReservations" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BranchOffice" EntityType="Self.BranchOffice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarReservation" EntityType="Self.CarReservation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FlightReservations" EntityType="Self.FlightReservations" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Flights" EntityType="Self.Flights" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Friendships" EntityType="Self.Friendships" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Kartas" EntityType="Self.Kartas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Presedanjes" EntityType="Self.Presedanjes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="RentaCars" EntityType="Self.RentaCars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Friendship" EntityType="Self.Friendship" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Karta" EntityType="Self.Karta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Presedanje" EntityType="Self.Presedanje" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RentaCar" EntityType="Self.RentaCar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserActivation" EntityType="Self.UserActivation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usermaster" EntityType="Self.Usermaster" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

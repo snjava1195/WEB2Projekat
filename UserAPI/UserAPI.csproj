@@ -201,13 +201,11 @@
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RentaCarController.cs" />
+    <Compile Include="Controllers\SearchFlightController.cs" />
     <Compile Include="Controllers\UserAPIController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Airline.cs">
-      <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AirlineDetail.cs">
       <DependentUpon>User.tt</DependentUpon>
@@ -239,6 +237,7 @@
     <Compile Include="Models\Presedanje.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Prikaz.cs" />
     <Compile Include="Models\RentaCar.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
@@ -258,7 +257,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>User.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserActivation.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserDetail.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usermaster.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usp_Login_Result.cs">
@@ -281,7 +286,6 @@
       <DependentUpon>User.edmx</DependentUpon>
       <LastGenOutput>User.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\User.edmx.sql" />
     <Content Include="Models\User.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>User.edmx</DependentUpon>

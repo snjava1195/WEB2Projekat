@@ -1,113 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="AngularModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="UserDetail">
+  <EntityType Name="AirlineDetail">
     <Key>
-      <PropertyRef Name="UserId" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="UserType" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityContainer Name="AngularEntities2" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
-    <FunctionImport Name="Usp_Login" ReturnType="Collection(AngularModel.Usp_Login_Result)">
-      <Parameter Name="UserName" Mode="In" Type="String" />
-      <Parameter Name="Password" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="Airlines" EntityType="AngularModel.Airline" />
-    <EntitySet Name="RentaCars" EntityType="AngularModel.RentaCar" />
-    <EntitySet Name="BranchOffices" EntityType="AngularModel.BranchOffice" />
-    <EntitySet Name="Cars" EntityType="AngularModel.Car" />
-    <EntitySet Name="AirlineDetails" EntityType="AngularModel.AirlineDetail" />
-    <EntitySet Name="Flights" EntityType="AngularModel.Flight" />
-    <EntitySet Name="FlightReservations" EntityType="AngularModel.FlightReservation" />
-    <EntitySet Name="Kartas" EntityType="AngularModel.Karta" />
-    <EntitySet Name="Presedanjes" EntityType="AngularModel.Presedanje" />
-    <EntitySet Name="CarReservations" EntityType="AngularModel.CarReservation" />
-    <EntitySet Name="Friendships" EntityType="AngularModel.Friendship" />
-  </EntityContainer>
-  <ComplexType Name="Usp_Login_Result">
-    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="UserType" Nullable="false" />
-    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
-  </ComplexType>
-  <EntityType Name="Airline">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="RentaCar">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Rate" Type="Double" Nullable="false" />
-    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="RatedBy" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdminId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="BranchOffice">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RentaCarId" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RentaCarId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Car">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RentaCarId" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Rate" Type="Double" Nullable="false" />
-    <Property Name="RatedBy" Type="Int32" Nullable="false" />
-    <Property Name="Price" Type="Double" Nullable="false" />
-    <Property Name="Reserved" Type="Boolean" Nullable="false" />
-    <Property Name="Brand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Type" Type="Int32" Nullable="false" />
-    <Property Name="Seats" Type="Int32" Nullable="false" />
-    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="RentaCarId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rate" Type="Int64" />
+    <Property Name="RatedBy" Type="Int32" />
+    <Property Name="Price" Type="Int64" />
+    <Property Name="Reserved" Type="Boolean" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="Seats" Type="Int32" />
+    <Property Name="Year" Type="Int32" />
   </EntityType>
-  <EntityType Name="AirlineDetail">
+  <EntityType Name="CarReservation">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AdminId" Type="Int32" Nullable="false" />
+    <Property Name="CarId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="DateFrom" Type="DateTime" Precision="3" />
+    <Property Name="DateTo" Type="DateTime" Precision="3" />
+    <Property Name="CarName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Int64" />
   </EntityType>
   <EntityType Name="Flight">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DatumPoletanja" Type="DateTime" Precision="3" Nullable="false" />
-    <Property Name="DatumSletanja" Type="DateTime" Precision="3" Nullable="false" />
-    <Property Name="VremeTrajanjaLeta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DuzinaPutovanja" Type="Int64" Nullable="false" />
-    <Property Name="BrojPresedanja" Type="Int32" Nullable="false" />
-    <Property Name="Cena" Type="Int64" Nullable="false" />
-    <Property Name="MestoPoletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="MestoSletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="OcenaLeta" Type="Int32" Nullable="false" />
+    <Property Name="DatumPoletanja" Type="DateTime" Precision="3" />
+    <Property Name="DatumSletanja" Type="DateTime" Precision="3" />
+    <Property Name="VremeTrajanjaLeta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DuzinaPutovanja" Type="Int32" />
+    <Property Name="BrojPresedanja" Type="Int32" />
+    <Property Name="CenaBiznisKlase" Type="Int64" />
+    <Property Name="CenaEkonomskeKlase" Type="Int64" />
+    <Property Name="CenaPrveKlase" Type="Int64" />
+    <Property Name="MestoPoletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MestoSletanja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OcenaLeta" Type="Int32" />
     <Property Name="IdAvioKompanije" Type="Int32" Nullable="false" />
+    <Property Name="BrojSedista" Type="Int32" />
   </EntityType>
   <EntityType Name="FlightReservation">
     <Key>
@@ -116,6 +73,15 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="FlightId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Friendship">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Friend1" Type="Int32" />
+    <Property Name="Friend2" Type="Int32" />
   </EntityType>
   <EntityType Name="Karta">
     <Key>
@@ -131,27 +97,86 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Lokacija" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Lokacija" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="IdLeta" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="CarReservation">
+  <EntityType Name="RentaCar">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rate" Type="Int64" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RatedBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="UserActivation">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="CarName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="ActivationCode" Type="Guid" Nullable="false" />
   </EntityType>
-  <EntityType Name="Friendship">
+  <EntityType Name="UserDetail">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="UserId" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Friend1" Type="Int32" Nullable="false" />
-    <Property Name="Friend2" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="Usermaster">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PasswordConfirm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsApporved" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="TotalCnt" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="AngularEntities4" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AirlineDetails" EntityType="Self.AirlineDetail" />
+    <EntitySet Name="BranchOffices" EntityType="Self.BranchOffice" />
+    <EntitySet Name="Cars" EntityType="Self.Car" />
+    <EntitySet Name="CarReservations" EntityType="Self.CarReservation" />
+    <EntitySet Name="Flights" EntityType="Self.Flight" />
+    <EntitySet Name="FlightReservations" EntityType="Self.FlightReservation" />
+    <EntitySet Name="Friendships" EntityType="Self.Friendship" />
+    <EntitySet Name="Kartas" EntityType="Self.Karta" />
+    <EntitySet Name="Presedanjes" EntityType="Self.Presedanje" />
+    <EntitySet Name="RentaCars" EntityType="Self.RentaCar" />
+    <EntitySet Name="UserActivations" EntityType="Self.UserActivation" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+    <EntitySet Name="Usermasters" EntityType="Self.Usermaster" />
+    <FunctionImport Name="Usp_Login" ReturnType="Collection(AngularModel.Usp_Login_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Usp_Login_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ConfirmPassword" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserType" Nullable="false" />
+  </ComplexType>
 </Schema>

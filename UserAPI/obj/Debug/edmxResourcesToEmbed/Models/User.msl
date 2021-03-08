@@ -1,8 +1,138 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="AngularModelStoreContainer" CdmEntityContainer="AngularEntities2">
+  <EntityContainerMapping StorageEntityContainer="AngularModelStoreContainer" CdmEntityContainer="AngularEntities4">
+    <EntitySetMapping Name="AirlineDetails">
+      <EntityTypeMapping TypeName="AngularModel.AirlineDetail">
+        <MappingFragment StoreEntitySet="AirlineDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BranchOffices">
+      <EntityTypeMapping TypeName="AngularModel.BranchOffice">
+        <MappingFragment StoreEntitySet="BranchOffice">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RentaCarId" ColumnName="RentaCarId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="AngularModel.Car">
+        <MappingFragment StoreEntitySet="Car">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RentaCarId" ColumnName="RentaCarId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="RatedBy" ColumnName="RatedBy" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Reserved" ColumnName="Reserved" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Seats" ColumnName="Seats" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarReservations">
+      <EntityTypeMapping TypeName="AngularModel.CarReservation">
+        <MappingFragment StoreEntitySet="CarReservation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+          <ScalarProperty Name="CarName" ColumnName="CarName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flights">
+      <EntityTypeMapping TypeName="AngularModel.Flight">
+        <MappingFragment StoreEntitySet="Flight">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DatumPoletanja" ColumnName="DatumPoletanja" />
+          <ScalarProperty Name="DatumSletanja" ColumnName="DatumSletanja" />
+          <ScalarProperty Name="VremeTrajanjaLeta" ColumnName="VremeTrajanjaLeta" />
+          <ScalarProperty Name="DuzinaPutovanja" ColumnName="DuzinaPutovanja" />
+          <ScalarProperty Name="BrojPresedanja" ColumnName="BrojPresedanja" />
+          <ScalarProperty Name="CenaBiznisKlase" ColumnName="CenaBiznisKlase" />
+          <ScalarProperty Name="CenaEkonomskeKlase" ColumnName="CenaEkonomskeKlase" />
+          <ScalarProperty Name="CenaPrveKlase" ColumnName="CenaPrveKlase" />
+          <ScalarProperty Name="MestoPoletanja" ColumnName="MestoPoletanja" />
+          <ScalarProperty Name="MestoSletanja" ColumnName="MestoSletanja" />
+          <ScalarProperty Name="OcenaLeta" ColumnName="OcenaLeta" />
+          <ScalarProperty Name="IdAvioKompanije" ColumnName="IdAvioKompanije" />
+          <ScalarProperty Name="BrojSedista" ColumnName="BrojSedista" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlightReservations">
+      <EntityTypeMapping TypeName="AngularModel.FlightReservation">
+        <MappingFragment StoreEntitySet="FlightReservations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Friendships">
+      <EntityTypeMapping TypeName="AngularModel.Friendship">
+        <MappingFragment StoreEntitySet="Friendship">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Friend1" ColumnName="Friend1" />
+          <ScalarProperty Name="Friend2" ColumnName="Friend2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kartas">
+      <EntityTypeMapping TypeName="AngularModel.Karta">
+        <MappingFragment StoreEntitySet="Karta">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BrojLeta" ColumnName="BrojLeta" />
+          <ScalarProperty Name="Popust" ColumnName="Popust" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Presedanjes">
+      <EntityTypeMapping TypeName="AngularModel.Presedanje">
+        <MappingFragment StoreEntitySet="Presedanje">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Lokacija" ColumnName="Lokacija" />
+          <ScalarProperty Name="IdLeta" ColumnName="IdLeta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RentaCars">
+      <EntityTypeMapping TypeName="AngularModel.RentaCar">
+        <MappingFragment StoreEntitySet="RentaCar">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="RatedBy" ColumnName="RatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserActivations">
+      <EntityTypeMapping TypeName="AngularModel.UserActivation">
+        <MappingFragment StoreEntitySet="UserActivation">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="UserDetails">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.UserDetail)">
+      <EntityTypeMapping TypeName="AngularModel.UserDetail">
         <MappingFragment StoreEntitySet="UserDetails">
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -16,142 +146,37 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Airlines">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Airline)">
-        <MappingFragment StoreEntitySet="Airlines">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RentaCars">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.RentaCar)">
-        <MappingFragment StoreEntitySet="RentaCars">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="RatedBy" ColumnName="RatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BranchOffices">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.BranchOffice)">
-        <MappingFragment StoreEntitySet="BranchOffices">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="RentaCarId" ColumnName="RentaCarId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Cars">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Car)">
-        <MappingFragment StoreEntitySet="Cars">
-          <ScalarProperty Name="Year" ColumnName="Year" />
-          <ScalarProperty Name="Seats" ColumnName="Seats" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Brand" ColumnName="Brand" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="RentaCarId" ColumnName="RentaCarId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="RatedBy" ColumnName="RatedBy" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Reserved" ColumnName="Reserved" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AirlineDetails">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.AirlineDetail)">
-        <MappingFragment StoreEntitySet="AirlineDetails">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Flights">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Flight)">
-        <MappingFragment StoreEntitySet="Flights">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DatumPoletanja" ColumnName="DatumPoletanja" />
-          <ScalarProperty Name="DatumSletanja" ColumnName="DatumSletanja" />
-          <ScalarProperty Name="VremeTrajanjaLeta" ColumnName="VremeTrajanjaLeta" />
-          <ScalarProperty Name="DuzinaPutovanja" ColumnName="DuzinaPutovanja" />
-          <ScalarProperty Name="BrojPresedanja" ColumnName="BrojPresedanja" />
-          <ScalarProperty Name="Cena" ColumnName="Cena" />
-          <ScalarProperty Name="MestoPoletanja" ColumnName="MestoPoletanja" />
-          <ScalarProperty Name="MestoSletanja" ColumnName="MestoSletanja" />
-          <ScalarProperty Name="OcenaLeta" ColumnName="OcenaLeta" />
-          <ScalarProperty Name="IdAvioKompanije" ColumnName="IdAvioKompanije" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="FlightReservations">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.FlightReservation)">
-        <MappingFragment StoreEntitySet="FlightReservations">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="Usermasters">
+      <EntityTypeMapping TypeName="AngularModel.Usermaster">
+        <MappingFragment StoreEntitySet="Usermaster">
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="FlightId" ColumnName="FlightId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Kartas">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Karta)">
-        <MappingFragment StoreEntitySet="Kartas">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BrojLeta" ColumnName="BrojLeta" />
-          <ScalarProperty Name="Popust" ColumnName="Popust" />
-          <ScalarProperty Name="Cena" ColumnName="Cena" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Presedanjes">
-      <EntityTypeMapping TypeName="IsTypeOf(AngularModel.Presedanje)">
-        <MappingFragment StoreEntitySet="Presedanjes">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Lokacija" ColumnName="Lokacija" />
-          <ScalarProperty Name="IdLeta" ColumnName="IdLeta" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordConfirm" ColumnName="PasswordConfirm" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="IsApporved" ColumnName="IsApporved" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="TotalCnt" ColumnName="TotalCnt" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Usp_Login" FunctionName="AngularModel.Store.Usp_Login">
       <ResultMapping>
         <ComplexTypeMapping TypeName="AngularModel.Usp_Login_Result">
-          <ScalarProperty Name="UserType" ColumnName="UserType" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="CarReservations">
-      <EntityTypeMapping TypeName="AngularModel.CarReservation">
-        <MappingFragment StoreEntitySet="CarReservations">
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="CarName" ColumnName="CarName" />
-          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
-          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="CarId" ColumnName="CarId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Friendships">
-      <EntityTypeMapping TypeName="AngularModel.Friendship">
-        <MappingFragment StoreEntitySet="Friendships">
-          <ScalarProperty Name="Friend2" ColumnName="Friend2" />
-          <ScalarProperty Name="Friend1" ColumnName="Friend1" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
