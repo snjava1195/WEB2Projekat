@@ -68,6 +68,59 @@ namespace UserAPI.Controllers
             return Ok(objUsr);
         }
 
+        ///za pretragu i prikaz
+        [HttpGet]
+        [Route("GetUserDetailsByEmail")]
+        public IHttpActionResult GetUserDetailsByEmail(string userEmail)
+        {
+            UserDetail objUsr = new UserDetail();
+
+            try
+            {
+                objUsr = objEntity.UserDetails.Where(user => user.Email == userEmail).FirstOrDefault();
+
+                if (objUsr == null)
+                    return NotFound();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(objUsr);
+        }
+
+
+        [HttpGet]
+        [Route("GetUserDetailsByName")]
+        public IQueryable<UserDetail> GetUserDetailsByName(string userName)
+        {
+            try
+            {
+                return objEntity.UserDetails.Where(user => user.Name.Contains(userName));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("GetUserDetailsByLastName")]
+        public IQueryable<UserDetail> GetUserDetailsByLastName(string userName)
+        {
+            try
+            {
+                return objEntity.UserDetails.Where(user => user.LastName.Contains(userName));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         [HttpPost]
         [Route("InsertUserDetails")]
         public IHttpActionResult PostUser(UserDetail data)
@@ -213,6 +266,11 @@ namespace UserAPI.Controllers
             }
                 return Ok();
         }
+
+
+
+
+
 
     }
 }

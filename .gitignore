@@ -12,3 +12,41 @@
 
 
 
+*.config
+*.pdb
+*.pdb
+*.config
+UserAPI/bin/UserAPI.dll.config
+PusgsProjekat-master/package-lock.json
+PusgsProjekat-master/package.json
+UserAPI/.vs/UserAPI/v15/.suo
+*.pdb
+*.config
+*.dll
+*.ide-wal
+*.ide-shm
+*.ide
+UserAPI/Models/BranchOffice.cs
+UserAPI/Models/Car.cs
+UserAPI/Models/CarReservation.cs
+UserAPI/Models/Flight.cs
+UserAPI/Models/Friendship.cs
+UserAPI/Models/RentaCar.cs
+UserAPI/Models/User.Context.cs
+UserAPI/Models/User.Designer.cs
+UserAPI/Models/User.edmx
+UserAPI/Models/User.edmx.diagram
+UserAPI/Models/Usermaster.cs
+UserAPI/Models/Usp_Login_Result.cs
+*.cache
+*.csdl
+*.msl
+*.ssdl
+UserAPI/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+UserAPI/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+*.cache
+*.txt
+*.dll
+*.pdb
+*.csproj
+*.config
