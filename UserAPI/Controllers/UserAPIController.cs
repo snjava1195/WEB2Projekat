@@ -69,6 +69,30 @@ namespace UserAPI.Controllers
         }
 
         ///za pretragu i prikaz
+        ///
+
+        [HttpGet]
+        [Route("GetUserByName")]
+        public IHttpActionResult GetUserByName(string userName)
+        {
+            UserDetail objUsr = new UserDetail();
+            try
+            {
+                objUsr = objEntity.UserDetails.Where(user => user.Name.Contains(userName)).FirstOrDefault();
+
+                if (objUsr == null)
+                    return NotFound();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(objUsr);
+        }
+
+
         [HttpGet]
         [Route("GetUserDetailsByEmail")]
         public IHttpActionResult GetUserDetailsByEmail(string userEmail)

@@ -30,6 +30,20 @@ namespace UserAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("AdminsRentaCars")]
+        public IQueryable<RentaCar> GetAdminsRentaCars(string carAdminId)
+        {
+            try
+            {
+                return objEntity.RentaCars.Where(rc => rc.CarAdminId.ToString() == carAdminId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         [HttpGet]
         [Route("GetRentaCarById")]
@@ -126,6 +140,14 @@ namespace UserAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("CarAdmins")]
+        public List<UserDetail> CarAdmins()
+        {
+            return objEntity.UserDetails.Where(s => s.UserType == 2).ToList<UserDetail>();
+        }
+
+
         [HttpPost]
         [Route("InsertRentaCar")]
         public IHttpActionResult PostRentaCar(RentaCar data)
@@ -171,6 +193,7 @@ namespace UserAPI.Controllers
                     rentaCar.Description = data.Description;
                     rentaCar.Rate = data.Rate;
                     rentaCar.RatedBy = data.RatedBy;
+                    rentaCar.CarAdminId = data.CarAdminId;
                 }
                 int i = objEntity.SaveChanges();
 

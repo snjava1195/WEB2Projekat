@@ -43,7 +43,7 @@
                 <tr>
                     <td> {{ rentaCarName }} </td>
                     <td *ngIf="rentaCarRate != 0"> 
-                       {{ rentaCarRate }}
+                       {{ rentaCarRate.toFixed(2) }}
                     </td>
                     <td *ngIf="rentaCarRate == 0"> 
                         &nbsp;
@@ -68,7 +68,9 @@
                     <td *ngIf="selectedCar.Type == 6">
                         coupe
                     </td>
-                    <td> {{ selectedCar.Rate }} </td>
+                    <td *ngIf="selectedCar.Rate" > 
+                        {{ selectedCar.Rate.toFixed(2) }}
+                     </td>
                     <td> {{ price  }} </td>
                     <td> {{ selectedCar.Year }} </td>
                     <td> {{ selectedCar.Seats }} </td>

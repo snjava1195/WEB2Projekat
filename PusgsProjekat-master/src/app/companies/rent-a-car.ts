@@ -10,7 +10,7 @@ export class RentACar{
     Description: string;
     Rate: number;
     RatedBy: number;
-
+    CarAdminId: Int16Array;
 
     Cars: Observable<Car[]>;
     BranchOffices: Observable<BranchOffice[]>;

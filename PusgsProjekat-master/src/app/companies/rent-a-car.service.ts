@@ -3,6 +3,7 @@ import { Car } from './car';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs'; 
+import { User } from '../users/user';
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +18,12 @@ export class RentACarService{
     getRentaCars(): Observable<RentACar[]> {
         return this.http.get<RentACar[]>(this.url + '/AllRentaCars');
     }
+
+
+    getAdminsRentaCars(carAdminId: string): Observable<RentACar[]>{
+        return this.http.get<RentACar[]>(this.url + '/AdminsRentaCars?carAdminId=' + carAdminId);
+    }
+
  
     getRentaCarById(rentaCarId: Int16Array): Observable<RentACar>{
         return this.http.get<RentACar>(this.url + '/GetRentaCarById?rentaCarId='+ rentaCarId);
@@ -53,6 +60,10 @@ export class RentACarService{
 
     sortRentaCarsByCity() : Observable<RentACar[]>{
         return this.http.get<RentACar[]>(this.url + '/SortRentaCarsByCity');
+    }
+
+    carAdmins() : Observable<User[]>{
+        return this.http.get<User[]>(this.url + '/CarAdmins');
     }
 
 

@@ -72,6 +72,29 @@
                             </mat-error>  
                           </td>  
                         </tr> 
+
+                        <tr>
+                          <td> Admin: </td>
+
+                          <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <select matNativeControl formControlName="CarAdmin" matInput>
+                                  <option 
+                                  *ngFor="let carAdmin of carAdmins | async" 
+                                  value="{{carAdmin.Name}}"  >
+                                      {{carAdmin.Name}}
+                                  </option>
+                                </select>
+                            </mat-form-field>  
+                           
+                            <mat-error>
+                              <span
+                                  *ngIf="!rentaCarForm.get('CarAdmin').value && rentaCarForm.get('CarAdmin').touched">
+                              </span>
+                          </mat-error>
+                          </td>  
+                        </tr> 
+                        
                     </table>
                   </td>               
               </table>  

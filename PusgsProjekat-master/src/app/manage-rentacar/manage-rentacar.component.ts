@@ -10,6 +10,7 @@ import { CarService } from '../companies/car.service';
 import { BranchOfficeService } from '../companies/branch.office.service';
 import { BranchOffice } from '../companies/branch.office';
 import { ThisReceiver } from '@angular/compiler';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class ManageRentacarComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private rentaCarService: RentACarService,
              private carFb: FormBuilder, private carService: CarService,
-            private officeFb : FormBuilder, private branchOfficeService: BranchOfficeService) {}
+            private officeFb : FormBuilder, private branchOfficeService: BranchOfficeService, 
+            private cookieService: CookieService) {}
 
   ngOnInit(): void {
     this.loadRentaCars();
@@ -76,7 +78,7 @@ export class ManageRentacarComponent implements OnInit {
 
 
  loadRentaCars(){
-    this.rentaCars = this.rentaCarService.getRentaCars();
+    this.rentaCars = this.rentaCarService.getAdminsRentaCars( this.cookieService.get('loggedId') );
  }
 
  loadCars(){
