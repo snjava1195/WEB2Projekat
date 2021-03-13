@@ -69,7 +69,7 @@ namespace UserAPI.Controllers
         }
 
         ///za pretragu i prikaz
-        ///
+
 
         [HttpGet]
         [Route("GetUserByName")]
@@ -116,12 +116,19 @@ namespace UserAPI.Controllers
 
 
         [HttpGet]
-        [Route("GetUserDetailsByName")]
-        public IQueryable<UserDetail> GetUserDetailsByName(string userName)
+        [Route("GetUsersByNameAndLastName")]
+        public IQueryable<UserDetail> GetUserByNameAndLastName(string userName)
         {
+            string name = userName.Split(' ').First().Trim();
+            string lastName = userName.Split(' ').Last().Trim();
+
             try
             {
-                return objEntity.UserDetails.Where(user => user.Name.Contains(userName));
+                return objEntity.UserDetails.Where(user => ((user.UserType == 1) &&
+                                                           (user.Name.Contains(name) || user.LastName.Contains(lastName) ||
+                                                            user.Name.Contains(lastName) || user.LastName.Contains(name) ||
+                                                            name.Contains(user.Name) || name.Contains(user.LastName) ||
+                                                            lastName.Contains(user.Name) || lastName.Contains(user.LastName))));
             }
             catch (Exception)
             {
@@ -130,19 +137,37 @@ namespace UserAPI.Controllers
         }
 
 
-        [HttpGet]
-        [Route("GetUserDetailsByLastName")]
-        public IQueryable<UserDetail> GetUserDetailsByLastName(string userName)
-        {
-            try
-            {
-                return objEntity.UserDetails.Where(user => user.LastName.Contains(userName));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        /*  [HttpGet]
+          [Route("GetUserDetailsByName")]
+          public IQueryable<UserDetail> GetUserDetailsByName(string userName)
+          {
+              try
+              {
+                  return objEntity.UserDetails.Where(user => user.Name.Contains(userName));
+              }
+              catch (Exception)
+              {
+                  throw;
+              }
+          }
+
+
+          [HttpGet]
+          [Route("GetUserDetailsByLastName")]
+          public IQueryable<UserDetail> GetUserDetailsByLastName(string userName)
+          {
+              try
+              {
+                  return objEntity.UserDetails.Where(user => user.LastName.Contains(userName));
+              }
+              catch (Exception)
+              {
+                  throw;
+              }
+          } */
+
+
+
 
 
         [HttpPost]

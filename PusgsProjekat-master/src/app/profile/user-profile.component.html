@@ -135,12 +135,59 @@
             <br>
 
             <table>
-                <th> Friends: </th>
+                <th> friends: </th>
                 <tr *ngFor="let friend of friends | async">
                     <td> {{ friend.Name }} </td>
                     <td> {{ friend.LastName }} </td>
+                    <td> <button type="button" (click)="removeFriend(friend)"> x </button></td>
                 </tr>
                 <br>
+
+                <tr>
+                    <td>
+                        <button  (click)="showGotRequests()"> my requests </button>
+                    </td>
+                    <td *ngIf="gr">
+                        <table>
+                            <tr *ngIf="!this.gotRequests; else ifGot">
+                                <td> no requests </td>
+                            </tr>
+                            <ng-template #ifGot>
+                                <tr *ngFor="let g of gotRequests | async">
+                                    <td> {{ g }} </td>
+                                    <td> <button type="button" (click)="acceptRequest(g)"> + </button> </td>
+                                    <td> <button type="button" (click)="removeRequest(g)"> x </button></td>
+                                </tr>
+                            </ng-template>
+                        </table>
+                    </td>
+                </tr>
+
+                <br>
+
+
+                <tr>
+                    <td>
+                        <button  (click)="showSentRequests()"> sent requests </button>
+                    </td>
+                    <td *ngIf="sr">
+                        <table>
+                            <tr *ngIf="!this.sentRequests; else ifSent">
+                                <td> no sent requests </td>
+                            </tr>
+                            <ng-template #ifSent>
+                                <tr *ngFor="let s of sentRequests | async">
+                                    <td> {{ s }} </td>
+                                    <td> <button type="button" (click)="removeRequest(s)"> x </button></td>
+                                </tr>
+                            </ng-template>
+                        </table>
+                    </td>
+                </tr>
+
+                <br>
+
+
                 <tr>
                     search for a new friend:
                 </tr>
@@ -149,7 +196,7 @@
                         <input type="text" [(ngModel)]="userToSearch">
                     </td>
                     <td>
-                        <button type="button" [disabled]="userToSearch == null" (click)="searchUsers()"> search</button>
+                        <button type="button" [disabled]="userToSearch == null" (click)="searchUsers()"> search </button>
                     </td>
                 </tr>
             </table>
@@ -158,7 +205,7 @@
 
             <table [hidden]="!donesearch">
                 <th> Users you found: </th>
-                <tr [class.selected]="n === selectedUser" *ngFor="let n of usersFoundByName | async"
+                <!--tr [class.selected]="n === selectedUser" *ngFor="let n of usersFoundByName | async"
                     (click)="onSelectUser(n)">
                     <td > {{ n.Name }} </td>
                     <td > {{ n.LastName }} </td>
@@ -167,11 +214,16 @@
                     (click)="onSelectUser(ln)">
                     <td > {{ ln.Name }} </td>
                     <td > {{ ln.LastName }} </td>
-                </tr>
+                </tr-->
+                <tr [class.selected]="nln === selectedUser" *ngFor="let nln of foundUsers | async"
+                (click)="onSelectUser(nln)">
+                <td > {{ nln.Name }} </td>
+                <td > {{ nln.LastName }} </td>
+            </tr>
                 <br>
                 <tr>
                     <td>
-                        <button type="button" [disabled]="selectedUser == null" (click)="addFriend()"> add friend </button>
+                        <button type="button" [disabled]="selectedUser == null" (click)="sendRequest()"> add friend </button>
                     </td>
                 </tr>
 
